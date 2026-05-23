@@ -50,6 +50,8 @@ function App() {
       </main>
       <Footer />
 
+      <Chatbot />
+
       <TweaksPanel title="Tweaks">
         <TweakSection label="Theme" />
         <TweakColor
