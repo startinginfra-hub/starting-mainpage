@@ -57,9 +57,23 @@
       function onBoot(error) {
         if (error) {
           console.error("[ChannelTalk] Channel.io boot failed:", error);
-          console.info(
-            "[ChannelTalk] 로컬에서 403이면 채널톡 관리자 → 버튼 설치 → 고급 설정 → 화이트리스트에 localhost / 127.0.0.1 을 추가하세요."
-          );
+          const host = window.location.hostname;
+          const status = error && error.status;
+          const type = error && error.type;
+
+          if (status === 403 || type === "constraintUrlError") {
+            console.info(
+              "[ChannelTalk] 이 URL은 채널톡 화이트리스트에 없습니다: " + host +
+                "\n채널톡 관리자 → 설정 → 채널 설정 → 일반 → 플러그인 관리 → 웹 → 고급 설정 → URL 화이트리스트에 아래를 추가하세요:" +
+                "\n  • starting-mainpage.vercel.app" +
+                "\n  • localhost" +
+                "\n  • 127.0.0.1"
+            );
+          } else if (status === 401 || type === "unauthenticatedError") {
+            console.info(
+              "[ChannelTalk] plugin key 인증에 실패했습니다. 채널톡 관리자에서 plugin key를 확인하거나 재발급하세요."
+            );
+          }
           return;
         }
         booted = true;
@@ -140,7 +154,7 @@
           role: role,
         });
 
-        openChat();
+        alert("정상적으로 발송이 성공했으며, 영업일 기준 1일 이내 연락드리도록 하겠습니다.");
         return true;
       })
       .catch(function (err) {
@@ -164,9 +178,13 @@
       e.preventDefault();
       const submitBtn = form.querySelector('[type="submit"]');
       if (submitBtn) submitBtn.disabled = true;
-      submitConsultation(collectFormData(form)).finally(function () {
-        if (submitBtn) submitBtn.disabled = false;
-      });
+      submitConsultation(collectFormData(form))
+        .then(function (ok) {
+          if (ok) form.reset();
+        })
+        .finally(function () {
+          if (submitBtn) submitBtn.disabled = false;
+        });
     });
   }
 
