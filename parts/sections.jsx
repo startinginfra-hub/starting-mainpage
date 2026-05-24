@@ -70,14 +70,34 @@ function Hero() {
 }
 
 function Logos() {
-  const names = ["kakao", "toss", "yanolja", "saramin", "Class101", "여기어때", "JOBKOREA", "오늘의집", "당근", "GPTers", "GRAYGO", "Wavbor"];
+  const logos = [
+    { name: "AcrossB", src: "assets/logos/acrossb.png" },
+    { name: "Dinewment", src: "assets/logos/dinewment.png" },
+    { name: "Easy", src: "assets/logos/easy.png" },
+    { name: "GPTers", src: "assets/logos/gpters.png" },
+    { name: "GRAYGO", src: "assets/logos/graygo.png" },
+    { name: "HGRS", src: "assets/logos/hgrs.png" },
+    { name: "Life Oasis", src: "assets/logos/lifeoasis.png" },
+    { name: "오늘후남", src: "assets/logos/onulhoonnam.png" },
+    { name: "Parity", src: "assets/logos/parity.png" },
+    { name: "PIA", src: "assets/logos/pia.png" },
+    { name: "Ponbi", src: "assets/logos/ponbi.png" },
+    { name: "Secuwow", src: "assets/logos/secuwow.png" },
+    { name: "Terracle", src: "assets/logos/terracle.png" },
+    { name: "Thera", src: "assets/logos/thera.png" },
+    { name: "Toktokhan", src: "assets/logos/toktokhan.png" },
+    { name: "Wavbor", src: "assets/logos/wavbor.png" },
+    { name: "Wishes", src: "assets/logos/wishes.png" },
+  ];
   return (
     <section className="logos">
       <div className="wrap">
         <div className="logos-label">스타트업부터 유니콘까지, 성장하는 기업이 스타팅을 선택해요</div>
         <div className="logos-grid">
-          {names.map((n) =>
-          <div key={n} className="logo-pill">{n}</div>
+          {logos.map((logo) =>
+          <div key={logo.src} className="logo-pill">
+            <img src={logo.src} alt={logo.name} loading="lazy" />
+          </div>
           )}
         </div>
       </div>
