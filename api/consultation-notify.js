@@ -13,6 +13,16 @@ function parseBody(req) {
   return {};
 }
 
+function plainInline(text, marks) {
+  const node = { type: "plain", attrs: { text } };
+  if (marks) node.marks = marks;
+  return node;
+}
+
+function textParagraph(content) {
+  return { type: "text", content };
+}
+
 function buildNotificationText(company, name, phone, email, role) {
   const lines = [`${company}에서 유선 상담을 신청했어요`];
   if (name) lines.push(`담당자: ${name}`);
@@ -20,6 +30,20 @@ function buildNotificationText(company, name, phone, email, role) {
   if (email) lines.push(`이메일: ${email}`);
   if (role) lines.push(`직군: ${role}`);
   return lines.join("\n");
+}
+
+function buildNotificationBlocks(company, name, phone, email, role) {
+  const blocks = [
+    textParagraph([
+      plainInline(company, [{ type: "bold" }]),
+      plainInline("에서 유선 상담을 신청했어요"),
+    ]),
+  ];
+  if (name) blocks.push(textParagraph([plainInline(`담당자: ${name}`)]));
+  if (phone) blocks.push(textParagraph([plainInline(`전화: ${phone}`)]));
+  if (email) blocks.push(textParagraph([plainInline(`이메일: ${email}`)]));
+  if (role) blocks.push(textParagraph([plainInline(`직군: ${role}`)]));
+  return blocks;
 }
 
 function getAllowedOrigins() {
@@ -51,7 +75,7 @@ function setCorsHeaders(req, res) {
   }
 }
 
-async function sendGroupMessage(groupId, plainText, botName) {
+async function sendGroupMessage(groupId, plainText, blocks, botName) {
   const accessKey = process.env.CHANNEL_ACCESS_KEY;
   const accessSecret = process.env.CHANNEL_ACCESS_SECRET;
 
@@ -69,7 +93,7 @@ async function sendGroupMessage(groupId, plainText, botName) {
       "x-access-key": accessKey,
       "x-access-secret": accessSecret,
     },
-    body: JSON.stringify({ plainText }),
+    body: JSON.stringify({ plainText, blocks }),
   });
 
   if (!response.ok) {
@@ -112,11 +136,13 @@ module.exports = async function handler(req, res) {
 
   const groupId = process.env.CHANNEL_GROUP_ID || DEFAULT_GROUP_ID;
   const plainText = buildNotificationText(company, name, phone, email, role);
+  const blocks = buildNotificationBlocks(company, name, phone, email, role);
 
   try {
     const message = await sendGroupMessage(
       groupId,
       plainText,
+      blocks,
       process.env.CHANNEL_BOT_NAME || undefined
     );
     return res.status(200).json({ ok: true, messageId: message?.message?.id });
