@@ -51,9 +51,7 @@ function Hero() {
             인재 매칭받아보기
             <Icon name="arrow-right" size={16} className="arrow" />
           </a>
-          <a className="btn btn-ghost lg" href="#demo">
-            제품 둘러보기
-          </a>
+          <a className="btn btn-ghost lg" href="#" data-channel-action="open">문의하기</a>
         </div>
         <div className="hero-meta">
           <span>사전 결제 없이 시작</span>
@@ -579,7 +577,7 @@ function Pricing() {
         </div>
 
         <div style={{ marginTop: 32, textAlign: "center" }}>
-          <a className="btn btn-soft" href="#contact">
+          <a className="btn btn-soft" href="#contact" data-channel-action="open">
             요금제 관련해서 궁금하다면?
             <Icon name="arrow-right" size={14} className="arrow" />
           </a>
@@ -647,31 +645,31 @@ function FinalCTA() {
                 인재 매칭받아보기
                 <Icon name="arrow-right" size={16} className="arrow" />
               </a>
-              <a className="btn btn-ghost lg" href="#talk">담당 매니저와 통화</a>
+              <a className="btn btn-ghost lg" href="#talk" data-channel-action="open">담당 매니저와 통화</a>
             </div>
           </div>
-          <form className="cta-form" onSubmit={(e) => {e.preventDefault();alert("매니저가 연락드릴게요!");}}>
+          <form className="cta-form" data-channel-form="consultation">
             <label>
               회사명
-              <input type="text" placeholder="(주)스타팅파트너스" />
+              <input name="company" type="text" placeholder="(주)스타팅파트너스" required />
             </label>
             <label>
               담당자 이메일
-              <input type="email" placeholder="you@company.com" />
+              <input name="email" type="email" placeholder="you@company.com" />
             </label>
             <label>
               필요한 직군
-              <select defaultValue="">
+              <select name="role" defaultValue="">
                 <option value="" disabled>선택해주세요</option>
-                <option>개발 (프론트/백엔드/AI)</option>
-                <option>디자인 (UI/UX/프로덕트)</option>
-                <option>PM / PO</option>
-                <option>마케팅</option>
-                <option>경영지원</option>
-                <option>기타</option>
+                <option value="개발 (프론트/백엔드/AI)">개발 (프론트/백엔드/AI)</option>
+                <option value="디자인 (UI/UX/프로덕트)">디자인 (UI/UX/프로덕트)</option>
+                <option value="PM / PO">PM / PO</option>
+                <option value="마케팅">마케팅</option>
+                <option value="경영지원">경영지원</option>
+                <option value="기타">기타</option>
               </select>
             </label>
-            <button type="submit">상담 신청하기</button>
+            <button type="submit">유선 상담 신청하기</button>
           </form>
         </div>
       </div>
@@ -713,7 +711,7 @@ function Footer() {
           <div className="footer-col">
             <h5>지원</h5>
             <ul>
-              <li><a href="#contact">문의하기</a></li>
+              <li><a href="#" data-channel-action="open">문의하기</a></li>
               <li><a href="#terms">이용약관</a></li>
               <li><a href="#privacy">개인정보처리방침</a></li>
               <li><a href="mailto:support@starting.kr">support@starting.kr</a></li>

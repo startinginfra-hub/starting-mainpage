@@ -1,138 +1,179 @@
-// Product UI mock — Starting recruiter dashboard
+// Product UI mock — Starting recruiter dashboard (new overview design)
 
 function ProductUI() {
   const [ref, inView] = useInView({ threshold: 0.05, rootMargin: "0px 0px -10% 0px" });
   return (
     <div ref={ref} className={`pu ${inView ? "armed" : ""}`}>
-      <div className="pu-bar">
-        <div className="pu-dots"><span className="pu-dot"/><span className="pu-dot"/><span className="pu-dot"/></div>
-        <div className="pu-url">app.starting.kr / 매칭 현황</div>
+      {/* App top bar */}
+      <div className="pu-top">
+        <div className="pu-top-logo">Starting</div>
+        <div className="pu-top-user" aria-hidden="true">
+          <Icon name="user" size={16} />
+        </div>
       </div>
+
       <div className="pu-body">
-        <aside className="pu-side">
-          <div className="pu-sb-logo">
-            <span className="pu-sb-mark">S</span>
-            Starting
+        {/* Vertical nav rail */}
+        <aside className="pu-rail">
+          <div className="pu-rail-item active">
+            <span className="pu-rail-ic"><Icon name="menu" size={18} /></span>
+            <span>대시보드</span>
           </div>
-          <div className="pu-sb-item active">
-            <Icon name="inbox" size={15} />
-            매칭 현황
+          <div className="pu-rail-item">
+            <span className="pu-rail-ic"><Icon name="plus" size={18} /></span>
+            <span>매칭 신청</span>
           </div>
-          <div className="pu-sb-item">
-            <Icon name="users" size={15} />
-            인재 풀
+          <div className="pu-rail-item">
+            <span className="pu-rail-ic"><Icon name="doc" size={18} /></span>
+            <span>매칭 현황</span>
           </div>
-          <div className="pu-sb-item">
-            <Icon name="doc" size={15} />
-            리포트
+          <div className="pu-rail-item">
+            <span className="pu-rail-ic"><Icon name="shield" size={18} /></span>
+            <span>기업 프로필</span>
           </div>
-          <div className="pu-sb-item">
-            <Icon name="receipt" size={15} />
-            정산
-          </div>
-          <div className="pu-sb-section">설정</div>
-          <div className="pu-sb-item">
-            <Icon name="user" size={15} />
-            팀 멤버
-          </div>
-          <div className="pu-sb-item">
-            <Icon name="settings" size={15} />
-            워크스페이스
+          <div className="pu-rail-item">
+            <span className="pu-rail-ic"><Icon name="users" size={18} /></span>
+            <span>담당자</span>
           </div>
         </aside>
 
         <main className="pu-main">
-          <div className="pu-head">
-            <div>
-              <div className="pu-h-title">공고별 매칭 현황</div>
-              <div className="pu-h-meta">실시간 업데이트 · 마지막 동기화 방금 전</div>
-            </div>
-            <button className="pu-h-cta">
-              <Icon name="plus" size={14} />
-              신규 매칭 신청
-            </button>
+          {/* Welcome */}
+          <div className="pu-welcome">
+            <h3 className="pu-welcome-title">
+              안녕하세요, 이수진 대표이사님 <span className="pu-badge">관리자</span>
+            </h3>
+            <p className="pu-welcome-sub">한눈에 진행 현황을 확인하고 바로 업무를 이어가 보세요.</p>
           </div>
 
-          <div className="pu-tabs">
-            <div className="pu-tab active">전체<span className="count">7</span></div>
-            <div className="pu-tab">채용 중<span className="count">5</span></div>
-            <div className="pu-tab">최종 검토<span className="count">2</span></div>
-            <div className="pu-tab">마감<span className="count">0</span></div>
+          {/* Stat strip — single card with 4 columns separated by dividers */}
+          <div className="pu-stats">
+            <div className="pu-stat">
+              <div className="pu-stat-label">채용 중 공고</div>
+              <div className="pu-stat-val"><CountNum to={12} duration={1200} /> <em>개</em></div>
+            </div>
+            <div className="pu-stat">
+              <div className="pu-stat-label">평가 진행 중</div>
+              <div className="pu-stat-val"><CountNum to={45} duration={1400} /> <em>명</em></div>
+            </div>
+            <div className="pu-stat">
+              <div className="pu-stat-label">
+                프로필 완성도
+                <span className="pu-pill">좋음</span>
+              </div>
+              <div className="pu-stat-val"><CountNum to={95} duration={1600} /> <em>%</em></div>
+            </div>
+            <div className="pu-stat">
+              <div className="pu-stat-label">요금제</div>
+              <div className="pu-stat-val">후불</div>
+            </div>
           </div>
 
-          <div className="pu-table">
-            <div className="pu-tr head">
-              <div>상태</div>
-              <div>채용 직군</div>
-              <div>경력 · 인원</div>
-              <div>매칭</div>
-              <div>진척도</div>
-              <div></div>
+          {/* Dark promo banner */}
+          <div className="pu-promo">
+            <div className="pu-promo-lines" aria-hidden="true">
+              <span /><span /><span /><span /><span /><span /><span /><span />
             </div>
-            <Row status="active" job="Product Manager" sub="시리즈 B · 핀테크" exp="3~4년 · 6명" matches={28} prog={86} />
-            <Row status="active" job="백엔드 개발자" sub="Node.js / TypeScript" exp="1~2년 · 4명" matches={42} prog={64} />
-            <Row status="active" job="UI/UX 디자이너" sub="B2B SaaS" exp="7~10년 · 5명" matches={19} prog={52} />
-            <Row status="active" job="AI 엔지니어" sub="LLM 응용" exp="1~2년 · 2명" matches={31} prog={38} />
-            <Row status="closed" job="콘텐츠 마케터" sub="퍼포먼스" exp="3~5년 · 3명" matches={24} prog={100} />
+            <div className="pu-promo-glow" aria-hidden="true" />
+            <div className="pu-promo-text">
+              <div className="pu-promo-title">헤드헌팅을 공고형 플랫폼 보다 저렴하게 이용하고 있어요!</div>
+              <div className="pu-promo-sub">담당 헤드헌터와, AI Agent가 성공적인 채용을 함께해요.</div>
+            </div>
+          </div>
+
+          {/* Two-up: recent matches + pass-rate chart */}
+          <div className="pu-cols">
+            <div className="pu-panel">
+              <div className="pu-panel-h">
+                <div>
+                  <div className="pu-panel-title">최근 매칭 인재</div>
+                  <div className="pu-panel-sub">최근 30일 이내 매칭 된 인재에요</div>
+                </div>
+                <Icon name="arrow-right" size={16} className="pu-panel-more" />
+              </div>
+              <div className="pu-mtable">
+                <div className="pu-mtr head">
+                  <div>공고명</div>
+                  <div>지원자명</div>
+                  <div>경력</div>
+                  <div>매칭일</div>
+                </div>
+                <MRow job="프론트 개발자" name="이지안" exp="3년 6개월" date="2026. 05. 24." />
+                <MRow job="프론트 개발자" name="김진주" exp="5년 1개월" date="2026. 05. 23." />
+                <MRow job="프로젝트 매니저(PM)" name="박민수" exp="3년 2개월" date="2026. 05. 22." />
+                <MRow job="인사담당자" name="최사랑" exp="8년 7개월" date="2026. 05. 21." />
+                <MRow job="UIUX 디자이너" name="이진아" exp="7년 3개월" date="2026. 05. 20." />
+              </div>
+            </div>
+
+            <div className="pu-panel">
+              <div className="pu-panel-h">
+                <div>
+                  <div className="pu-panel-title">공고별 서류 합격률</div>
+                  <div className="pu-panel-sub">
+                    서류 합격률이 <b className="pu-em">67%</b> 이하인 경우 조건을 더 알려주는게 좋아요!
+                  </div>
+                </div>
+                <div className="pu-panel-tools">
+                  <button className="pu-iconbtn" aria-label="이전"><Icon name="arrow-right" size={14} style={{ transform: "rotate(180deg)" }} /></button>
+                  <button className="pu-iconbtn" aria-label="다음"><Icon name="arrow-right" size={14} /></button>
+                </div>
+              </div>
+              <div className="pu-chart">
+                <PassBar label="ML 엔지니어"     sub="4~6년" v={78} />
+                <PassBar label="프로덕트 디자이너" sub="1~3년" v={67} />
+                <PassBar label="DevOps 엔지니…"   sub="3~5년" v={67} />
+                <PassBar label="프론트엔드 개발자" sub="2~4년" v={58} />
+                <PassBar label="데이터 엔지니어"   sub="4~6년" v={58} />
+                <div className="pu-chart-guide" aria-hidden="true" />
+              </div>
+            </div>
           </div>
         </main>
       </div>
 
-      <div className="pu-chip">
-        <div className="pu-chip-avatar">JK</div>
-        <div>
-          <div className="pu-chip-match"><CountNum to={96} duration={1400} />% 매칭</div>
-          <div className="pu-chip-text"><b>김지원</b> · 백엔드 5년</div>
-        </div>
-      </div>
-      <div className="pu-chip b">
-        <div className="pu-chip-avatar" style={{ background: "linear-gradient(135deg, #6dccc3, #0a7c73)" }}>HS</div>
-        <div>
-          <div className="pu-chip-match" style={{ color: "#0a7c73" }}>리포트 발행</div>
-          <div className="pu-chip-text"><b>박현수</b> · PM 4년</div>
-        </div>
-      </div>
     </div>
   );
 }
 
-function Row({ status, job, sub, exp, matches, prog }) {
+function MRow({ job, name, exp, date }) {
   return (
-    <div className="pu-tr">
-      <div>
-        <span className={`pu-status ${status === "closed" ? "closed" : ""}`}>
-          <span className="pulse" />
-          {status === "closed" ? "마감" : "채용 중"}
-        </span>
-      </div>
-      <div className="pu-job">
-        {job}
-        <small>{sub}</small>
-      </div>
-      <div className="pu-cap">{exp}</div>
-      <div className="pu-cap"><b>{matches}</b>명</div>
-      <div className="pu-prog">
-        <div className="pu-prog-bar" style={{ "--w": `${prog}%` }}><i /></div>
-        <div className="pu-prog-num">{prog}%</div>
-      </div>
-      <div className="pu-more">⋯</div>
+    <div className="pu-mtr">
+      <div className="pu-mtr-job">{job}</div>
+      <div>{name}</div>
+      <div>{exp}</div>
+      <div className="pu-mtr-date">{date}</div>
     </div>
   );
 }
 
-// Process step visuals
+function PassBar({ label, sub, v }) {
+  const [ref, inView] = useInView({ threshold: 0.2 });
+  return (
+    <div className="pu-pb" ref={ref}>
+      <div className="pu-pb-track">
+        <div className="pu-pb-fill" style={{ height: inView ? `${v}%` : "0%" }}>
+          <span className="pu-pb-num">{v}%</span>
+        </div>
+      </div>
+      <div className="pu-pb-lbl">{label}</div>
+      <div className="pu-pb-sub">{sub}</div>
+    </div>
+  );
+}
+
+// ─── The rest of the file (FilterCard, ScreeningCard, JobPostCard, ReportCard, Bar, InvoiceCard) ───
+// These power the process steps elsewhere on the page and are unchanged.
+
 function FilterCard() {
-  // Keyword extraction simulation — chips light up one-by-one as if user is clicking.
   const groups = [
     { label: "분야",   items: ["SaaS", "애견", "플랫폼", "B2C"],         active: [0, 1, 3] },
     { label: "타겟",   items: ["B2C"],                                   active: [0] },
     { label: "스킬",   items: ["Node.js", "Spring", "AWS", "RDBMS"],     active: [0, 1, 3] },
     { label: "협업툴", items: ["Slack", "Notion", "Figma", "Git"],       active: [0, 1, 2] },
   ];
-  // Total selectable chips across all groups (denominator for %)
   const TOTAL_CHIPS = groups.reduce((sum, g) => sum + g.items.length, 0);
 
-  // Flat list of (groupIdx, itemIdx) for the activation sequence
   const seq = React.useMemo(() => {
     const list = [];
     groups.forEach((g, gi) => g.active.forEach((ai) => list.push([gi, ai])));
@@ -140,7 +181,7 @@ function FilterCard() {
   }, []);
 
   const [ref, inView] = useInView({ threshold: 0.2 });
-  const [step, setStep] = React.useState(0); // 0..seq.length, +1 = reset
+  const [step, setStep] = React.useState(0);
   React.useEffect(() => {
     if (!inView) return;
     const HOLD = step === seq.length ? 1400 : step === 0 ? 700 : 600;
@@ -150,8 +191,6 @@ function FilterCard() {
 
   const activatedSet = new Set();
   for (let i = 0; i < step && i < seq.length; i++) activatedSet.add(`${seq[i][0]}-${seq[i][1]}`);
-
-  const pct = (Math.min(step, seq.length) / TOTAL_CHIPS) * 100;
 
   return (
     <div className="fc" ref={ref}>
@@ -200,22 +239,14 @@ function FilterCard() {
 
 function ScreeningCard() {
   const messages = [
-    {
-      msg: <>채용 직군과 <b>주요 업무</b> 내용이 맞지 않아요. 주요 업무를 직군에 맞게 다시 정리하는 게 좋아요.</>,
-    },
-    {
-      msg: <>자격 요건이 프론트엔드 스택 위주로 작성되어 있어요. <b>백엔드 기술 스택</b>으로 수정해주세요.</>,
-    },
-    {
-      msg: <>경력 조건이 너무 광범위해요. <b>3~5년</b> 정도로 좁혀 입력하면 핏한 인재를 더 잘 찾을 수 있어요.</>,
-    },
-    {
-      msg: <>우대 사항에 <b>도메인 경험(B2B SaaS)</b>을 추가하면 매칭 정확도가 높아져요.</>,
-    },
+    { msg: <>채용 직군과 <b>주요 업무</b> 내용이 맞지 않아요. 주요 업무를 직군에 맞게 다시 정리하는 게 좋아요.</> },
+    { msg: <>자격 요건이 프론트엔드 스택 위주로 작성되어 있어요. <b>백엔드 기술 스택</b>으로 수정해주세요.</> },
+    { msg: <>경력 조건이 너무 광범위해요. <b>3~5년</b> 정도로 좁혀 입력하면 핏한 인재를 더 잘 찾을 수 있어요.</> },
+    { msg: <>우대 사항에 <b>도메인 경험(B2B SaaS)</b>을 추가하면 매칭 정확도가 높아져요.</> },
   ];
 
   const [ref, inView] = useInView({ threshold: 0.15 });
-  const [count, setCount] = React.useState(0); // # of messages currently visible
+  const [count, setCount] = React.useState(0);
   React.useEffect(() => {
     if (!inView) return;
     const HOLD = count === 0 ? 600 : count > messages.length ? 1800 : 1400;
@@ -311,7 +342,6 @@ function ReportCard() {
     { tag: "주요업무" },
     { tag: "주요업무" },
   ];
-  // Vary the placeholder line widths so rows feel natural
   const widths = [
     { req: ["80%"],          res: ["60%"] },
     { req: ["72%"],          res: ["88%"] },
@@ -332,20 +362,12 @@ function ReportCard() {
             <span className="rep-tag">{r.tag}</span>
             <div className="rep-lines">
               {widths[i].req.map((w, j) => (
-                <span
-                  key={j}
-                  className="jp-line"
-                  style={{ width: w, animationDelay: `${i * 80 + j * 60}ms` }}
-                />
+                <span key={j} className="jp-line" style={{ width: w, animationDelay: `${i * 80 + j * 60}ms` }} />
               ))}
             </div>
             <div className="rep-lines">
               {widths[i].res.map((w, j) => (
-                <span
-                  key={j}
-                  className="jp-line"
-                  style={{ width: w, animationDelay: `${i * 80 + j * 60 + 120}ms` }}
-                />
+                <span key={j} className="jp-line" style={{ width: w, animationDelay: `${i * 80 + j * 60 + 120}ms` }} />
               ))}
             </div>
             <span className="rep-check">
@@ -358,6 +380,7 @@ function ReportCard() {
     </div>
   );
 }
+
 function Bar({ label, v }) {
   const [ref, inView] = useInView();
   return (
