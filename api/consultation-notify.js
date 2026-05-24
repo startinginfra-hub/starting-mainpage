@@ -65,7 +65,10 @@ async function sendGroupMessage(groupId, plainText, botName) {
 
   if (!response.ok) {
     const body = await response.text();
-    throw new Error(`Channel API ${response.status}: ${body}`);
+    const err = new Error(`Channel API ${response.status}: ${body}`);
+    err.status = response.status;
+    err.body = body;
+    throw err;
   }
 
   return response.json();
@@ -102,6 +105,14 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true, messageId: message?.message?.id });
   } catch (error) {
     console.error("[consultation-notify]", error);
-    return res.status(500).json({ error: "Failed to send notification" });
+    const missingCreds = !process.env.CHANNEL_ACCESS_KEY || !process.env.CHANNEL_ACCESS_SECRET;
+    return res.status(500).json({
+      error: "Failed to send notification",
+      hint: missingCreds
+        ? "Missing CHANNEL_ACCESS_KEY or CHANNEL_ACCESS_SECRET on Vercel"
+        : error.status
+          ? `Channel API returned ${error.status}`
+          : error.message,
+    });
   }
 };
