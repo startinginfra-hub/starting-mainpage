@@ -92,6 +92,8 @@
 
   function submitConsultation(data) {
     const company = (data.company || "").trim();
+    const name = (data.name || "").trim();
+    const phone = (data.phone || "").trim();
     const email = (data.email || "").trim();
     const role = (data.role || "").trim();
 
@@ -99,22 +101,31 @@
       alert("회사명을 입력해주세요.");
       return Promise.resolve(false);
     }
+    if (!name) {
+      alert("담당자 이름을 입력해주세요.");
+      return Promise.resolve(false);
+    }
+    if (!phone) {
+      alert("담당자 전화번호를 입력해주세요.");
+      return Promise.resolve(false);
+    }
 
     return fetch(CONSULTATION_API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ company: company, email: email, role: role }),
+      body: JSON.stringify({ company: company, name: name, phone: phone, email: email, role: role }),
     })
       .then(function (res) {
         if (!res.ok) throw new Error("notify failed");
         return res.json();
       })
       .then(function () {
-        if (company || email) {
+        if (company || email || name) {
           callChannelIO("updateUser", {
             profile: {
-              name: company || undefined,
+              name: name || company || undefined,
               email: email || undefined,
+              mobileNumber: phone || undefined,
               company: company || undefined,
               desiredRole: role || undefined,
             },
@@ -123,6 +134,8 @@
 
         callChannelIO("track", "consultation_request", {
           company: company,
+          name: name,
+          phone: phone,
           email: email,
           role: role,
         });

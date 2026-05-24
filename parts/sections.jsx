@@ -8,21 +8,17 @@ function Nav({ onToggleTheme, dark }) {
           <StartingLogo height={22} />
         </a>
         <div className="nav-links">
-          <a href="#features">서비스</a>
-          <a href="#process">매칭 순서</a>
+          <a href="#features">특징</a>
+          <a href="#process">Ai Agent</a>
           <a href="#pricing">요금</a>
           <a href="#faq">FAQ</a>
-          <a href="#blog">블로그</a>
+          <a href="https://blog.starting.kr/starting/ko" target="_blank" rel="noopener noreferrer">블로그</a>
         </div>
         <div className="nav-cta">
           <button className="btn btn-soft sm" onClick={onToggleTheme} aria-label="테마 전환">
             <Icon name={dark ? "sun" : "moon"} size={15} />
           </button>
           <a className="btn btn-ghost sm" href="#login">로그인</a>
-          <a className="btn btn-primary sm" href="#start">
-            인재 매칭받기
-            <Icon name="arrow-right" size={14} className="arrow" />
-          </a>
         </div>
       </div>
     </nav>);
@@ -70,14 +66,31 @@ function Hero() {
 }
 
 function Logos() {
-  const names = ["kakao", "toss", "yanolja", "saramin", "Class101", "여기어때", "JOBKOREA", "오늘의집", "당근", "GPTers", "GRAYGO", "Wavbor"];
+  const logos = [
+  { src: "logos/secuwow.png", alt: "SECUWOW" },
+  { src: "logos/wavbor.png", alt: "Wavbor" },
+  { src: "logos/ponbi.png", alt: "폰비" },
+  { src: "logos/parity.png", alt: "parity" },
+  { src: "logos/easy.png", alt: "easy" },
+  { src: "logos/gpters.png", alt: "GPTers" },
+  { src: "logos/wishes.png", alt: "Wishes" },
+  { src: "logos/thera.png", alt: "씨테라수면연구소" },
+  { src: "logos/graygo.png", alt: "GRAYGO" },
+  { src: "logos/onulhunnam.png", alt: "오늘훈남" },
+  { src: "logos/acrossb.png", alt: "acrossB" },
+  { src: "logos/terracle.png", alt: "Terracle" },
+  { src: "logos/pia.png", alt: "PIA" },
+  { src: "logos/hgrs.png", alt: "해그로시" }];
+
   return (
     <section className="logos">
       <div className="wrap">
-        <div className="logos-label">스타트업부터 유니콘까지, 성장하는 기업이 스타팅을 선택해요</div>
+        <div className="logos-label">Seed부터 Series 기업까지, 성장하는 기업이 스타팅을 선택해요</div>
         <div className="logos-grid">
-          {names.map((n) =>
-          <div key={n} className="logo-pill">{n}</div>
+          {logos.map((l) =>
+          <div key={l.src} className="logo-pill">
+              <img src={l.src} alt={l.alt} loading="lazy" />
+            </div>
           )}
         </div>
       </div>
@@ -92,7 +105,7 @@ function Comparison() {
     tag: "공고형 플랫폼",
     fee: "플랫폼 수수료 7%",
     title: "직접 채용",
-    steps: ["공고 게시", "다수 지원자 유입", "서류 검토 반복"],
+    steps: ["공고 게시", "다수 지원자 유입", "미충족 인재 서류 검토 반복"],
     footer: "모든 과정을 직접하고 수수료 지불\n시간, 비용 비효율 끝판왕"
   },
   {
@@ -100,7 +113,7 @@ function Comparison() {
     tag: "스타팅",
     fee: "정찰제 300만 원",
     title: "AI Agent 헤드헌팅 솔루션",
-    steps: ["상세 매칭 조건 입력", "유입 인재 자동 필터링", "조건 분석 매칭리포트 전달"],
+    steps: ["상세 매칭 조건 입력", "직군 키워드 + 그외 조건 필터", "핏한 소수 인재 매칭"],
     footer: "연봉 관계 없는 정찰제\n플랫폼 수준의 비용으로 전문 헤드헌팅 퍼포먼스"
   },
   {
@@ -108,7 +121,7 @@ function Comparison() {
     tag: "타사 헤드헌팅",
     fee: "계약 연봉의 15 ~ 22%",
     title: "채용 대행",
-    steps: ["포지션 의뢰", "인재 소싱", "후보자 추천"],
+    steps: ["포지션 의뢰", "기본 조건 기반 소싱", "소수 인재 매칭"],
     footer: "계약 연봉에 따른 수수료\n고연봉 포지션일수록 수수료 부담이 커집니다"
   }];
 
@@ -160,7 +173,6 @@ function ProductPreview() {
             공고별 매칭 현황,<br />
             한 화면에서 관리해요
           </h2>
-          <p className="section-sub">진행 중인 공고 · 후보자 진척도 · 매칭 리포트까지 한눈에.</p>
         </div>
         <Reveal y={24}>
           <ProductUI />
@@ -278,9 +290,7 @@ function Features() {
                   직군별 개인화 키워드 제공
                 </li>
                 <li>
-                  <span className="fv-ai-check fv-ai-check--typing">
-                    <span className="fv-ai-dot" /><span className="fv-ai-dot" /><span className="fv-ai-dot" />
-                  </span>
+                  <span className="fv-ai-check"><Icon name="check" size={11} /></span>
                   조건 기준 인재 분석 리포트 생성
                 </li>
               </ul>
@@ -341,7 +351,7 @@ function Process() {
         <div className="section-head">
           <span className="eyebrow"><Icon name="bolt" size={13} /> 매칭 순서</span>
           <h2 className="section-title">효율을 향상시키는 AI Agent</h2>
-          <p className="section-sub">공고작성, 인재검토 그 어떠한 것도 어렵지 않아요.</p>
+          <p className="section-sub">공고작성, 인재검토 등 AI가 서포트해요</p>
         </div>
         <div className="process-list">
           <Reveal className="process-row" y={24}>
@@ -406,66 +416,65 @@ function Process() {
 
 function Testimonials() {
   const items = [
-    {
-      brand: "PIA",
-      brandStyle: { fontFamily: "Inter, sans-serif", fontWeight: 800, letterSpacing: "-0.04em", color: "#1a1a1a", fontSize: 32 },
-      brandAccent: <sup style={{ color: "#1A7CFF", fontSize: 16, fontWeight: 800, marginLeft: 2 }}>×</sup>,
-      cover: "linear-gradient(135deg, #cfd7df 0%, #eef1f6 60%, #d5dde5 100%)",
-      quote: "채용에 들어가는 시간\n획기적으로 줄일 수 있었어요",
-      role: "피아스페이스 COO",
-    },
-    {
-      brand: "+0*",
-      sub: "Toktokhan.Dev",
-      brandStyle: { fontFamily: "Inter, sans-serif", fontWeight: 800, color: "#101012", fontSize: 30, letterSpacing: "-0.02em" },
-      cover: "linear-gradient(135deg, #d4dde6 0%, #eef2f7 50%, #c9d4df 100%)",
-      quote: "매칭 리포트를 통해\n인재 정보를 한눈에 볼 수 있어서\n시간 단축에 큰 도움이 되었어요.",
-      role: "똑똑한 개발자 HR 담당자",
-    },
-    {
-      brand: "CAREER",
-      brandAccent: <span style={{ color: "#FF2E2E" }}>ABLE</span>,
-      brandStyle: { fontFamily: "Inter, sans-serif", fontWeight: 800, color: "#111", fontSize: 24, letterSpacing: "-0.02em" },
-      cover: "linear-gradient(135deg, #e1e6ec 0%, #f0f3f7 100%)",
-      quote: "원하는 기준을 충분히 갖춘\n인재 중에서 고를 수 있었어요",
-      role: "커리어블 CEO",
-    },
-    {
-      brand: "acrossB",
-      brandIcon: (
-        <span style={{ width: 28, height: 28, borderRadius: 8, background: "linear-gradient(135deg, #2f66f6, #1a3fa6)", display: "inline-grid", placeItems: "center", marginRight: 8, verticalAlign: "middle" }}>
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 11l5-7 4 6 3-4" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-        </span>
-      ),
-      brandStyle: { fontFamily: "Inter, sans-serif", fontWeight: 800, color: "#111", fontSize: 30, letterSpacing: "-0.02em" },
-      cover: "linear-gradient(135deg, #dde4ee 0%, #f1f4f8 100%)",
-      quote: "채용 매니저분이 밀착해서\n관리해주셔서 정말 마음에 들어요\n이정도면 사내 인사팀 아닌가요?!",
-      role: "어크로스비 HR 담당자",
-    },
-    {
-      brand: "MGRS",
-      sub: "주식회사 매그리스",
-      brandStyle: { fontFamily: "Inter, sans-serif", fontWeight: 800, color: "#222", fontSize: 32, letterSpacing: "-0.04em", fontStyle: "italic" },
-      cover: "linear-gradient(135deg, #d3dce6 0%, #eaf0f6 100%)",
-      quote: "지금 바로 필요한\n인재를 신속하게\n채용할 수 있었어요",
-      role: "해그로시 CEO",
-    },
-    {
-      brand: "오늘훈남",
-      brandIcon: (
-        <span style={{ width: 28, height: 28, borderRadius: "50%", background: "#f6c9b9", display: "inline-grid", placeItems: "center", marginRight: 8, verticalAlign: "middle" }}>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="7" r="4" fill="#222"/>
-            <circle cx="12" cy="3" r="1.4" fill="#1A7CFF"/>
-          </svg>
-        </span>
-      ),
-      brandStyle: { fontFamily: "'Pretendard', sans-serif", fontWeight: 800, color: "#111", fontSize: 26 },
-      cover: "linear-gradient(135deg, #f1d8c2 0%, #f9e7d6 100%)",
-      quote: "채용 과정이\n효율적으로 바뀌었어요",
-      role: "오늘훈남 CEO",
-    },
-  ];
+  {
+    logo: "logos/pia.png",
+    cover: "linear-gradient(135deg, #cfd7df 0%, #eef1f6 60%, #d5dde5 100%)",
+    quote: "채용에 들어가는 시간\n획기적으로 줄일 수 있었어요",
+    role: "피아스페이스 COO",
+    href: "https://blog.starting.kr/ko/articles/%ED%94%BC%EC%95%84%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-AI-%EC%98%81%EC%83%81%EB%B6%84%EC%84%9D-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85-%EB%B0%98%EB%B3%B5%EB%90%98%EB%8A%94-%EC%B1%84%EC%9A%A9-%EB%B9%84%ED%9A%A8%EC%9C%A8-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95-9f7fcf24"
+  },
+  {
+    logo: "logos/toktokhan.png",
+    cover: "linear-gradient(135deg, #d4dde6 0%, #eef2f7 50%, #c9d4df 100%)",
+    quote: "매칭 리포트를 통해\n인재 정보를 한눈에 볼 수 있어서\n시간 단축에 큰 도움이 되었어요.",
+    role: "똑똑한 개발자 HR 담당자",
+    href: "https://blog.starting.kr/ko/articles/%EB%98%91%EB%98%91%ED%95%9C%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%EC%82%AC%EB%A7%A4%EB%8B%88%EC%A0%80%EA%B0%80-%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC-%ED%9A%A8%EC%9C%A8%EC%A0%81%EC%9C%BC%EB%A1%9C-%EB%BD%91%EB%8A%94-%EB%B0%A9%EB%B2%95-906f7bb1"
+  },
+  {
+    brand: "CAREER",
+    brandAccent: <span style={{ color: "#FF2E2E" }}>ABLE</span>,
+    brandStyle: { fontFamily: "Inter, sans-serif", fontWeight: 800, color: "#111", fontSize: 24, letterSpacing: "-0.02em" },
+    cover: "linear-gradient(135deg, #e1e6ec 0%, #f0f3f7 100%)",
+    quote: "원하는 기준을 충분히 갖춘\n인재 중에서 고를 수 있었어요",
+    role: "커리어블 CEO",
+    href: "https://blog.starting.kr/ko/articles/%EC%BB%A4%EB%A6%AC%EC%96%B4%EB%B8%94-%EC%B2%AD%EC%B0%BD%EC%82%AC-%EC%B6%9C%EC%8B%A0-%EC%97%90%EB%93%80%ED%85%8C%ED%81%AC-%EA%B8%B0%EC%97%85-%EC%B4%88%EA%B8%B0-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85%EC%97%90-%EB%A7%9E%EB%8A%94-%EC%9D%B8%EC%9E%AC-%ED%99%95%EB%B3%B4-%EB%B0%A9%EB%B2%95-702b2821"
+  },
+  {
+    logo: "logos/acrossb.png",
+    cover: "linear-gradient(135deg, #dde4ee 0%, #f1f4f8 100%)",
+    quote: "채용 매니저분이 밀착해서\n관리해주셔서 정말 마음에 들어요\n이정도면 사내 인사팀 아닌가요?!",
+    role: "어크로스비 HR 담당자",
+    href: "https://blog.starting.kr/ko/articles/%EC%96%B4%ED%81%AC%EB%A1%9C%EC%8A%A4%EB%B9%84-%EA%B8%80%EB%A1%9C%EB%B2%8C-SCM-Tech-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85-%EB%B9%A0%EB%A5%B4%EA%B3%A0-%ED%9A%A8%EC%9C%A8%EC%A0%81%EC%9D%B8-%EC%B1%84%EC%9A%A9%EC%9D%98-%EB%B9%84%EA%B2%B0-b9c9e726"
+  },
+  {
+    logo: "logos/hgrs.png",
+    cover: "linear-gradient(135deg, #d3dce6 0%, #eaf0f6 100%)",
+    quote: "지금 바로 필요한\n인재를 신속하게\n채용할 수 있었어요",
+    role: "해그로시 CEO",
+    href: "https://blog.starting.kr/ko/articles/%ED%95%B4%EA%B7%B8%EB%A1%9C%EC%8B%9C-%EB%B8%8C%EB%9E%9C%EB%94%A9-%EC%A0%84%EB%AC%B8-%EA%B8%B0%EC%97%85%EC%9D%98-%EB%B9%A0%EB%A5%B4%EA%B3%A0-%EC%9C%A0%EC%97%B0%ED%95%9C-%EC%B1%84%EC%9A%A9-%EC%A0%84%EB%9E%B5-dadad2a0"
+  },
+  {
+    logo: "logos/onulhunnam.png",
+    cover: "linear-gradient(135deg, #f1d8c2 0%, #f9e7d6 100%)",
+    quote: "채용 과정이\n효율적으로 바뀌었어요",
+    role: "오늘훈남 CEO",
+    href: "https://blog.starting.kr/ko/articles/%EC%98%A4%EB%8A%98%ED%9B%88%EB%82%A8-%EB%82%A8%EC%84%B1-%EB%B7%B0%ED%8B%B0%EA%B8%B0%EC%97%85%EC%9D%B4-%EB%A9%80%ED%8B%B0%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%EB%A5%BC-%EC%B1%84%EC%9A%A9%ED%95%9C-%EB%B9%84%EA%B2%B0-a3899ed8"
+  },
+  {
+    logo: "logos/secuwow.png",
+    cover: "linear-gradient(135deg, #d6dff0 0%, #eaf0fb 60%, #cfd8ee 100%)",
+    quote: "정보보호 컨설팅 전문기업의\n까다로운 채용 기준에 맞는\n인재를 정확히 찾아주셨어요",
+    role: "시큐와우 채용 담당자",
+    href: "https://blog.starting.kr/ko/articles/%EC%8B%9C%ED%81%90%EC%99%80%EC%9A%B0-%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8-%EC%BB%A8%EC%84%A4%ED%8C%85-%EC%A0%84%EB%AC%B8%EA%B8%B0%EC%97%85-%EC%A4%91%EC%A7%84%EA%B3%B5-%EC%A7%80%EC%9B%90%EC%82%AC%EC%97%85-%ED%86%B5%ED%95%9C-%EC%B1%84%EC%9A%A9-%EC%A0%84%EB%9E%B5-18dcdef4"
+  },
+  {
+    logo: "logos/terracle.png",
+    cover: "linear-gradient(135deg, #d8e2dc 0%, #eef3ef 60%, #cdd8d2 100%)",
+    quote: "불필요한 인터뷰 없이\n적합한 인재만 만나볼 수 있어\n시간을 크게 아꼈어요",
+    role: "테라클 CEO",
+    href: "https://blog.starting.kr/ko/articles/%ED%85%8C%EB%9D%BC%ED%81%B4-%ED%95%B4%EC%A4%91%ED%95%A9-%EA%B8%B0%EB%B0%98-%ED%8F%90%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%8B%B1-%EC%9E%AC%ED%99%9C%EC%9A%A9-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85-%EB%B6%88%ED%95%84%EC%9A%94%ED%95%9C-%EC%9D%B8%ED%84%B0%EB%B7%B0-%EC%A4%84%EC%9D%B4%EB%8A%94-%EB%B0%A9%EB%B2%95-3a75d208"
+  }];
+
 
   // Duplicate twice for a seamless infinite marquee
   const doubled = [...items, ...items];
@@ -481,23 +490,26 @@ function Testimonials() {
       </div>
       <div className="t-marquee">
         <div className="t-track">
-          {doubled.map((it, i) => (
-            <article key={i} className="t-card">
+          {doubled.map((it, i) =>
+          <a key={i} className="t-card" href={it.href} target="_blank" rel="noopener noreferrer">
               <div className="t-cover" style={{ background: it.cover }}>
-                <div className="t-cover-brand">
+                {it.logo ?
+              <img src={it.logo} alt={it.role} className="t-cover-logo" loading="lazy" /> :
+
+              <div className="t-cover-brand">
                   {it.brandIcon}
                   <span style={it.brandStyle}>
                     {it.brand}{it.brandAccent}
                   </span>
-                </div>
+                </div>}
                 {it.sub && <div className="t-cover-sub">{it.sub}</div>}
               </div>
               <div className="t-body">
                 <p className="t-quote">{it.quote}</p>
                 <div className="t-role">{it.role}</div>
               </div>
-            </article>
-          ))}
+            </a>
+          )}
         </div>
       </div>
     </section>);
@@ -522,7 +534,7 @@ function Pricing() {
             <span className="price-eyebrow">후불 정찰제</span>
             <h3 className="price-title">합격 후 결제</h3>
             <div className="price-amount">
-              <span className="currency">₩</span>300만<span className="unit">/ 1명</span>
+              <span className="currency">₩</span>300<span className="won">만 원</span><span className="unit">/ 1명</span>
             </div>
             <div className="price-meta">VAT 별도 · 입사 이후 결제</div>
             <ul className="price-features">
@@ -532,8 +544,8 @@ function Pricing() {
               <li><Icon name="check" size={16} className="check" />면접 일정 조율 및 처우 협의 서포트</li>
             </ul>
             <div className="price-pay">
-              <span>결제 시점</span>
-              <b>입사 이후</b>
+              <span>최종 결제 금액(부가세 제외)</span>
+              <b>300만 원</b>
             </div>
           </Reveal>
 
@@ -542,7 +554,7 @@ function Pricing() {
             <span className="price-eyebrow">선불 정찰제</span>
             <h3 className="price-title">면접 진행 전 결제</h3>
             <div className="price-amount">
-              <span className="currency">₩</span>250만<span className="unit">/ 1명 · 총 500만 원</span>
+              <span className="currency">₩</span>250<span className="won">만 원</span><span className="unit">/  2명 </span>
             </div>
             <div className="price-meta">VAT 별도 · 면접 진행 전 결제</div>
             <ul className="price-features">
@@ -553,8 +565,8 @@ function Pricing() {
               <li><Icon name="check" size={16} className="check" />신속한 서류 검토 · 유사도 분석 리포트 제공</li>
             </ul>
             <div className="price-pay">
-              <span>결제 시점</span>
-              <b>면접 진행 전</b>
+              <span>최종 결제 금액(부가세 제외)</span>
+              <b>500만 원</b>
             </div>
           </Reveal>
         </div>
@@ -589,16 +601,22 @@ function Pricing() {
 
 function FAQ() {
   const items = [
-  { q: "정찰제는 어떤 방식인가요?",
-    a: "연봉에 비례한 수수료(보통 15~25%) 대신 인재 1명당 고정 금액(300만 원 또는 선불 250만 원)으로 책정해요. 연봉이 높을수록 더 큰 절감 효과를 볼 수 있어요." },
-  { q: "후보자가 입사 후 빠르게 퇴사하면 어떻게 되나요?",
-    a: "스타팅은 3개월 이상 재직률 90%를 유지하고 있어요. 그럼에도 조기 퇴사가 발생하면 별도 비용 없이 1명 무료 재매칭을 제공해드려요." },
-  { q: "어떤 직군까지 매칭이 가능한가요?",
-    a: "개발(프론트/백엔드/AI), 디자인(UI/UX/프로덕트), PM/PO, 마케팅, 경영지원 등 IT·스타트업 핵심 직군 전반을 다뤄요. 임원급 헤드헌팅은 별도 상담 후 진행해요." },
-  { q: "지원자 정보는 어떻게 관리되나요?",
-    a: "유료직업소개사업 정식 허가 사업자로서 개인정보보호법을 준수하고, 후보자 사전 동의를 받은 인재만 추천해드려요. 보증보험에도 가입되어 있어요." },
-  { q: "도입 결정 전에 제품을 미리 볼 수 있나요?",
-    a: "물론이에요. 신용카드 없이 워크스페이스를 만들고, 직접 매칭 조건을 입력해보세요. 매칭 시작 전까지는 비용이 발생하지 않아요." }];
+  { q: "요금제는 언제, 어디서 신청하나요?",
+    a: "회원가입 시 기본적으로 후불 요금제가 적용되며, 선불 요금제 이용을 원할 경우 담당 매니저에게 요청하시면 됩니다." },
+  { q: "후불 요금제 이용 중간에 선불 요금제로 변경할 수 있나요?",
+    a: "선불 요금제는 결제 완료 시점부터 적용됩니다. 따라서 채용 전형 진행 중이라도 면접 이전에 결제가 완료된 경우에만 선불 요금제로 인정됩니다. 만약 결제 전에 면접이 진행되면, 해당 인재는 자동으로 후불 요금제가 적용되며, 이후 소급 적용은 불가합니다." },
+  { q: "선불 요금제 이용 중간에 후불 요금제로 변경할 수 있나요?",
+    a: "선불 티켓이 먼저 차감되며, 이후 잔여 티켓이 부족한 포지션은 자동으로 후불제로 적용됩니다." },
+  { q: "선불 요금제는 어떤 프로세스로 진행되나요?",
+    a: "선불 요금제는 '채용 카운트' 방식으로 운영되며, 채용 확정 시 1명당 카운트 1개가 차감됩니다. 매칭 프로세스는 후불제와 동일하게 진행됩니다." },
+  { q: "선불 요금제 보증기간과 재추천은 어떻게 진행되나요?",
+    a: "입사일 기준 한 달 이내 자진퇴사 시, 카운트 원복 혹은 재추천을 제공합니다." },
+  { q: "선불 요금제 만료 기한이 지나면 어떻게 되나요?",
+    a: "잔여 티켓은 기한 만료와 함께 모두 소멸됩니다." },
+  { q: "선불 요금제 최대 지원 카운트 모두 소진시 어떻게 되나요?",
+    a: "후불 요금제가 자동 적용됩니다." },
+  { q: "선불 요금제 잔여 카운트가 남아있는 상태에서 추가 결제를 하면 어떻게 되나요?",
+    a: "선불 요금제 추가 결제를 하실 경우, 서비스 이용 기간은 초기화되며, 기존에 남아 있던 카운트는 소멸되지 않고 그대로 누적되어 함께 사용하실 수 있습니다." }];
 
   return (
     <section id="faq">
@@ -633,20 +651,13 @@ function FinalCTA() {
               지금 바로 시작
             </span>
             <h2 className="cta-h">
-              핏한 인재를 만나는<br />
-              가장 빠른 길.
+              플랫폼 보다 저렴한 금액으로<br />
+              헤드헌팅 퍼포먼스.
             </h2>
             <p className="cta-sub">
-              조건만 알려주세요. 평균 48시간 안에 첫 후보자를 보내드려요.<br />
-              신용카드 없이, 채용 확정 후에만 결제해요.
+              추가로 더 궁금한 내용이 있다면 상담을 신청해주세요<br />
+              이해하기 쉽게 유선으로 설명드릴게요!
             </p>
-            <div className="cta-actions">
-              <a className="btn btn-primary lg" href="#start">
-                인재 매칭받아보기
-                <Icon name="arrow-right" size={16} className="arrow" />
-              </a>
-              <a className="btn btn-ghost lg" href="#talk" data-channel-action="open">담당 매니저와 통화</a>
-            </div>
           </div>
           <form className="cta-form" data-channel-form="consultation">
             <label>
@@ -654,11 +665,19 @@ function FinalCTA() {
               <input name="company" type="text" placeholder="(주)스타팅파트너스" required />
             </label>
             <label>
+              담당자 이름
+              <input name="name" type="text" placeholder="홍길동" required />
+            </label>
+            <label>
+              담당자 전화번호
+              <input name="phone" type="tel" placeholder="010-0000-0000" required />
+            </label>
+            <label>
               담당자 이메일
               <input name="email" type="email" placeholder="you@company.com" />
             </label>
             <label>
-              필요한 직군
+              채용 예정 직군
               <select name="role" defaultValue="">
                 <option value="" disabled>선택해주세요</option>
                 <option value="개발 (프론트/백엔드/AI)">개발 (프론트/백엔드/AI)</option>
@@ -686,26 +705,24 @@ function Footer() {
             <div className="nav-logo" style={{ marginBottom: 16 }}>
               <StartingLogo height={24} />
             </div>
-            <p className="footer-meta" style={{ maxWidth: 360 }}>
-              정확히 필터링된 인재를 정찰제로 매칭해드리는 헤드헌팅 서비스. 스타팅파트너스(주).
+            <p className="footer-meta" style={{ maxWidth: 360 }}>스타팅
+공고 플랫폼을 대체하는 AI Agent 헤드헌팅 서비스
             </p>
           </div>
           <div className="footer-col">
             <h5>제품</h5>
             <ul>
-              <li><a href="#features">서비스 소개</a></li>
-              <li><a href="#process">매칭 순서</a></li>
-              <li><a href="#pricing">요금제</a></li>
+              <li><a href="#features">특징</a></li>
+              <li><a href="#process">Ai Agent</a></li>
+              <li><a href="#pricing">요금</a></li>
               <li><a href="#faq">FAQ</a></li>
             </ul>
           </div>
           <div className="footer-col">
             <h5>회사</h5>
             <ul>
-              <li><a href="#about">회사 소개</a></li>
-              <li><a href="#blog">블로그</a></li>
-              <li><a href="#careers">채용</a></li>
-              <li><a href="#press">보도자료</a></li>
+              <li><a href="https://starting.kr/company" target="_blank" rel="noopener noreferrer">회사 소개</a></li>
+              <li><a href="https://blog.starting.kr/ko" target="_blank" rel="noopener noreferrer">블로그</a></li>
             </ul>
           </div>
           <div className="footer-col">
@@ -720,8 +737,10 @@ function Footer() {
         </div>
         <div className="footer-bottom">
           <div className="footer-meta">
-            스타팅파트너스(주) · 대표이사 김호기 · 사업자등록번호 313-88-02066 · 통신판매번호 2025-서울광진-0701<br />
-            서울 광진구 능동로 81, 3층 · 1588-7360 · support@starting.kr
+            대표이사 : 김홍찬 | 사업자 등록번호 : 313-88-02066 | 통신판매번호 : 2025-서울광진-0701<br />
+            직업정보제공번호 : 서울동부 제 2026-6 호 | 유료직업소개번호 : 제 2025-3040234-14-5-00005 호<br />
+            본사 : 서울특별시 광진구 능동로 81, 3층 | 지사/연구소 : 서울특별시 중구 퇴계로 15, 5층<br />
+            문의 : 1688-7360 / support@starting.kr
           </div>
           <div className="footer-meta">© 2026 Starting Partners, Inc.</div>
         </div>

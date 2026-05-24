@@ -620,6 +620,7 @@ section.tight{ padding: clamp(48px, 6vw, 80px) 0; }
   font-size: 13px; color: var(--text-3);
   padding-top: 18px; border-top: 1px dashed var(--border);
   display: flex; justify-content: space-between;
+  margin-top: auto;
 }
 .price-pay b{ font-weight: 600; color: var(--text); }
 
@@ -2409,14 +2410,17 @@ footer{
 }
 
 .compare-card.is-featured{
-  background:
-    radial-gradient(80% 60% at 50% 0%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 70%),
-    linear-gradient(180deg, color-mix(in oklab, var(--primary) 10%, var(--surface)), var(--surface) 70%);
+  background: var(--surface);
   border-color: color-mix(in oklab, var(--primary) 50%, transparent);
   box-shadow:
     0 0 0 1px color-mix(in oklab, var(--primary) 30%, transparent),
     0 0 40px -4px color-mix(in oklab, var(--primary) 35%, transparent),
     0 30px 60px -20px color-mix(in oklab, var(--primary) 30%, transparent);
+}
+[data-theme="dark"] .compare-card.is-featured{
+  background:
+    radial-gradient(80% 60% at 50% 0%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in oklab, var(--primary) 10%, var(--surface)), var(--surface) 70%);
 }
 @media (min-width: 900px){
   .compare-card.is-featured{ transform: scale(1.03); z-index: 2; }

@@ -13,8 +13,10 @@ function parseBody(req) {
   return {};
 }
 
-function buildNotificationText(company, email, role) {
+function buildNotificationText(company, name, phone, email, role) {
   const lines = [`${company}에서 유선 상담을 신청했어요`];
+  if (name) lines.push(`담당자: ${name}`);
+  if (phone) lines.push(`전화: ${phone}`);
   if (email) lines.push(`이메일: ${email}`);
   if (role) lines.push(`직군: ${role}`);
   return lines.join("\n");
@@ -30,13 +32,20 @@ function getAllowedOrigins() {
 function setCorsHeaders(req, res) {
   const origin = req.headers.origin;
   const allowed = getAllowedOrigins();
+  const isLocalhost =
+    origin && /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
 
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (!origin) return;
 
-  if (allowed.length === 0 || allowed.includes(origin) || allowed.includes("*")) {
+  if (
+    allowed.length === 0 ||
+    allowed.includes(origin) ||
+    allowed.includes("*") ||
+    isLocalhost
+  ) {
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Vary", "Origin");
   }
@@ -87,14 +96,22 @@ module.exports = async function handler(req, res) {
 
   const body = parseBody(req);
   const company = (body.company || "").trim();
+  const name = (body.name || "").trim();
+  const phone = (body.phone || "").trim();
   const email = (body.email || "").trim();
   const role = (body.role || "").trim();
   if (!company) {
     return res.status(400).json({ error: "company is required" });
   }
+  if (!name) {
+    return res.status(400).json({ error: "name is required" });
+  }
+  if (!phone) {
+    return res.status(400).json({ error: "phone is required" });
+  }
 
   const groupId = process.env.CHANNEL_GROUP_ID || DEFAULT_GROUP_ID;
-  const plainText = buildNotificationText(company, email, role);
+  const plainText = buildNotificationText(company, name, phone, email, role);
 
   try {
     const message = await sendGroupMessage(
