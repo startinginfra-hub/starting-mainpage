@@ -13,14 +13,16 @@ function parseBody(req) {
   return {};
 }
 
-function plainInline(text, marks) {
-  const node = { type: "plain", attrs: { text } };
-  if (marks) node.marks = marks;
-  return node;
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
-function textParagraph(content) {
-  return { type: "text", content };
+function textBlock(value) {
+  return { type: "text", value };
 }
 
 function buildNotificationText(company, name, phone, email, role) {
@@ -34,15 +36,12 @@ function buildNotificationText(company, name, phone, email, role) {
 
 function buildNotificationBlocks(company, name, phone, email, role) {
   const blocks = [
-    textParagraph([
-      plainInline(company, [{ type: "bold" }]),
-      plainInline("에서 유선 상담을 신청했어요"),
-    ]),
+    textBlock(`<b>${escapeHtml(company)}</b>에서 유선 상담을 신청했어요`),
   ];
-  if (name) blocks.push(textParagraph([plainInline(`담당자: ${name}`)]));
-  if (phone) blocks.push(textParagraph([plainInline(`전화: ${phone}`)]));
-  if (email) blocks.push(textParagraph([plainInline(`이메일: ${email}`)]));
-  if (role) blocks.push(textParagraph([plainInline(`직군: ${role}`)]));
+  if (name) blocks.push(textBlock(`담당자: ${escapeHtml(name)}`));
+  if (phone) blocks.push(textBlock(`전화: ${escapeHtml(phone)}`));
+  if (email) blocks.push(textBlock(`이메일: ${escapeHtml(email)}`));
+  if (role) blocks.push(textBlock(`직군: ${escapeHtml(role)}`));
   return blocks;
 }
 
