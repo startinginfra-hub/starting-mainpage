@@ -49,7 +49,7 @@ function ProductUI() {
           {/* Stat strip — single card with 4 columns separated by dividers */}
           <div className="pu-stats">
             <div className="pu-stat">
-              <div className="pu-stat-label">채용 중 공고</div>
+              <div className="pu-stat-label">채용 중 포지션</div>
               <div className="pu-stat-val"><CountNum to={12} duration={1200} /> <em>개</em></div>
             </div>
             <div className="pu-stat">
@@ -93,7 +93,7 @@ function ProductUI() {
               </div>
               <div className="pu-mtable">
                 <div className="pu-mtr head">
-                  <div>공고명</div>
+                  <div>포지션 명</div>
                   <div>지원자명</div>
                   <div>경력</div>
                   <div>매칭일</div>
@@ -109,7 +109,7 @@ function ProductUI() {
             <div className="pu-panel">
               <div className="pu-panel-h">
                 <div>
-                  <div className="pu-panel-title">공고별 서류 합격률</div>
+                  <div className="pu-panel-title">JD별 서류 합격률</div>
                   <div className="pu-panel-sub">
                     서류 합격률이 <b className="pu-em">67%</b> 이하인 경우 조건을 더 알려주는게 좋아요!
                   </div>
@@ -199,7 +199,7 @@ function FilterCard() {
           <div className="fc-scan" aria-hidden="true">
             <div className="fc-scan-doc">
               <Icon name="doc" size={14} />
-              <span>공고 분석중</span>
+              <span>JD 분석 중</span>
             </div>
             <div className="fc-scan-lines">
               <span className="fc-scan-line" style={{ width: "92%" }} />

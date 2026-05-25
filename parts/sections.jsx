@@ -57,10 +57,6 @@ function Hero() {
       <div className="hero-grid" />
       <div className="hero-glow" />
       <div className="wrap hero-inner">
-        <span className="eyebrow">
-          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--primary)" }} />
-          국내 누적 인재 100,000명+
-        </span>
         <h1 className="hero-headline">
           공고 플랫폼을 대체하는<br />
           <span className="accent">AI Agent 헤드헌팅 솔루션</span>
@@ -144,24 +140,24 @@ function Comparison() {
     tag: "공고/검색 플랫폼",
     fee: "연봉 7% 수수료",
     title: "직접 필터링",
-    steps: ["공고 게시", "주요업무, 자격요건, 우대사항 의존", "미충족 인재 서류 검토 반복"],
-    footer: "모든 과정을 직접하고 수수료 지불\n시간, 비용 비효율 끝판왕"
+    steps: ["공고 등록(혹은 인재 검색)", "다수 지원자 필터링(혹은 인재 설득)", "소싱 피로도 및 내부 비용 발생"],
+    footer: "모든 과정을 직접하고 수수료 결제\n왜 결제해야 하는지 딜레마 발생"
   },
   {
     type: "featured",
-    tag: "스타팅",
+    tag: "AI 헤드헌팅 솔루션 '스타팅'",
     fee: "정찰제 300만 원",
-    title: "AI Agent 헤드헌팅 솔루션",
-    steps: ["상세 매칭 조건 입력", "직군 키워드 + 그외 조건 필터", "핏한 소수 인재 매칭"],
-    footer: "연봉 관계 없는 정찰제\n플랫폼 수준의 비용으로 전문 헤드헌팅 퍼포먼스"
+    title: "고성능 필터링 및 조율 대행",
+    steps: ["AI Agent로 포지션 간편 등록", "후보자 소싱 + AI·리쿠르터 이중 필터링", "핏한 소수매칭 + 요약 리포트 기반 검토"],
+    footer: "다 맡기고 가성비 정찰제 결제\n연봉에 따른 부담 및 채용 피로도 모두 제거"
   },
   {
     type: "normal",
     tag: "서치펌 헤드헌팅",
     fee: "연봉 15~30% 수수료",
-    title: "필터링·조율 대행",
-    steps: ["포지션 의뢰", "기본 조건 기반 소싱", "소수 인재 매칭"],
-    footer: "계약 연봉에 따른 수수료\n고연봉 포지션일수록 수수료 부담이 커집니다"
+    title: "필터링 및 조율 대행",
+    steps: ["이메일 기반 포지션 의뢰", "리쿠르터 직감에 의한 소싱 및 필터링", "핏한 소수 매칭 + 단순 담당자 의견 첨부"],
+    footer: "다 맡기고 비싼 수수료 결제\n연봉에 따라 수수료 부담 기하급수 증가"
   }];
 
 
@@ -169,7 +165,6 @@ function Comparison() {
     <section className="compare-section" id="compare">
       <div className="wrap">
         <div className="section-head">
-          <span className="eyebrow"><Icon name="target" size={13} /> 합리적인 스타팅</span>
           <h2 className="section-title compare-title">헤드헌팅 솔루션은 무엇이 다른가요?</h2>
           <p className="section-sub">공고/검색 플랫폼, 서치펌 헤드헌팅과 어떻게 다른지 한눈에 비교해봤어요. 
 
@@ -207,9 +202,8 @@ function ProductPreview() {
     <section id="product" className="product-preview">
       <div className="wrap">
         <div className="section-head">
-          <span className="eyebrow"><Icon name="chart" size={13} /> 제품 미리보기</span>
           <h2 className="section-title">
-            공고별 매칭 현황,<br />
+            포지션별 매칭 현황,<br />
             한 화면에서 관리해요
           </h2>
         </div>
@@ -231,7 +225,6 @@ function Stats() {
     <section className="stats-section">
       <div className="wrap">
         <div className="section-head">
-          <span className="eyebrow"><Icon name="chart" size={13} /> 숫자로 보는 스타팅</span>
           <h2 className="section-title">
             이유 있는 선택,<br />
             데이터로 증명해요
@@ -272,12 +265,11 @@ function Features() {
     <section id="features">
       <div className="wrap">
         <div className="section-head">
-          <span className="eyebrow"><Icon name="spark" size={13} /> 특장점</span>
           <h2 className="section-title">
             헤드헌팅의 그 이상의 정교함을<br />
             플랫폼 보다 저렴하게
           </h2>
-          <p className="section-sub">스타팅이 다른 헤드헌팅 서비스와 다른 4가지 이유.</p>
+          <p className="section-sub">공고 플랫폼 대신 스타팅을 써야하는 4가지 이유</p>
         </div>
         <div className="features-grid">
           <Reveal className="feature-card f1" delay={0}>
@@ -309,43 +301,64 @@ function Features() {
 
           <Reveal className="feature-card f2" delay={120}>
             <div className="feature-icon"><Icon name="spark" size={20} /></div>
-            <h3 className="feature-title">AI Agent 기능 지원</h3>
+            <h3 className="feature-title">전 과정 AI Agent 및 전문 헤드헌터와 함께</h3>
             <p className="feature-desc" style={{ whiteSpace: "pre-line", letterSpacing: "-0.2px" }}>
               {"매칭신청부터, 키워드 설정, 인재를 만나보기까지\n전부 서포트해요"}
             </p>
-            <div className="visual fv-ai">
-              <div className="fv-ai-head">
-                <div className="fv-ai-av" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
+            <div className="visual fv-ai-stack">
+              <div className="fv-ai">
+                <div className="fv-ai-head">
+                  <div className="fv-ai-av" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  </div>
+                  <div className="fv-ai-name">AI Agent 역할</div>
+                  <span className="fv-ai-tag">Agent</span>
                 </div>
-                <div className="fv-ai-name">Starting AI</div>
-                <span className="fv-ai-tag">Agent</span>
+                <ul className="fv-ai-steps">
+                  <li>
+                    <span className="fv-ai-check"><Icon name="check" size={11} /></span>
+                    매칭조건 & JD 내용 검토 및 수정 제안
+                  </li>
+                  <li>
+                    <span className="fv-ai-check"><Icon name="check" size={11} /></span>
+                    직군별 개인화 키워드 제공
+                  </li>
+                  <li>
+                    <span className="fv-ai-check"><Icon name="check" size={11} /></span>
+                    조건 기준 인재 분석 리포트 생성
+                  </li>
+                </ul>
               </div>
-              <ul className="fv-ai-steps">
-                <li>
-                  <span className="fv-ai-check"><Icon name="check" size={11} /></span>
-                  매칭조건 & 공고내용 검토 및 수정 제안
-                </li>
-                <li>
-                  <span className="fv-ai-check"><Icon name="check" size={11} /></span>
-                  직군별 개인화 키워드 제공
-                </li>
-                <li>
-                  <span className="fv-ai-check"><Icon name="check" size={11} /></span>
-                  조건 기준 인재 분석 리포트 생성
-                </li>
-              </ul>
+              <div className="fv-ai fv-ai--recruiter">
+                <div className="fv-ai-head">
+                  <div className="fv-ai-av" aria-hidden="true">
+                    <Icon name="users" size={18} />
+                  </div>
+                  <div className="fv-ai-name">헤드헌터 역할</div>
+                  <span className="fv-ai-tag">Headhunter</span>
+                </div>
+                <ul className="fv-ai-steps">
+                  <li>
+                    <span className="fv-ai-check"><Icon name="check" size={11} /></span>
+                    채용 전략, 조건 설정 등 고민 함께 논의
+                  </li>
+                  <li>
+                    <span className="fv-ai-check"><Icon name="check" size={11} /></span>
+                    AI Agent로 필터링된 후보자 이중 검토
+                  </li>
+                </ul>
+              </div>
             </div>
           </Reveal>
 
           <Reveal className="feature-card f3" delay={200}>
             <div className="feature-icon"><Icon name="target" size={20} /></div>
-            <h3 className="feature-title">정찰제 가격</h3>
+            <h3 className="feature-title">플랫폼 수준 비용으로 헤드헌팅 이용</h3>
             <p className="feature-desc" style={{ whiteSpace: "pre-line" }}>
-              {"연봉 5,000만 원 인재 기준,\n약 450만 원을 절감할 수 있어요!"}
+              {"소싱/필터링/조율 모두 맡기는데\n플랫폼과 비슷한 수준의 비용만 발생해요"}
             </p>
             <div className="visual">
               <div className="fv-price">
@@ -358,9 +371,9 @@ function Features() {
 
           <Reveal className="feature-card f4" delay={280}>
             <div className="feature-icon"><Icon name="shield" size={20} /></div>
-            <h3 className="feature-title">담당 헤드헌터 배정</h3>
+            <h3 className="feature-title">정찰제로 연봉 부담 완화</h3>
             <p className="feature-desc" style={{ whiteSpace: "pre-line" }}>
-              {"채용 전략, 조건 설정 등 고민이 생길 때\n함께 논의할 수 있는 파트너가 생겨요."}
+              {"경력/직군/연봉 상관없이 고정된 금액으로\n연봉에 따른 수수료 부담이 없어요"}
             </p>
             <div className="visual fv-hh">
               <div className="fv-hh-shake" aria-hidden="true">
@@ -396,9 +409,8 @@ function Process() {
     <section id="process" className="process-section">
       <div className="wrap">
         <div className="section-head">
-          <span className="eyebrow"><Icon name="bolt" size={13} /> 매칭 순서</span>
           <h2 className="section-title">효율을 향상시키는 AI Agent</h2>
-          <p className="section-sub">공고작성, 인재검토 등 AI가 서포트해요</p>
+          <p className="section-sub">JD 작성, 인재검토 등 AI가 서포트해요</p>
         </div>
         <div className="process-list">
           <Reveal className="process-row" y={24}>
@@ -406,7 +418,7 @@ function Process() {
               <span className="process-step">Agent 01</span>
               <h3 className="process-title">직군별 개인화 키워드 추출</h3>
               <p className="process-desc" style={{ whiteSpace: "pre-line" }}>
-                {"공고 내용을 분석해 직군별 핵심 키워드를 자동으로 뽑아드려요.\n이후 "}
+                {"JD 내용을 분석해 직군별 핵심 키워드를 자동으로 뽑아드려요.\n이후 "}
                 <b style={{ color: "var(--text)" }}>인재가 직접 경험 유무를 선택</b>하기 때문에,
                 {"\n지원자의 실제 역량을 보다 정확하게 파악할 수 있어요."}
               </p>
@@ -434,9 +446,9 @@ function Process() {
           <Reveal className="process-row" y={24}>
             <div className="process-text">
               <span className="process-step">Agent 03</span>
-              <h3 className="process-title">공고 자동 생성</h3>
+              <h3 className="process-title">JD 자동 생성</h3>
               <p className="process-desc" style={{ whiteSpace: "pre-line" }}>
-                확정된 조건과 키워드로 <b style={{ color: "var(--text)" }}>공고를 자동으로 생성</b>{"해드려요.\n바로 게시할 수 있는 완성도, 다듬는 시간을 크게 절약해요."}
+                확정된 조건과 키워드로 <b style={{ color: "var(--text)" }}>JD를 자동으로 생성</b>{"해드려요.\n바로 게시할 수 있는 완성도, 다듬는 시간을 크게 절약해요."}
               </p>
             </div>
             <div className="process-vis">
@@ -494,7 +506,7 @@ function Testimonials() {
   {
     brand: "CAREER",
     brandAccent: <span style={{ color: "#FF2E2E" }}>ABLE</span>,
-    brandStyle: { fontFamily: "Inter, sans-serif", fontWeight: 800, color: "#111", fontSize: 24, letterSpacing: "-0.02em" },
+    brandStyle: { fontFamily: "'Pretendard', sans-serif", fontWeight: 800, color: "#111", fontSize: 24, letterSpacing: "-0.02em" },
     cover: "linear-gradient(135deg, #ddd0f0 0%, #f2ecfa 100%)",
     quote: "원하는 기준을 충분히 갖춘\n인재 중에서 고를 수 있었어요",
     role: "커리어블 CEO",
@@ -530,7 +542,6 @@ function Testimonials() {
     <section id="testimonials">
       <div className="wrap">
         <div className="section-head">
-          <span className="eyebrow"><Icon name="users" size={13} /> 고객 후기</span>
           <h2 className="section-title">이유 있는 선택</h2>
           <p className="section-sub">스타팅을 통해 많은 기업이 채용 효율을 올리고 있어요.</p>
         </div>
@@ -568,7 +579,6 @@ function Pricing() {
     <section id="pricing" className="process-section">
       <div className="wrap">
         <div className="section-head">
-          <span className="eyebrow"><Icon name="receipt" size={13} /> 요금제</span>
           <h2 className="section-title">
             리스크를 줄여주는<br />
             합리적인 가격과 안전장치
@@ -591,7 +601,7 @@ function Pricing() {
               <li><Icon name="check" size={16} className="check" />면접 일정 조율 및 처우 협의 서포트</li>
             </ul>
             <div className="price-pay">
-              <span>최종 결제 금액(부가세 제외)</span>
+              <span>최종 결제 금액(VAT 별도)</span>
               <b>300만 원</b>
             </div>
           </Reveal>
@@ -612,7 +622,7 @@ function Pricing() {
               <li><Icon name="check" size={16} className="check" />신속한 서류 검토 · 유사도 분석 리포트 제공</li>
             </ul>
             <div className="price-pay">
-              <span>최종 결제 금액(부가세 제외)</span>
+              <span>최종 결제 금액(VAT 별도)</span>
               <b>500만 원</b>
             </div>
           </Reveal>
@@ -630,7 +640,7 @@ function Pricing() {
             <div className="license-mark"><Icon name="check" size={18} /></div>
             <div>
               <div className="license-name">유료직업소개사업 보증보험 가입</div>
-              <div className="license-id">증권번호 · 제 100-000-2025-0359-3297 호</div>
+              <div className="license-id">증권번호 · 제 100-000-2026-0354-0215 호</div>
             </div>
           </div>
         </div>
@@ -662,7 +672,6 @@ function FAQ() {
     <section id="faq">
       <div className="wrap">
         <div className="section-head">
-          <span className="eyebrow"><Icon name="search" size={13} /> 자주 묻는 질문</span>
           <h2 className="section-title">궁금한 점, 미리 정리해뒀어요</h2>
         </div>
         <div className="faq-list">
@@ -687,9 +696,6 @@ function FinalCTA() {
       <div className="wrap">
         <div className="cta-card">
           <div>
-            <span style={{ display: "inline-flex", padding: "6px 10px", background: "rgba(255,255,255,.18)", borderRadius: 999, fontSize: 12, fontWeight: 600, letterSpacing: ".04em", textTransform: "uppercase", marginBottom: 14 }}>
-              지금 바로 시작
-            </span>
             <h2 className="cta-h">
               플랫폼 보다 저렴한 금액으로<br />
               헤드헌팅 퍼포먼스.
@@ -745,8 +751,8 @@ function Footer() {
             <div className="nav-logo" style={{ marginBottom: 16 }}>
               <StartingLogo height={24} />
             </div>
-            <p className="footer-meta" style={{ maxWidth: 360 }}>스타팅
-공고 플랫폼을 대체하는 AI Agent 헤드헌팅 서비스
+            <p className="footer-meta" style={{ maxWidth: 360 }}>
+              공고 플랫폼을 대체하는 AI Agent 헤드헌팅 서비스
             </p>
           </div>
           <div className="footer-col">
