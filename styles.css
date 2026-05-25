@@ -814,10 +814,9 @@ body.nav-open{ overflow: hidden; }
   background: linear-gradient(135deg, var(--brand-700) 0%, var(--brand-500) 60%, var(--brand-400) 100%);
   color: #fff;
   padding: clamp(48px, 6vw, 80px) clamp(28px, 5vw, 64px);
-  display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center;
+  display: block;
   box-shadow: var(--sh-lg);
 }
-@media (min-width: 800px){ .cta-card{ grid-template-columns: 1.2fr 0.9fr; } }
 .cta-card::before{
   content: "";
   position: absolute; inset: 0;
@@ -840,37 +839,6 @@ body.nav-open{ overflow: hidden; }
 .cta-actions .btn-primary:hover{ background: #fff; color: var(--brand-800); transform: translateY(-1px); }
 .cta-actions .btn-ghost{ background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
 .cta-actions .btn-ghost:hover{ background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.6); }
-.cta-form{
-  position: relative;
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: var(--r-lg);
-  backdrop-filter: blur(8px);
-  padding: 24px;
-  font-size: 14px;
-  display: flex; flex-direction: column; gap: 14px;
-}
-.cta-form label{ display: flex; flex-direction: column; gap: 6px; font-weight: 500; font-size: 13px; opacity: .85; }
-.cta-form input, .cta-form select{
-  background: rgba(255,255,255,.1);
-  border: 1px solid rgba(255,255,255,.2);
-  color: #fff;
-  padding: 11px 14px;
-  border-radius: 8px;
-  font: inherit;
-  outline: none;
-}
-.cta-form input::placeholder{ color: rgba(255,255,255,.55); }
-.cta-form input:focus, .cta-form select:focus{ border-color: #fff; background: rgba(255,255,255,.15); }
-.cta-form button{
-  margin-top: 6px;
-  height: 46px;
-  background: #fff;
-  color: var(--primary-deep);
-  border-radius: 10px;
-  font-weight: 700;
-  border: 0;
-}
 
 /* ─── Footer ────────────────────────────────────────────────── */
 footer{
@@ -2058,69 +2026,96 @@ footer{
 }
 [data-theme="dark"] .fv-price-tag{ color: oklch(80% 0.13 78); background: color-mix(in oklab, var(--acc-amber) 18%, var(--ink-800)); }
 
-/* Headhunter visual (feature f4) */
-.fv-hh{
-  margin-top: 10px;
+.fv-price-labels{
+  margin-top: 8px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 18px 18px;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
   background: var(--bg-alt);
   border: 1px solid var(--border);
   border-radius: 12px;
 }
-.fv-hh-shake{
-  display: grid;
-  place-items: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  background: color-mix(in oklab, var(--primary) 12%, var(--surface));
-  border: 1px solid color-mix(in oklab, var(--primary) 22%, transparent);
-  box-shadow: 0 0 18px -4px color-mix(in oklab, var(--primary) 45%, transparent);
-  flex: none;
-}
-.fv-hh-connector{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  flex: 1;
-  min-width: 0;
-  padding: 0 4px;
-}
-.fv-hh-connector span{
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--text-3);
-  opacity: 0.45;
-  animation: fv-hh-dot-pulse 1.6s ease-in-out infinite;
-}
-.fv-hh-connector span:nth-child(2){ animation-delay: 0.2s; }
-.fv-hh-connector span:nth-child(3){ animation-delay: 0.4s; }
-@keyframes fv-hh-dot-pulse{
-  0%, 100%{ opacity: 0.35; transform: scale(0.92); }
-  50%{ opacity: 0.85; transform: scale(1); }
-}
-.fv-hh-status{
+.fv-price-label{
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 12px;
   font-weight: 600;
-  color: oklch(70% 0.16 155);
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: color-mix(in oklab, oklch(70% 0.16 155) 14%, transparent);
+  color: var(--text-2);
+}
+.fv-price-label svg{ color: var(--primary); flex: none; }
+
+.fv-flat{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.fv-flat-row{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.fv-flat-ic{
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
   flex: none;
 }
-.fv-hh-dot{
-  width: 6px; height: 6px;
+.fv-flat-ic svg{ color: var(--primary); }
+.fv-flat-text{
+  flex: 1;
+  min-width: 0;
+  color: var(--text);
+  line-height: 1.35;
+}
+.fv-flat-text strong{
+  font-weight: 800;
+  color: var(--text);
+}
+.fv-flat-check{
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  margin-left: 6px;
   border-radius: 50%;
-  background: oklch(70% 0.16 155);
-  animation: pulse 1.8s infinite;
+  background: color-mix(in oklab, var(--primary) 18%, transparent);
+  color: var(--primary);
+  vertical-align: middle;
+}
+.fv-flat-amt{
+  flex: none;
+  font-size: 13px;
+  font-weight: 700;
+  font-feature-settings: "tnum";
+  color: var(--text-3);
+  text-decoration: line-through;
+}
+.fv-flat-row--muted{
+  background: color-mix(in oklab, var(--text-3) 6%, transparent);
+}
+.fv-flat-row--muted .fv-flat-ic svg{ color: var(--text-3); }
+.fv-flat-row--accent{
+  background: color-mix(in oklab, var(--primary) 10%, var(--surface));
+  border: 1px solid color-mix(in oklab, var(--primary) 22%, transparent);
+}
+.fv-flat-row--accent .fv-flat-ic{
+  background: color-mix(in oklab, var(--primary) 14%, var(--surface));
+  border-color: color-mix(in oklab, var(--primary) 28%, transparent);
 }
 
 /* Accent variants applied via [data-accent] */
@@ -2750,24 +2745,7 @@ footer{
   .price-amount{ font-size: 36px; }
   .faq-item summary{ padding: 18px 18px; font-size: 15px; }
   .faq-body{ padding: 0 18px 18px; font-size: 14px; }
-  .cta-card{ padding: 36px 22px; gap: 24px; }
-  .cta-form{
-    background: transparent;
-    border: none;
-    backdrop-filter: none;
-    padding: 0;
-    border-radius: 0;
-  }
-  .cta-form input,
-  .cta-form select{
-    border: none;
-    background: rgba(255,255,255,.12);
-  }
-  .cta-form input:focus,
-  .cta-form select:focus{
-    border: none;
-    background: rgba(255,255,255,.18);
-  }
+  .cta-card{ padding: 36px 22px; }
   .cta-actions{ flex-direction: column; }
   .cta-actions .btn{ width: 100%; justify-content: center; min-height: 48px; }
   .footer-top{ grid-template-columns: 1fr 1fr; gap: 28px 20px; }

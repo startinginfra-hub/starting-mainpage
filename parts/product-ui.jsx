@@ -41,7 +41,7 @@ function ProductUI() {
           {/* Welcome */}
           <div className="pu-welcome">
             <h3 className="pu-welcome-title">
-              안녕하세요, 이수진 대표이사님 <span className="pu-badge">관리자</span>
+              안녕하세요, 이수진님 <span className="pu-badge">관리자</span>
             </h3>
             <p className="pu-welcome-sub">한눈에 진행 현황을 확인하고 바로 업무를 이어가 보세요.</p>
           </div>

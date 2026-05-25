@@ -72,8 +72,6 @@ function Hero() {
           <a className="btn btn-ghost lg" href="#" data-channel-action="open">문의하기</a>
         </div>
         <div className="hero-meta">
-          <span>사전 결제 없이 시작</span>
-          <span className="dot" />
           <span>유료직업소개사업 정식 허가</span>
           <span className="dot" />
           <span>채용 확정 시 결제</span>
@@ -230,7 +228,7 @@ function Stats() {
             데이터로 증명해요
           </h2>
           <p className="section-sub">
-            잘 맞는 인재를 빠르게, 부담은 적게. 스타팅이 만드는 변화예요.
+            검증된 매칭이 만드는 결과, 높은 합격률과 긴 재직률로 증명해요.
           </p>
         </div>
         <div className="stats-grid">
@@ -343,11 +341,15 @@ function Features() {
                 <ul className="fv-ai-steps">
                   <li>
                     <span className="fv-ai-check"><Icon name="check" size={11} /></span>
-                    채용 전략, 조건 설정 등 고민 함께 논의
+                    후보자 다이렉트 소싱 및 제안
                   </li>
                   <li>
                     <span className="fv-ai-check"><Icon name="check" size={11} /></span>
                     AI Agent로 필터링된 후보자 이중 검토
+                  </li>
+                  <li>
+                    <span className="fv-ai-check"><Icon name="check" size={11} /></span>
+                    채용 전략, JD 설계 등 1:1 상담
                   </li>
                 </ul>
               </div>
@@ -355,12 +357,22 @@ function Features() {
           </Reveal>
 
           <Reveal className="feature-card f3" delay={200}>
-            <div className="feature-icon"><Icon name="target" size={20} /></div>
+            <div className="feature-icon"><Icon name="chart" size={20} /></div>
             <h3 className="feature-title">플랫폼 수준 비용으로 헤드헌팅 이용</h3>
             <p className="feature-desc" style={{ whiteSpace: "pre-line" }}>
               {"소싱/필터링/조율 모두 맡기는데\n플랫폼과 비슷한 수준의 비용만 발생해요"}
             </p>
             <div className="visual">
+              <div className="fv-price-labels">
+                <span className="fv-price-label">
+                  <Icon name="users" size={14} />
+                  소싱·필터링·조율 전담
+                </span>
+                <span className="fv-price-label">
+                  <Icon name="chart" size={14} />
+                  플랫폼 수준 비용
+                </span>
+              </div>
               <div className="fv-price">
                 <span className="fv-price-strike">750만</span>
                 <span className="fv-price-now">300만 원</span>
@@ -370,32 +382,25 @@ function Features() {
           </Reveal>
 
           <Reveal className="feature-card f4" delay={280}>
-            <div className="feature-icon"><Icon name="shield" size={20} /></div>
+            <div className="feature-icon"><Icon name="receipt" size={20} /></div>
             <h3 className="feature-title">정찰제로 연봉 부담 완화</h3>
             <p className="feature-desc" style={{ whiteSpace: "pre-line" }}>
               {"경력/직군/연봉 상관없이 고정된 금액으로\n연봉에 따른 수수료 부담이 없어요"}
             </p>
-            <div className="visual fv-hh">
-              <div className="fv-hh-shake" aria-hidden="true">
-                <svg viewBox="0 0 64 64" width="34" height="34">
-                  <defs>
-                    <linearGradient id="hhPh" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="var(--brand-300)" />
-                      <stop offset="100%" stopColor="var(--brand-600)" />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    fill="url(#hhPh)"
-                    d="M22.5 8.5c2 0 3.7 1.3 4.3 3.3l2.2 7.2a4.5 4.5 0 0 1-1.2 4.5l-3.6 3.6c2.7 5.6 7.5 10.4 13.1 13.1l3.6-3.6a4.5 4.5 0 0 1 4.5-1.2l7.2 2.2c2 .6 3.3 2.3 3.3 4.3v7c0 2.5-2 4.6-4.5 4.6C28 53.5 10.5 36 10.5 14c0-2.5 2-4.5 4.5-4.5h7.5z" />
-                  
-                </svg>
-              </div>
-              <div className="fv-hh-connector" aria-hidden="true">
-                <span /><span /><span />
-              </div>
-              <div className="fv-hh-status">
-                <span className="fv-hh-dot" />
-                Online
+            <div className="visual">
+              <div className="fv-flat">
+                <div className="fv-flat-row fv-flat-row--muted">
+                  <span className="fv-flat-ic"><Icon name="chart" size={16} /></span>
+                  <span className="fv-flat-text">연봉 비례 수수료</span>
+                  <span className="fv-flat-amt">750만+</span>
+                </div>
+                <div className="fv-flat-row fv-flat-row--accent">
+                  <span className="fv-flat-ic"><Icon name="receipt" size={16} /></span>
+                  <span className="fv-flat-text">
+                    정찰제 <strong>300만 원</strong> 고정
+                    <span className="fv-flat-check"><Icon name="check" size={11} /></span>
+                  </span>
+                </div>
               </div>
             </div>
           </Reveal>
@@ -701,41 +706,15 @@ function FinalCTA() {
               헤드헌팅 퍼포먼스.
             </h2>
             <p className="cta-sub">
-              추가로 더 궁금한 내용이 있다면 상담을 신청해주세요<br />
-              이해하기 쉽게 유선으로 설명드릴게요!
+              지금 바로 Fit한 인재를 만나보세요
             </p>
+            <div className="cta-actions">
+              <a className="btn btn-primary lg" href="#start">
+                인재 매칭받아보기
+                <Icon name="arrow-right" size={16} className="arrow" />
+              </a>
+            </div>
           </div>
-          <form className="cta-form" data-channel-form="consultation">
-            <label>
-              회사명
-              <input name="company" type="text" placeholder="(주)스타팅파트너스" required />
-            </label>
-            <label>
-              담당자 이름
-              <input name="name" type="text" placeholder="홍길동" required />
-            </label>
-            <label>
-              담당자 전화번호
-              <input name="phone" type="tel" placeholder="010-0000-0000" required />
-            </label>
-            <label>
-              담당자 이메일
-              <input name="email" type="email" placeholder="you@company.com" />
-            </label>
-            <label>
-              채용 예정 직군
-              <select name="role" defaultValue="">
-                <option value="" disabled>선택해주세요</option>
-                <option value="개발 (프론트/백엔드/AI)">개발 (프론트/백엔드/AI)</option>
-                <option value="디자인 (UI/UX/프로덕트)">디자인 (UI/UX/프로덕트)</option>
-                <option value="PM / PO">PM / PO</option>
-                <option value="마케팅">마케팅</option>
-                <option value="경영지원">경영지원</option>
-                <option value="기타">기타</option>
-              </select>
-            </label>
-            <button type="submit">유선 상담 신청하기</button>
-          </form>
         </div>
       </div>
     </section>);
