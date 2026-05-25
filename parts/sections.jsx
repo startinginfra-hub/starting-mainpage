@@ -18,7 +18,7 @@ function Nav({ onToggleTheme, dark }) {
         </a>
         <div className="nav-links" id="nav-drawer">
           <a href="#features" onClick={closeMenu}>특징</a>
-          <a href="#process" onClick={closeMenu}>Ai Agent</a>
+          <a href="#process" onClick={closeMenu}>AI Agent</a>
           <a href="#pricing" onClick={closeMenu}>요금</a>
           <a href="#faq" onClick={closeMenu}>FAQ</a>
           <a href="https://blog.starting.kr/starting/ko" target="_blank" rel="noopener noreferrer" onClick={closeMenu}>블로그</a>
@@ -63,7 +63,7 @@ function Hero() {
         </span>
         <h1 className="hero-headline">
           공고 플랫폼을 대체하는<br />
-          <span className="accent">Ai Agent 헤드헌팅 솔루션</span>
+          <span className="accent">AI Agent 헤드헌팅 솔루션</span>
         </h1>
         <p className="hero-sub">매칭 신청부터 후보자 매칭까지, 모든 과정을 효율적으로
 
@@ -141,9 +141,9 @@ function Comparison() {
   const cards = [
   {
     type: "normal",
-    tag: "공고형 플랫폼",
-    fee: "플랫폼 수수료 7%",
-    title: "직접 채용",
+    tag: "공고/검색 플랫폼",
+    fee: "연봉 7% 수수료",
+    title: "직접 필터링",
     steps: ["공고 게시", "주요업무, 자격요건, 우대사항 의존", "미충족 인재 서류 검토 반복"],
     footer: "모든 과정을 직접하고 수수료 지불\n시간, 비용 비효율 끝판왕"
   },
@@ -157,9 +157,9 @@ function Comparison() {
   },
   {
     type: "normal",
-    tag: "타사 헤드헌팅",
-    fee: "계약 연봉의 15 ~ 22%",
-    title: "채용 대행",
+    tag: "서치펌 헤드헌팅",
+    fee: "연봉 15~30% 수수료",
+    title: "필터링·조율 대행",
     steps: ["포지션 의뢰", "기본 조건 기반 소싱", "소수 인재 매칭"],
     footer: "계약 연봉에 따른 수수료\n고연봉 포지션일수록 수수료 부담이 커집니다"
   }];
@@ -171,7 +171,7 @@ function Comparison() {
         <div className="section-head">
           <span className="eyebrow"><Icon name="target" size={13} /> 합리적인 스타팅</span>
           <h2 className="section-title compare-title">헤드헌팅 솔루션은 무엇이 다른가요?</h2>
-          <p className="section-sub">공고형 플랫폼, 타사 헤드헌팅과 어떻게 다른지 한눈에 비교해봤어요. 
+          <p className="section-sub">공고/검색 플랫폼, 서치펌 헤드헌팅과 어떻게 다른지 한눈에 비교해봤어요. 
 
 
           </p>
@@ -753,7 +753,7 @@ function Footer() {
             <h5>제품</h5>
             <ul>
               <li><a href="#features">특징</a></li>
-              <li><a href="#process">Ai Agent</a></li>
+              <li><a href="#process">AI Agent</a></li>
               <li><a href="#pricing">요금</a></li>
               <li><a href="#faq">FAQ</a></li>
             </ul>
