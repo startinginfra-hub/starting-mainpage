@@ -250,9 +250,74 @@ function Stats() {
 }
 
 const FV_MATCH_INDICES_DESKTOP = [0, 5, 14, 21, 35];
-const FV_MATCH_INDICES_MOBILE = [0, 5, 12, 17, 23];
+// 6×4 grid — avoid cols 0 & 5 so highlights sit toward the center on narrow screens
+const FV_MATCH_INDICES_MOBILE = [7, 9, 14, 16, 20];
 const FV_POOL_COUNT_DESKTOP = 36;
 const FV_POOL_COUNT_MOBILE = 24;
+
+function CostCompareChart() {
+  const [ref, inView] = useInView({ threshold: 0.2 });
+  const headhuntingH = inView ? "100%" : "0%";
+  const platformH = inView ? "calc(350 / 750 * 100%)" : "0%";
+  const startingH = inView ? "calc(300 / 750 * 100%)" : "0%";
+
+  return (
+    <div className="fv-cost-chart">
+      <p className="fv-cost-note">*연봉 5,000만 원 기준</p>
+      <div
+        className="fv-cost-plot"
+        role="img"
+        aria-label="연봉 5,000만 원 기준. 헤드헌팅 수수료 15% 750만 원, 공고형 플랫폼 수수료 7% 350만 원, 스타팅 정찰제 300만 원"
+      >
+        <div className="fv-cost-grid" aria-hidden="true" />
+        <div className="fv-cost-cols" ref={ref}>
+          <div className="fv-cost-col">
+            <div className="fv-cost-bar-area">
+              <div
+                className="fv-cost-fill fv-cost-fill--hunt"
+                style={{ height: headhuntingH }}
+              >
+                <span className="fv-cost-amt">750만 원</span>
+              </div>
+            </div>
+            <p className="fv-cost-lbl">
+              헤드헌팅
+              <span className="fv-cost-lbl-sub">(수수료 15%)</span>
+            </p>
+          </div>
+          <div className="fv-cost-col">
+            <div className="fv-cost-bar-area">
+              <div
+                className="fv-cost-fill fv-cost-fill--platform"
+                style={{ height: platformH }}
+              >
+                <span className="fv-cost-amt">350만 원</span>
+              </div>
+            </div>
+            <p className="fv-cost-lbl">
+              공고형 플랫폼
+              <span className="fv-cost-lbl-sub">(수수료 7%)</span>
+            </p>
+          </div>
+          <div className="fv-cost-col fv-cost-col--accent">
+            <div className="fv-cost-bar-area">
+              <div
+                className="fv-cost-fill fv-cost-fill--starting"
+                style={{ height: startingH }}
+              >
+                <span className="fv-cost-amt">300만 원</span>
+              </div>
+            </div>
+            <p className="fv-cost-lbl fv-cost-lbl--accent">
+              스타팅
+              <span className="fv-cost-lbl-sub">(정찰제)</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function Features() {
   const mobile = useMobileFunnel();
@@ -267,7 +332,7 @@ function Features() {
             헤드헌팅의 그 이상의 정교함을<br />
             플랫폼 보다 저렴하게
           </h2>
-          <p className="section-sub">공고 플랫폼 대신 스타팅을 써야하는 4가지 이유</p>
+          <p className="section-sub">공고 플랫폼 대신 스타팅을 써야하는 3가지 이유</p>
         </div>
         <div className="features-grid">
           <Reveal className="feature-card f1" delay={0}>
@@ -300,8 +365,8 @@ function Features() {
           <Reveal className="feature-card f2" delay={120}>
             <div className="feature-icon"><Icon name="spark" size={20} /></div>
             <h3 className="feature-title">전 과정 AI Agent 및 전문 헤드헌터와 함께</h3>
-            <p className="feature-desc" style={{ whiteSpace: "pre-line", letterSpacing: "-0.2px" }}>
-              {"매칭신청부터, 키워드 설정, 인재를 만나보기까지\n전부 서포트해요"}
+            <p className="feature-desc" style={{ letterSpacing: "-0.2px" }}>
+              매칭신청부터, 키워드 설정, 인재를 만나보기까지 전부 서포트해요
             </p>
             <div className="visual fv-ai-stack">
               <div className="fv-ai">
@@ -357,51 +422,13 @@ function Features() {
           </Reveal>
 
           <Reveal className="feature-card f3" delay={200}>
-            <div className="feature-icon"><Icon name="chart" size={20} /></div>
-            <h3 className="feature-title">플랫폼 수준 비용으로 헤드헌팅 이용</h3>
-            <p className="feature-desc" style={{ whiteSpace: "pre-line" }}>
-              {"소싱/필터링/조율 모두 맡기는데\n플랫폼과 비슷한 수준의 비용만 발생해요"}
-            </p>
-            <div className="visual">
-              <div className="fv-price-labels">
-                <span className="fv-price-label">
-                  <Icon name="users" size={14} />
-                  소싱·필터링·조율 전담
-                </span>
-                <span className="fv-price-label">
-                  <Icon name="chart" size={14} />
-                  플랫폼 수준 비용
-                </span>
-              </div>
-              <div className="fv-price">
-                <span className="fv-price-strike">750만</span>
-                <span className="fv-price-now">300만 원</span>
-                <span className="fv-price-tag">최대 60% ↓</span>
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal className="feature-card f4" delay={280}>
             <div className="feature-icon"><Icon name="receipt" size={20} /></div>
-            <h3 className="feature-title">정찰제로 연봉 부담 완화</h3>
-            <p className="feature-desc" style={{ whiteSpace: "pre-line" }}>
-              {"경력/직군/연봉 상관없이 고정된 금액으로\n연봉에 따른 수수료 부담이 없어요"}
+            <h3 className="feature-title">플랫폼 수준 비용으로 헤드헌팅 이용</h3>
+            <p className="feature-desc">
+              소싱/필터링/조율 모두 맡기는데 플랫폼과 비슷한 수준의 비용만 발생해요
             </p>
             <div className="visual">
-              <div className="fv-flat">
-                <div className="fv-flat-row fv-flat-row--muted">
-                  <span className="fv-flat-ic"><Icon name="chart" size={16} /></span>
-                  <span className="fv-flat-text">연봉 비례 수수료</span>
-                  <span className="fv-flat-amt">750만+</span>
-                </div>
-                <div className="fv-flat-row fv-flat-row--accent">
-                  <span className="fv-flat-ic"><Icon name="receipt" size={16} /></span>
-                  <span className="fv-flat-text">
-                    정찰제 <strong>300만 원</strong> 고정
-                    <span className="fv-flat-check"><Icon name="check" size={11} /></span>
-                  </span>
-                </div>
-              </div>
+              <CostCompareChart />
             </div>
           </Reveal>
         </div>
