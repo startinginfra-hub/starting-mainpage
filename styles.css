@@ -186,11 +186,21 @@ section.tight{ padding: clamp(48px, 6vw, 80px) 0; }
 
 /* ─── Nav ────────────────────────────────────────────────────── */
 .nav{
-  position: sticky; top: 0; z-index: 50;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+}
+/* Blur on ::before so fixed drawer/backdrop anchor to the viewport, not .nav */
+.nav::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   backdrop-filter: blur(12px) saturate(160%);
   -webkit-backdrop-filter: blur(12px) saturate(160%);
   background: color-mix(in oklab, var(--bg) 80%, transparent);
-  border-bottom: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
 }
 .nav-inner{ display: flex; align-items: center; justify-content: space-between; height: 68px; }
 section[id]{ scroll-margin-top: 80px; }
@@ -239,6 +249,12 @@ section[id]{ scroll-margin-top: 80px; }
 }
 body.nav-open{ overflow: hidden; }
 @media (max-width: 899px){
+  .nav.is-open{
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
   .nav-links{
     display: flex;
     flex-direction: column;
@@ -883,6 +899,12 @@ footer{
 .footer-col a:hover{ color: var(--text); }
 .footer-bottom{ display: flex; justify-content: space-between; padding-top: 28px; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 12px; }
 .footer-meta{ line-height: 1.7; opacity: .8; }
+.footer-company{ font-weight: 600; opacity: 1; margin: 0; max-width: 360px; }
+.footer-legal a{ color: inherit; text-decoration: none; }
+.footer-legal a:hover{ color: var(--text); text-decoration: underline; }
+.footer-legal-mobile{ display: none; }
+.footer-legal-line{ margin: 0; }
+.footer-legal-company{ font-weight: 600; opacity: 1; margin-bottom: 2px; }
 
 /* ─── Product UI mock — recruiter dashboard ────────────────────── */
 .pu{
@@ -2085,7 +2107,7 @@ footer{
   --fv-cost-plot-h: clamp(112px, 28vw, 132px);
   --fv-cost-bar-max: 96px;
   --fv-cost-gap: clamp(6px, 2.5vw, 18px);
-  --fv-cost-max: 750;
+  --fv-cost-max: 1000;
   container-type: inline-size;
   min-width: 0;
   margin-top: 4px;
@@ -2869,6 +2891,13 @@ footer{
   .footer-top{ grid-template-columns: 1fr 1fr; gap: 28px 20px; }
   .footer-col:first-child{ grid-column: 1 / -1; }
   .footer-bottom{ flex-direction: column; align-items: flex-start; }
+  .footer-company{ display: none; }
+  .footer-legal-desktop{ display: none; }
+  .footer-legal-mobile{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
   .t-marquee{
     -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
             mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);

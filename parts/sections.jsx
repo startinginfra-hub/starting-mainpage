@@ -146,7 +146,7 @@ function Comparison() {
     tag: "AI 헤드헌팅 솔루션 '스타팅'",
     fee: "정찰제 300만 원",
     title: "고성능 필터링 및 조율 대행",
-    steps: ["AI Agent로 포지션 간편 등록", "후보자 소싱 + AI·리쿠르터 이중 필터링", "핏한 소수매칭 + 요약 리포트 기반 검토"],
+    steps: ["AI Agent로 포지션 간편 등록", "후보자 소싱 + AI·리쿠르터 이중 필터링", "핏한 소수 매칭 + 요약 리포트 기반 검토"],
     footer: "다 맡기고 가성비 정찰제 결제\n연봉에 따른 부담 및 채용 피로도 모두 제거"
   },
   {
@@ -258,8 +258,8 @@ const FV_POOL_COUNT_MOBILE = 24;
 function CostCompareChart() {
   const [ref, inView] = useInView({ threshold: 0.2 });
   const headhuntingH = inView ? "100%" : "0%";
-  const platformH = inView ? "calc(350 / 750 * 100%)" : "0%";
-  const startingH = inView ? "calc(300 / 750 * 100%)" : "0%";
+  const platformH = inView ? "calc(350 / 1000 * 100%)" : "0%";
+  const startingH = inView ? "calc(300 / 1000 * 100%)" : "0%";
 
   return (
     <div className="fv-cost-chart">
@@ -267,7 +267,7 @@ function CostCompareChart() {
       <div
         className="fv-cost-plot"
         role="img"
-        aria-label="연봉 5,000만 원 기준. 헤드헌팅 수수료 15% 750만 원, 공고형 플랫폼 수수료 7% 350만 원, 스타팅 정찰제 300만 원"
+        aria-label="연봉 5,000만 원 기준. 헤드헌팅 수수료 20% 1,000만 원, 공고형 플랫폼 수수료 7% 350만 원, 스타팅 정찰제 300만 원"
       >
         <div className="fv-cost-grid" aria-hidden="true" />
         <div className="fv-cost-cols" ref={ref}>
@@ -277,12 +277,12 @@ function CostCompareChart() {
                 className="fv-cost-fill fv-cost-fill--hunt"
                 style={{ height: headhuntingH }}
               >
-                <span className="fv-cost-amt">750만 원</span>
+                <span className="fv-cost-amt">1,000만 원</span>
               </div>
             </div>
             <p className="fv-cost-lbl">
               헤드헌팅
-              <span className="fv-cost-lbl-sub">(수수료 15%)</span>
+              <span className="fv-cost-lbl-sub">(수수료 20%)</span>
             </p>
           </div>
           <div className="fv-cost-col">
@@ -330,7 +330,7 @@ function Features() {
         <div className="section-head">
           <h2 className="section-title">
             헤드헌팅의 그 이상의 정교함을<br />
-            플랫폼 보다 저렴하게
+            플랫폼 수준의 비용으로
           </h2>
           <p className="section-sub">공고 플랫폼 대신 스타팅을 써야하는 3가지 이유</p>
         </div>
@@ -729,11 +729,11 @@ function FinalCTA() {
         <div className="cta-card">
           <div>
             <h2 className="cta-h">
-              플랫폼 보다 저렴한 금액으로<br />
-              헤드헌팅 퍼포먼스.
+              플랫폼 수준의 비용으로<br />
+              헤드헌팅을 경험해보세요
             </h2>
             <p className="cta-sub">
-              지금 바로 Fit한 인재를 만나보세요
+              소싱/필터링/조율, 채용의 모든 과정을 효율적으로
             </p>
             <div className="cta-actions">
               <a className="btn btn-primary lg" href="#start">
@@ -757,9 +757,7 @@ function Footer() {
             <div className="nav-logo" style={{ marginBottom: 16 }}>
               <StartingLogo height={24} />
             </div>
-            <p className="footer-meta" style={{ maxWidth: 360 }}>
-              공고 플랫폼을 대체하는 AI Agent 헤드헌팅 서비스
-            </p>
+            <p className="footer-meta footer-company">스타팅파트너스(주)</p>
           </div>
           <div className="footer-col">
             <h5>제품</h5>
@@ -783,18 +781,31 @@ function Footer() {
               <li><a href="#" data-channel-action="open">문의하기</a></li>
               <li><a href="#terms">이용약관</a></li>
               <li><a href="#privacy">개인정보처리방침</a></li>
-              <li><a href="mailto:support@starting.kr">support@starting.kr</a></li>
             </ul>
           </div>
         </div>
         <div className="footer-bottom">
-          <div className="footer-meta">
-            대표이사 : 김홍찬 | 사업자 등록번호 : 313-88-02066 | 통신판매번호 : 2025-서울광진-0701<br />
-            직업정보제공번호 : 서울동부 제 2026-6 호 | 유료직업소개번호 : 제 2025-3040234-14-5-00005 호<br />
-            본사 : 서울특별시 광진구 능동로 81, 3층 | 지사/연구소 : 서울특별시 중구 퇴계로 15, 5층<br />
-            문의 : 1688-7360 / support@starting.kr
+          <div className="footer-meta footer-legal">
+            <div className="footer-legal-desktop">
+              대표이사 : 김홍찬 | 사업자 등록번호 : 313-88-02066 | 통신판매번호 : 2025-서울광진-0701<br />
+              직업정보제공번호 : 서울동부 제 2026-6 호 | 유료직업소개번호 : 제 2025-3040234-14-5-00005 호<br />
+              본사 : 서울특별시 광진구 능동로 81, 3층 | 지사/연구소 : 서울특별시 중구 퇴계로 15, 5층<br />
+              문의 : <a href="tel:16887360">1688-7360</a> / <a href="mailto:support@starting.kr">support@starting.kr</a>
+            </div>
+            <div className="footer-legal-mobile">
+              <p className="footer-legal-line footer-legal-company">스타팅파트너스(주)</p>
+              <p className="footer-legal-line">대표이사 : 김홍찬 | 사업자 등록번호 : 313-88-02066</p>
+              <p className="footer-legal-line">통신판매번호 : 2025-서울광진-0701</p>
+              <p className="footer-legal-line">직업정보제공번호 : 서울동부 제 2026-6 호</p>
+              <p className="footer-legal-line">유료직업소개번호 : 제 2025-3040234-14-5-00005 호</p>
+              <p className="footer-legal-line">본사 : 서울특별시 광진구 능동로 81, 3층</p>
+              <p className="footer-legal-line">지사/연구소 : 서울특별시 중구 퇴계로 15, 5층</p>
+              <p className="footer-legal-line">
+                문의 : <a href="tel:16887360">1688-7360</a> / <a href="mailto:support@starting.kr">support@starting.kr</a>
+              </p>
+            </div>
           </div>
-          <div className="footer-meta">© 2026 Starting Partners, Inc.</div>
+          <div className="footer-meta">© 2026, Starting Partners Inc.</div>
         </div>
       </div>
     </footer>);

@@ -407,7 +407,7 @@ function InvoiceCard() {
         </div>
         <div className="inv-row">후보자 채용 확정<b>김지원 · 백엔드</b></div>
         <div className="inv-row">계약 연봉<b>5,000만 원</b></div>
-        <div className="inv-row">기존 헤드헌팅 수수료 (15%)<span style={{ textDecoration: "line-through", color: "var(--text-3)" }}>750만 원</span></div>
+        <div className="inv-row">기존 헤드헌팅 수수료 (20%)<span style={{ textDecoration: "line-through", color: "var(--text-3)" }}>1,000만 원</span></div>
         <div className="inv-total">
           <span>스타팅 정찰제</span>
           <span className="amt">300만 원</span>
