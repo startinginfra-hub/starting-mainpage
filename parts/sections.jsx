@@ -757,7 +757,6 @@ function Footer() {
             <div className="nav-logo" style={{ marginBottom: 16 }}>
               <StartingLogo height={24} />
             </div>
-            <p className="footer-meta footer-company">스타팅파트너스(주)</p>
           </div>
           <div className="footer-col">
             <h5>제품</h5>
@@ -787,10 +786,13 @@ function Footer() {
         <div className="footer-bottom">
           <div className="footer-meta footer-legal">
             <div className="footer-legal-desktop">
-              대표이사 : 김홍찬 | 사업자 등록번호 : 313-88-02066 | 통신판매번호 : 2025-서울광진-0701<br />
-              직업정보제공번호 : 서울동부 제 2026-6 호 | 유료직업소개번호 : 제 2025-3040234-14-5-00005 호<br />
-              본사 : 서울특별시 광진구 능동로 81, 3층 | 지사/연구소 : 서울특별시 중구 퇴계로 15, 5층<br />
-              문의 : <a href="tel:16887360">1688-7360</a> / <a href="mailto:support@starting.kr">support@starting.kr</a>
+              <p className="footer-legal-line footer-legal-company">스타팅파트너스(주)</p>
+              <p className="footer-legal-line">대표이사 : 김홍찬 | 사업자 등록번호 : 313-88-02066 | 통신판매번호 : 2025-서울광진-0701</p>
+              <p className="footer-legal-line">직업정보제공번호 : 서울동부 제 2026-6 호 | 유료직업소개번호 : 제 2025-3040234-14-5-00005 호</p>
+              <p className="footer-legal-line">본사 : 서울특별시 광진구 능동로 81, 3층 | 지사/연구소 : 서울특별시 중구 퇴계로 15, 5층</p>
+              <p className="footer-legal-line">
+                문의 : <a href="tel:16887360">1688-7360</a> / <a href="mailto:support@starting.kr">support@starting.kr</a>
+              </p>
             </div>
             <div className="footer-legal-mobile">
               <p className="footer-legal-line footer-legal-company">스타팅파트너스(주)</p>
