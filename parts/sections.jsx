@@ -27,7 +27,7 @@ function Nav({ onToggleTheme, dark }) {
           <button className="btn btn-soft sm" onClick={onToggleTheme} aria-label="테마 전환">
             <Icon name={dark ? "sun" : "moon"} size={15} />
           </button>
-          <a className="btn btn-ghost sm nav-login" href="#login">로그인</a>
+          <a className="btn btn-ghost sm nav-login" href="https://app.starting.kr/">로그인</a>
           <button
             type="button"
             className="nav-toggle"
@@ -65,7 +65,7 @@ function Hero() {
 
         </p>
         <div className="hero-cta">
-          <a className="btn btn-primary lg" href="#start">
+          <a className="btn btn-primary lg" href="https://app.starting.kr/">
             인재 매칭받아보기
             <Icon name="arrow-right" size={16} className="arrow" />
           </a>
@@ -736,7 +736,7 @@ function FinalCTA() {
               소싱/필터링/조율, 채용의 모든 과정을 효율적으로
             </p>
             <div className="cta-actions">
-              <a className="btn btn-primary lg" href="#start">
+              <a className="btn btn-primary lg" href="https://app.starting.kr/">
                 인재 매칭받아보기
                 <Icon name="arrow-right" size={16} className="arrow" />
               </a>
@@ -777,8 +777,6 @@ function Footer() {
           <div className="footer-col">
             <h5>지원</h5>
             <ul>
-              <li><a href="#" data-channel-action="open">문의하기</a></li>
-              <li><a href="#terms">이용약관</a></li>
               <li><a href="#privacy">개인정보처리방침</a></li>
             </ul>
           </div>
