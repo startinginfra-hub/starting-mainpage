@@ -2829,9 +2829,12 @@ footer{
   .compare-grid{ margin-top: 40px; gap: 14px; }
   .compare-card{ padding: 22px 18px; }
   .compare-fee{ font-size: 22px; }
+  .process-list{
+    gap: 48px;
+  }
   .process-row{
     padding: 0;
-    gap: 20px;
+    gap: 28px;
     background: transparent;
     border: none;
     box-shadow: none;
