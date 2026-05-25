@@ -47,6 +47,8 @@ const Icon = ({ name, size = 18, stroke = 1.6, ...rest }) => {
       return <svg {...props}><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>;
     case "menu":
       return <svg {...props}><path d="M4 7h16M4 12h16M4 17h16"/></svg>;
+    case "x":
+      return <svg {...props}><path d="M6 6l12 12M18 6L6 18"/></svg>;
     case "chevron-down":
       return <svg {...props}><path d="M6 9l6 6 6-6"/></svg>;
     default: return null;

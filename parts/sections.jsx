@@ -1,26 +1,52 @@
 // Landing page sections
 
 function Nav({ onToggleTheme, dark }) {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    document.body.classList.toggle("nav-open", menuOpen);
+    return () => document.body.classList.remove("nav-open");
+  }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <nav className="nav">
+    <nav className={`nav${menuOpen ? " is-open" : ""}`}>
       <div className="wrap nav-inner">
-        <a href="#" className="nav-logo" aria-label="Starting">
+        <a href="#" className="nav-logo" aria-label="Starting" onClick={closeMenu}>
           <StartingLogo height={22} />
         </a>
-        <div className="nav-links">
-          <a href="#features">특징</a>
-          <a href="#process">Ai Agent</a>
-          <a href="#pricing">요금</a>
-          <a href="#faq">FAQ</a>
-          <a href="https://blog.starting.kr/starting/ko" target="_blank" rel="noopener noreferrer">블로그</a>
+        <div className="nav-links" id="nav-drawer">
+          <a href="#features" onClick={closeMenu}>특징</a>
+          <a href="#process" onClick={closeMenu}>Ai Agent</a>
+          <a href="#pricing" onClick={closeMenu}>요금</a>
+          <a href="#faq" onClick={closeMenu}>FAQ</a>
+          <a href="https://blog.starting.kr/starting/ko" target="_blank" rel="noopener noreferrer" onClick={closeMenu}>블로그</a>
         </div>
         <div className="nav-cta">
           <button className="btn btn-soft sm" onClick={onToggleTheme} aria-label="테마 전환">
             <Icon name={dark ? "sun" : "moon"} size={15} />
           </button>
-          <a className="btn btn-ghost sm" href="#login">로그인</a>
+          <a className="btn btn-ghost sm nav-login" href="#login">로그인</a>
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-expanded={menuOpen}
+            aria-controls="nav-drawer"
+            aria-label={menuOpen ? "메뉴 닫기" : "메뉴 열기"}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <Icon name={menuOpen ? "x" : "menu"} size={18} />
+          </button>
         </div>
       </div>
+      <button
+        type="button"
+        className="nav-backdrop"
+        aria-hidden={!menuOpen}
+        tabIndex={menuOpen ? 0 : -1}
+        onClick={closeMenu}
+      />
     </nav>);
 
 }
@@ -82,16 +108,29 @@ function Logos() {
   { src: "logos/pia.png", alt: "PIA" },
   { src: "logos/hgrs.png", alt: "해그로시" }];
 
+  const mid = Math.ceil(logos.length / 2);
+  const row1 = logos.slice(0, mid);
+  const row2 = logos.slice(mid);
+  const doubledRow1 = [...row1, ...row1];
+  const doubledRow2 = [...row2, ...row2];
+
+  const renderPill = (l, i) =>
+  <div key={`${l.src}-${i}`} className="logo-pill">
+      <img src={l.src} alt={l.alt} loading="lazy" />
+    </div>;
+
+
   return (
     <section className="logos">
       <div className="wrap">
         <div className="logos-label">Seed부터 Series 기업까지, 성장하는 기업이 스타팅을 선택해요</div>
-        <div className="logos-grid">
-          {logos.map((l) =>
-          <div key={l.src} className="logo-pill">
-              <img src={l.src} alt={l.alt} loading="lazy" />
-            </div>
-          )}
+        <div className="logos-marquee-wrap">
+          <div className="logos-marquee logos-marquee--ltr">
+            <div className="logos-track">{doubledRow1.map(renderPill)}</div>
+          </div>
+          <div className="logos-marquee logos-marquee--rtl">
+            <div className="logos-track">{doubledRow2.map(renderPill)}</div>
+          </div>
         </div>
       </div>
     </section>);
@@ -105,7 +144,7 @@ function Comparison() {
     tag: "공고형 플랫폼",
     fee: "플랫폼 수수료 7%",
     title: "직접 채용",
-    steps: ["공고 게시", "다수 지원자 유입", "미충족 인재 서류 검토 반복"],
+    steps: ["공고 게시", "주요업무, 자격요건, 우대사항 의존", "미충족 인재 서류 검토 반복"],
     footer: "모든 과정을 직접하고 수수료 지불\n시간, 비용 비효율 끝판왕"
   },
   {
@@ -219,7 +258,16 @@ function Stats() {
 
 }
 
+const FV_MATCH_INDICES_DESKTOP = [0, 5, 14, 21, 35];
+const FV_MATCH_INDICES_MOBILE = [0, 5, 12, 17, 23];
+const FV_POOL_COUNT_DESKTOP = 36;
+const FV_POOL_COUNT_MOBILE = 24;
+
 function Features() {
+  const mobile = useMobileFunnel();
+  const poolCount = mobile ? FV_POOL_COUNT_MOBILE : FV_POOL_COUNT_DESKTOP;
+  const matchIndices = mobile ? FV_MATCH_INDICES_MOBILE : FV_MATCH_INDICES_DESKTOP;
+
   return (
     <section id="features">
       <div className="wrap">
@@ -241,8 +289,8 @@ function Features() {
             </p>
             <div className="visual">
               <div className="fv-pool fv-pool--cards">
-                {Array.from({ length: 24 }).map((_, i) => {
-                  const matchIdx = [3, 9, 14, 17, 20].indexOf(i);
+                {Array.from({ length: poolCount }).map((_, i) => {
+                  const matchIdx = matchIndices.indexOf(i);
                   const isMatch = matchIdx !== -1;
                   return (
                     <Reveal
@@ -255,10 +303,6 @@ function Features() {
                     </Reveal>);
 
                 })}
-              </div>
-              <div style={{ fontSize: 12, color: "var(--text-3)", marginTop: 12, display: "flex", justifyContent: "space-between" }}>
-                <span>지원자 풀 (24명)</span>
-                <span style={{ color: "var(--primary)", fontWeight: 600 }}>매칭 후보 5명</span>
               </div>
             </div>
           </Reveal>
@@ -332,6 +376,9 @@ function Features() {
                     d="M22.5 8.5c2 0 3.7 1.3 4.3 3.3l2.2 7.2a4.5 4.5 0 0 1-1.2 4.5l-3.6 3.6c2.7 5.6 7.5 10.4 13.1 13.1l3.6-3.6a4.5 4.5 0 0 1 4.5-1.2l7.2 2.2c2 .6 3.3 2.3 3.3 4.3v7c0 2.5-2 4.6-4.5 4.6C28 53.5 10.5 36 10.5 14c0-2.5 2-4.5 4.5-4.5h7.5z" />
                   
                 </svg>
+              </div>
+              <div className="fv-hh-connector" aria-hidden="true">
+                <span /><span /><span />
               </div>
               <div className="fv-hh-status">
                 <span className="fv-hh-dot" />
@@ -417,43 +464,6 @@ function Process() {
 function Testimonials() {
   const items = [
   {
-    logo: "logos/pia.png",
-    cover: "linear-gradient(135deg, #cfd7df 0%, #eef1f6 60%, #d5dde5 100%)",
-    quote: "채용에 들어가는 시간\n획기적으로 줄일 수 있었어요",
-    role: "피아스페이스 COO",
-    href: "https://blog.starting.kr/ko/articles/%ED%94%BC%EC%95%84%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-AI-%EC%98%81%EC%83%81%EB%B6%84%EC%84%9D-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85-%EB%B0%98%EB%B3%B5%EB%90%98%EB%8A%94-%EC%B1%84%EC%9A%A9-%EB%B9%84%ED%9A%A8%EC%9C%A8-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95-9f7fcf24"
-  },
-  {
-    logo: "logos/toktokhan.png",
-    cover: "linear-gradient(135deg, #d4dde6 0%, #eef2f7 50%, #c9d4df 100%)",
-    quote: "매칭 리포트를 통해\n인재 정보를 한눈에 볼 수 있어서\n시간 단축에 큰 도움이 되었어요.",
-    role: "똑똑한 개발자 HR 담당자",
-    href: "https://blog.starting.kr/ko/articles/%EB%98%91%EB%98%91%ED%95%9C%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%EC%82%AC%EB%A7%A4%EB%8B%88%EC%A0%80%EA%B0%80-%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC-%ED%9A%A8%EC%9C%A8%EC%A0%81%EC%9C%BC%EB%A1%9C-%EB%BD%91%EB%8A%94-%EB%B0%A9%EB%B2%95-906f7bb1"
-  },
-  {
-    brand: "CAREER",
-    brandAccent: <span style={{ color: "#FF2E2E" }}>ABLE</span>,
-    brandStyle: { fontFamily: "Inter, sans-serif", fontWeight: 800, color: "#111", fontSize: 24, letterSpacing: "-0.02em" },
-    cover: "linear-gradient(135deg, #e1e6ec 0%, #f0f3f7 100%)",
-    quote: "원하는 기준을 충분히 갖춘\n인재 중에서 고를 수 있었어요",
-    role: "커리어블 CEO",
-    href: "https://blog.starting.kr/ko/articles/%EC%BB%A4%EB%A6%AC%EC%96%B4%EB%B8%94-%EC%B2%AD%EC%B0%BD%EC%82%AC-%EC%B6%9C%EC%8B%A0-%EC%97%90%EB%93%80%ED%85%8C%ED%81%AC-%EA%B8%B0%EC%97%85-%EC%B4%88%EA%B8%B0-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85%EC%97%90-%EB%A7%9E%EB%8A%94-%EC%9D%B8%EC%9E%AC-%ED%99%95%EB%B3%B4-%EB%B0%A9%EB%B2%95-702b2821"
-  },
-  {
-    logo: "logos/acrossb.png",
-    cover: "linear-gradient(135deg, #dde4ee 0%, #f1f4f8 100%)",
-    quote: "채용 매니저분이 밀착해서\n관리해주셔서 정말 마음에 들어요\n이정도면 사내 인사팀 아닌가요?!",
-    role: "어크로스비 HR 담당자",
-    href: "https://blog.starting.kr/ko/articles/%EC%96%B4%ED%81%AC%EB%A1%9C%EC%8A%A4%EB%B9%84-%EA%B8%80%EB%A1%9C%EB%B2%8C-SCM-Tech-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85-%EB%B9%A0%EB%A5%B4%EA%B3%A0-%ED%9A%A8%EC%9C%A8%EC%A0%81%EC%9D%B8-%EC%B1%84%EC%9A%A9%EC%9D%98-%EB%B9%84%EA%B2%B0-b9c9e726"
-  },
-  {
-    logo: "logos/hgrs.png",
-    cover: "linear-gradient(135deg, #d3dce6 0%, #eaf0f6 100%)",
-    quote: "지금 바로 필요한\n인재를 신속하게\n채용할 수 있었어요",
-    role: "해그로시 CEO",
-    href: "https://blog.starting.kr/ko/articles/%ED%95%B4%EA%B7%B8%EB%A1%9C%EC%8B%9C-%EB%B8%8C%EB%9E%9C%EB%94%A9-%EC%A0%84%EB%AC%B8-%EA%B8%B0%EC%97%85%EC%9D%98-%EB%B9%A0%EB%A5%B4%EA%B3%A0-%EC%9C%A0%EC%97%B0%ED%95%9C-%EC%B1%84%EC%9A%A9-%EC%A0%84%EB%9E%B5-dadad2a0"
-  },
-  {
     logo: "logos/onulhunnam.png",
     cover: "linear-gradient(135deg, #f1d8c2 0%, #f9e7d6 100%)",
     quote: "채용 과정이\n효율적으로 바뀌었어요",
@@ -473,6 +483,43 @@ function Testimonials() {
     quote: "불필요한 인터뷰 없이\n적합한 인재만 만나볼 수 있어\n시간을 크게 아꼈어요",
     role: "테라클 CEO",
     href: "https://blog.starting.kr/ko/articles/%ED%85%8C%EB%9D%BC%ED%81%B4-%ED%95%B4%EC%A4%91%ED%95%A9-%EA%B8%B0%EB%B0%98-%ED%8F%90%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%8B%B1-%EC%9E%AC%ED%99%9C%EC%9A%A9-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85-%EB%B6%88%ED%95%84%EC%9A%94%ED%95%9C-%EC%9D%B8%ED%84%B0%EB%B7%B0-%EC%A4%84%EC%9D%B4%EB%8A%94-%EB%B0%A9%EB%B2%95-3a75d208"
+  },
+  {
+    logo: "logos/toktokhan.png",
+    cover: "linear-gradient(135deg, #e6d5bc 0%, #f5ebe0 100%)",
+    quote: "매칭 리포트를 통해\n인재 정보를 한눈에 볼 수 있어서\n시간 단축에 큰 도움이 되었어요.",
+    role: "똑똑한 개발자 HR 담당자",
+    href: "https://blog.starting.kr/ko/articles/%EB%98%91%EB%98%91%ED%95%9C%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%EC%82%AC%EB%A7%A4%EB%8B%88%EC%A0%80%EA%B0%80-%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC-%ED%9A%A8%EC%9C%A8%EC%A0%81%EC%9C%BC%EB%A1%9C-%EB%BD%91%EB%8A%94-%EB%B0%A9%EB%B2%95-906f7bb1"
+  },
+  {
+    brand: "CAREER",
+    brandAccent: <span style={{ color: "#FF2E2E" }}>ABLE</span>,
+    brandStyle: { fontFamily: "Inter, sans-serif", fontWeight: 800, color: "#111", fontSize: 24, letterSpacing: "-0.02em" },
+    cover: "linear-gradient(135deg, #ddd0f0 0%, #f2ecfa 100%)",
+    quote: "원하는 기준을 충분히 갖춘\n인재 중에서 고를 수 있었어요",
+    role: "커리어블 CEO",
+    href: "https://blog.starting.kr/ko/articles/%EC%BB%A4%EB%A6%AC%EC%96%B4%EB%B8%94-%EC%B2%AD%EC%B0%BD%EC%82%AC-%EC%B6%9C%EC%8B%A0-%EC%97%90%EB%93%80%ED%85%8C%ED%81%AC-%EA%B8%B0%EC%97%85-%EC%B4%88%EA%B8%B0-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85%EC%97%90-%EB%A7%9E%EB%8A%94-%EC%9D%B8%EC%9E%AC-%ED%99%95%EB%B3%B4-%EB%B0%A9%EB%B2%95-702b2821"
+  },
+  {
+    logo: "logos/acrossb.png",
+    cover: "linear-gradient(135deg, #c2e0dc 0%, #e2f3f0 100%)",
+    quote: "채용 매니저분이 밀착해서\n관리해주셔서 정말 마음에 들어요\n이정도면 사내 인사팀 아닌가요?!",
+    role: "어크로스비 HR 담당자",
+    href: "https://blog.starting.kr/ko/articles/%EC%96%B4%ED%81%AC%EB%A1%9C%EC%8A%A4%EB%B9%84-%EA%B8%80%EB%A1%9C%EB%B2%8C-SCM-Tech-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85-%EB%B9%A0%EB%A5%B4%EA%B3%A0-%ED%9A%A8%EC%9C%A8%EC%A0%81%EC%9D%B8-%EC%B1%84%EC%9A%A9%EC%9D%98-%EB%B9%84%EA%B2%B0-b9c9e726"
+  },
+  {
+    logo: "logos/hgrs.png",
+    cover: "linear-gradient(135deg, #e8cfd0 0%, #f6e8e9 100%)",
+    quote: "지금 바로 필요한\n인재를 신속하게\n채용할 수 있었어요",
+    role: "해그로시 CEO",
+    href: "https://blog.starting.kr/ko/articles/%ED%95%B4%EA%B7%B8%EB%A1%9C%EC%8B%9C-%EB%B8%8C%EB%9E%9C%EB%94%A9-%EC%A0%84%EB%AC%B8-%EA%B8%B0%EC%97%85%EC%9D%98-%EB%B9%A0%EB%A5%B4%EA%B3%A0-%EC%9C%A0%EC%97%B0%ED%95%9C-%EC%B1%84%EC%9A%A9-%EC%A0%84%EB%9E%B5-dadad2a0"
+  },
+  {
+    logo: "logos/pia.png",
+    cover: "linear-gradient(135deg, #c8d4e0 0%, #e4ebf2 100%)",
+    quote: "채용에 들어가는 시간\n획기적으로 줄일 수 있었어요",
+    role: "피아스페이스 COO",
+    href: "https://blog.starting.kr/ko/articles/%ED%94%BC%EC%95%84%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-AI-%EC%98%81%EC%83%81%EB%B6%84%EC%84%9D-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85-%EB%B0%98%EB%B3%B5%EB%90%98%EB%8A%94-%EC%B1%84%EC%9A%A9-%EB%B9%84%ED%9A%A8%EC%9C%A8-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95-9f7fcf24"
   }];
 
 
@@ -534,7 +581,7 @@ function Pricing() {
             <span className="price-eyebrow">후불 정찰제</span>
             <h3 className="price-title">합격 후 결제</h3>
             <div className="price-amount">
-              <span className="currency">₩</span>300<span className="won">만 원</span><span className="unit">/ 1명</span>
+              <span className="currency">₩</span>300<span className="won">만 원</span><span className="unit">/ 1명 기준</span>
             </div>
             <div className="price-meta">VAT 별도 · 입사 이후 결제</div>
             <ul className="price-features">
@@ -554,11 +601,11 @@ function Pricing() {
             <span className="price-eyebrow">선불 정찰제</span>
             <h3 className="price-title">면접 진행 전 결제</h3>
             <div className="price-amount">
-              <span className="currency">₩</span>250<span className="won">만 원</span><span className="unit">/  2명 </span>
+              <span className="currency">₩</span>250<span className="won">만 원</span><span className="unit">/ 1명 기준</span>
             </div>
             <div className="price-meta">VAT 별도 · 면접 진행 전 결제</div>
             <ul className="price-features">
-              <li><Icon name="check" size={16} className="check" />1년간 애드온팅 최대 2명 지원</li>
+              <li><Icon name="check" size={16} className="check" />1년간 헤드헌팅 최대 2명 지원</li>
               <li><Icon name="check" size={16} className="check" />후불형 대비 총 100만 원 절감</li>
               <li><Icon name="check" size={16} className="check" />다양한 서류 지원 · 창업자 출신 전담 매니저</li>
               <li><Icon name="check" size={16} className="check" />기업 내부 조건에 맞는 인재 프리미엄 매칭</li>
@@ -586,13 +633,6 @@ function Pricing() {
               <div className="license-id">증권번호 · 제 100-000-2025-0359-3297 호</div>
             </div>
           </div>
-        </div>
-
-        <div style={{ marginTop: 32, textAlign: "center" }}>
-          <a className="btn btn-soft" href="#contact" data-channel-action="open">
-            요금제 관련해서 궁금하다면?
-            <Icon name="arrow-right" size={14} className="arrow" />
-          </a>
         </div>
       </div>
     </section>);

@@ -1,10 +1,38 @@
 // Hero Funnel — vertical pipeline
-// 20명 → [1차 필터] → 10명 → [2차 필터] → 5명 (final)
-// Each tier is a row of profile cards (rounded square + person icon).
+// Desktop: 20 → [filter] → 8 → [filter] → 5
+// Mobile (≤768px): 10 → [filter] → 5 → [filter] → 3
 
 const FN_F1_CHIPS = ["인하우스 출신", "UX 중심", "B2B", "웹 서비스"];
 const FN_F2_CHIPS = ["인서울 대학", "경쟁사 재직 여부", "34세 이하"];
 const FN_FINAL_NAMES = ["김지원", "박서연", "이재희", "최민수", "윤예진"];
+
+const FN_TIER_LAYOUT = {
+  desktop: [
+    { count: 20, cols: 10 },
+    { count: 8, cols: 8 },
+    { count: 5, cols: 5, names: FN_FINAL_NAMES },
+  ],
+  mobile: [
+    { count: 10, cols: 5 },
+    { count: 5, cols: 5 },
+    { count: 3, cols: 3, names: FN_FINAL_NAMES.slice(0, 3) },
+  ],
+};
+
+const FN_MOBILE_MQ = "(max-width: 768px)";
+
+function useMobileFunnel() {
+  const [mobile, setMobile] = React.useState(
+    () => typeof window !== "undefined" && window.matchMedia(FN_MOBILE_MQ).matches
+  );
+  React.useEffect(() => {
+    const mq = window.matchMedia(FN_MOBILE_MQ);
+    const onChange = (e) => setMobile(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+  return mobile;
+}
 
 // Phase indices:
 //  0 idle (start delay)
@@ -36,18 +64,20 @@ function FnArrow() {
 
 }
 
-function FnTier({ label, count, size, cols, show, state, names, hideCount }) {
+function FnTier({ label, count, size, cols, show, state, names, hideCount, className = "" }) {
   return (
-    <div className={`fn-tier fn-tier--${size} ${show ? "is-shown" : ""}`}>
-      <div className="fn-tier-head">
-        <span className="fn-tier-label">{label}</span>
-        {!hideCount && (
-          <span className="fn-tier-count">
-            {count}<span className="fn-tier-unit">명</span>
-          </span>
-        )}
-      </div>
-      <div className="fn-grid" style={{ "--fn-cols": cols, width: "800px" }}>
+    <div className={`fn-tier fn-tier--${size} ${className} ${show ? "is-shown" : ""}`.trim()}>
+      {(label || !hideCount) && (
+        <div className="fn-tier-head">
+          {label && <span className="fn-tier-label">{label}</span>}
+          {!hideCount && (
+            <span className="fn-tier-count">
+              {count}<span className="fn-tier-unit">명</span>
+            </span>
+          )}
+        </div>
+      )}
+      <div className="fn-grid" style={{ "--fn-cols": cols }}>
         {Array.from({ length: count }).map((_, i) =>
         <div key={i} className="fn-cell">
             <div
@@ -95,6 +125,8 @@ function FnFilter({ num, title, chips, on, done }) {
 }
 
 function HeroFunnel() {
+  const isMobile = useMobileFunnel();
+  const tiers = FN_TIER_LAYOUT[isMobile ? "mobile" : "desktop"];
   const [ref, inView] = useInView({ threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
   const [phase, setPhase] = React.useState(0);
 
@@ -117,12 +149,22 @@ function HeroFunnel() {
   const t5on = active && phase >= 5;
 
   return (
-    <div ref={ref} className={`fn ${!active ? "is-resetting" : ""}`}>
-      <FnTier label="기업 소개 후 관심 있는 후보자" count={20} size="sm" cols={10} show={t20on} state="on" hideCount />
+    <div ref={ref} key={isMobile ? "fn-m" : "fn-d"} className={`fn ${!active ? "is-resetting" : ""}`}>
+      <FnTier label="다수 지원자" count={tiers[0].count} size="sm" cols={tiers[0].cols} show={t20on} state="on" hideCount />
       <FnFilter num={1} title="직군별 개인화 키워드 필터" chips={FN_F1_CHIPS} on={f1on} done={f1done} />
-      <FnTier label="1차 필터 적용" count={10} size="md" cols={10} show={t10on} state="glow" hideCount />
+      <FnTier count={tiers[1].count} size="md" cols={tiers[1].cols} show={t10on} state="glow" hideCount />
       <FnFilter num={2} title="비공개 필수 조건 필터" chips={FN_F2_CHIPS} on={f2on} done={f2done} />
-      <FnTier label="FIT 한 인재 매칭" count={5} size="lg" cols={5} show={t5on} state="bright" names={FN_FINAL_NAMES} hideCount />
+      <FnTier
+        label="FIT 한 인재 매칭"
+        count={tiers[2].count}
+        size={isMobile ? "md" : "lg"}
+        cols={tiers[2].cols}
+        show={t5on}
+        state="bright"
+        names={tiers[2].names}
+        hideCount
+        className={isMobile ? "fn-tier--final" : ""}
+      />
     </div>);
 
 }
