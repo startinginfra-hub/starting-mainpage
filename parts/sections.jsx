@@ -455,7 +455,7 @@ function Process() {
                 {"\n지원자의 실제 역량을 보다 정확하게 파악할 수 있어요."}
               </p>
             </div>
-            <div className="process-vis">
+            <div className="process-vis process-vis--match-f3">
               <FilterCard />
             </div>
           </Reveal>
@@ -470,7 +470,7 @@ function Process() {
                 </b>{"해드려요.\n놓치기 쉬운 부분을 AI가 함께 챙겨요."}
               </p>
             </div>
-            <div className="process-vis">
+            <div className="process-vis process-vis--match-f3">
               <ScreeningCard />
             </div>
           </Reveal>
@@ -483,7 +483,7 @@ function Process() {
                 확정된 조건과 키워드로 <b style={{ color: "var(--text)" }}>JD를 자동으로 생성</b>{"해드려요.\n바로 게시할 수 있는 완성도, 다듬는 시간을 크게 절약해요."}
               </p>
             </div>
-            <div className="process-vis">
+            <div className="process-vis process-vis--match-f3">
               <JobPostCard />
             </div>
           </Reveal>
@@ -496,7 +496,7 @@ function Process() {
                 지원자별로 <b style={{ color: "var(--text)" }}>키워드 분석·조건별 적합도</b>{"를 분석한\n상세 매칭 리포트를 발행해드려요.\n빠르고 정확하게 의사결정 할 수 있어요."}
               </p>
             </div>
-            <div className="process-vis">
+            <div className="process-vis process-vis--match-f3">
               <ReportCard />
             </div>
           </Reveal>
