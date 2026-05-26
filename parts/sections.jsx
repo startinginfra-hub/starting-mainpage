@@ -778,7 +778,6 @@ function Footer() {
             <h5>지원</h5>
             <ul>
               <li><a href="#" data-channel-action="open">문의하기</a></li>
-              <li><a href="#privacy">개인정보처리방침</a></li>
             </ul>
           </div>
         </div>
