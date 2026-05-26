@@ -1,6 +1,7 @@
 {
   "rewrites": [
-    { "source": "/company", "destination": "/company/index.html" }
+    { "source": "/company", "destination": "/company/index.html" },
+    { "source": "/company/:path*", "destination": "/company/index.html" }
   ],
   "headers": [
     {

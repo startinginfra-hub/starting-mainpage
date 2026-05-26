@@ -16,8 +16,16 @@ const FRAMER_URL =
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "company", "index.html");
 
+const HIDE_FRAMER_CHROME = `
+	<style id="hide-framer-chrome">
+		#__framer-editorbar,
+		#__framer-badge-container {
+			display: none !important;
+		}
+	</style>`;
+
 function stripProductionScripts(html) {
-  return html
+  let out = html
     .replace(
       /\s*<script>try\{if\(localStorage\.get\("__framer_force_showing_editorbar_since"\)\).*?<\/script>\s*/s,
       "\n"
@@ -25,7 +33,42 @@ function stripProductionScripts(html) {
     .replace(
       /\s*<script[^>]*src="https:\/\/events\.framer\.com\/script\?v=\d+"[^>]*><\/script>\s*/g,
       "\n"
+    )
+    .replace(/\s*<style id="hide-framer-chrome">[\s\S]*?<\/style>\s*/g, "\n");
+
+  if (!out.includes('id="hide-framer-chrome"')) {
+    out = out.replace(
+      /<!-- End of headStart -->\s*/,
+      `<!-- End of headStart -->${HIDE_FRAMER_CHROME}\n`
     );
+  }
+
+  return out;
+}
+
+function ensureRobotsIndexFollow(html) {
+  const robotsMeta = /<meta\s+name="robots"\s+content="([^"]*)"\s*\/?>/i;
+  const match = html.match(robotsMeta);
+  if (!match) {
+    return html.replace(
+      /<head>/i,
+      '<head>\n\t<meta name="robots" content="index,follow">'
+    );
+  }
+
+  const directives = new Set(
+    match[1]
+      .split(",")
+      .map((d) => d.trim().toLowerCase())
+      .filter(Boolean)
+  );
+  directives.delete("noindex");
+  directives.delete("nofollow");
+  directives.add("index");
+  directives.add("follow");
+
+  const content = [...directives].join(",");
+  return html.replace(robotsMeta, `<meta name="robots" content="${content}">`);
 }
 
 console.log(`Fetching ${FRAMER_URL} ...`);
@@ -34,7 +77,7 @@ const raw = execSync(`curl -fsSL "${FRAMER_URL}"`, {
   maxBuffer: 10 * 1024 * 1024,
 });
 
-const html = stripProductionScripts(raw);
+const html = ensureRobotsIndexFollow(stripProductionScripts(raw));
 mkdirSync(dirname(OUT), { recursive: true });
 writeFileSync(OUT, html, "utf8");
 
