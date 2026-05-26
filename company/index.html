@@ -16,8 +16,30 @@
 		#__framer-editorbar,
 		#__framer-badge-container {
 			display: none !important;
+			visibility: hidden !important;
+			opacity: 0 !important;
+			pointer-events: none !important;
 		}
 	</style>
+	<script id="block-framer-editorbar">
+	(function () {
+		var key = "__framer_force_showing_editorbar_since";
+		try { localStorage.removeItem(key); } catch (e) {}
+
+		function removeChrome() {
+			var editor = document.getElementById("__framer-editorbar");
+			var badge = document.getElementById("__framer-badge-container");
+			if (editor) editor.remove();
+			if (badge) badge.remove();
+		}
+
+		removeChrome();
+		new MutationObserver(removeChrome).observe(document.documentElement, {
+			childList: true,
+			subtree: true,
+		});
+	})();
+	</script>
 	<meta name="viewport" content="width=device-width">
 	<meta name="generator" content="Framer f32bfea">
 	<title>스타팅파트너스</title>

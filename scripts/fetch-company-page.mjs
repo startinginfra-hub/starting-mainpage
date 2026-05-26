@@ -21,8 +21,30 @@ const HIDE_FRAMER_CHROME = `
 		#__framer-editorbar,
 		#__framer-badge-container {
 			display: none !important;
+			visibility: hidden !important;
+			opacity: 0 !important;
+			pointer-events: none !important;
 		}
-	</style>`;
+	</style>
+	<script id="block-framer-editorbar">
+	(function () {
+		var key = "__framer_force_showing_editorbar_since";
+		try { localStorage.removeItem(key); } catch (e) {}
+
+		function removeChrome() {
+			var editor = document.getElementById("__framer-editorbar");
+			var badge = document.getElementById("__framer-badge-container");
+			if (editor) editor.remove();
+			if (badge) badge.remove();
+		}
+
+		removeChrome();
+		new MutationObserver(removeChrome).observe(document.documentElement, {
+			childList: true,
+			subtree: true,
+		});
+	})();
+	</script>`;
 
 function stripProductionScripts(html) {
   let out = html
@@ -34,7 +56,8 @@ function stripProductionScripts(html) {
       /\s*<script[^>]*src="https:\/\/events\.framer\.com\/script\?v=\d+"[^>]*><\/script>\s*/g,
       "\n"
     )
-    .replace(/\s*<style id="hide-framer-chrome">[\s\S]*?<\/style>\s*/g, "\n");
+    .replace(/\s*<style id="hide-framer-chrome">[\s\S]*?<\/style>\s*/g, "\n")
+    .replace(/\s*<script id="block-framer-editorbar">[\s\S]*?<\/script>\s*/g, "\n");
 
   if (!out.includes('id="hide-framer-chrome"')) {
     out = out.replace(
