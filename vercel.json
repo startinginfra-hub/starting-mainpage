@@ -1,4 +1,7 @@
 {
+  "rewrites": [
+    { "source": "/company", "destination": "/company/index.html" }
+  ],
   "headers": [
     {
       "source": "/api/(.*)",

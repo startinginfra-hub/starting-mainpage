@@ -770,7 +770,7 @@ function Footer() {
           <div className="footer-col">
             <h5>회사</h5>
             <ul>
-              <li><a href="https://starting.kr/company" target="_blank" rel="noopener noreferrer">회사 소개</a></li>
+              <li><a href="/company">회사 소개</a></li>
               <li><a href="https://blog.starting.kr/ko" target="_blank" rel="noopener noreferrer">블로그</a></li>
             </ul>
           </div>
