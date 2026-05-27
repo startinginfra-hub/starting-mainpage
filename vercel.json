@@ -1,4 +1,14 @@
 {
+  "redirects": [
+    { "source": "/recruiting-partner", "destination": "/", "permanent": true },
+    { "source": "/project", "destination": "/", "permanent": true },
+    { "source": "/faq", "destination": "/", "permanent": true },
+    {
+      "source": "/:path((?!.*\\..*)(?!company(?:/|$)|api(?:/|$)|parts(?:/|$)|integrations(?:/|$)|uploads(?:/|$)|assets(?:/|$)).+)",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/company", "destination": "/company/index.html" },
     { "source": "/company/:path*", "destination": "/company/index.html" }
