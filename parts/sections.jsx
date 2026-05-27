@@ -24,7 +24,12 @@ function Nav({ onToggleTheme, dark }) {
           <a href="https://blog.starting.kr/starting/ko" target="_blank" rel="noopener noreferrer" onClick={closeMenu}>블로그</a>
         </div>
         <div className="nav-cta">
-          <button className="btn btn-soft sm" onClick={onToggleTheme} aria-label="테마 전환">
+          <button
+            type="button"
+            className="btn btn-soft sm nav-theme-toggle"
+            onClick={onToggleTheme}
+            aria-label="테마 전환"
+          >
             <Icon name={dark ? "sun" : "moon"} size={15} />
           </button>
           <a className="btn btn-ghost sm nav-login" href="https://app.starting.kr/">로그인</a>
@@ -61,8 +66,8 @@ function Hero() {
           공고 플랫폼을 대체하는<br />
           <span className="accent">AI Agent 헤드헌팅 솔루션</span>
         </h1>
-        <p className="hero-sub">매칭 신청부터 후보자 매칭까지, 모든 과정을 효율적으로
-
+        <p className="hero-sub">
+          정확히 필터링된 인재를 부담없는 정찰제로
         </p>
         <div className="hero-cta">
           <a className="btn btn-primary lg" href="https://app.starting.kr/">
