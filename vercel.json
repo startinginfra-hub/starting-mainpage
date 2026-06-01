@@ -1,7 +1,7 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [{ "type": "host", "value": "blog.start-ing.kr" }],
       "destination": "https://blog.starting.kr/",
       "statusCode": 301
