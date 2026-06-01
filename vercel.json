@@ -1,5 +1,11 @@
 {
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "blog.start-ing.kr" }],
+      "destination": "https://blog.starting.kr/",
+      "statusCode": 301
+    },
     { "source": "/recruiting-partner", "destination": "/", "permanent": true },
     { "source": "/project", "destination": "/", "permanent": true },
     { "source": "/faq", "destination": "/", "permanent": true },
