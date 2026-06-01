@@ -272,7 +272,7 @@ function CostCompareChart() {
       <div
         className="fv-cost-plot"
         role="img"
-        aria-label="연봉 5,000만 원 기준. 헤드헌팅 수수료 20% 1,000만 원, 공고형 플랫폼 수수료 7% 350만 원, 스타팅 정찰제 300만 원"
+        aria-label="연봉 5,000만 원 기준. 헤드헌팅 수수료 20% 1,000만 원, 채용 플랫폼 수수료 7% 350만 원, 스타팅 정찰제 300만 원"
       >
         <div className="fv-cost-grid" aria-hidden="true" />
         <div className="fv-cost-cols" ref={ref}>
@@ -300,7 +300,7 @@ function CostCompareChart() {
               </div>
             </div>
             <p className="fv-cost-lbl">
-              공고형 플랫폼
+              채용 플랫폼
               <span className="fv-cost-lbl-sub">(수수료 7%)</span>
             </p>
           </div>
