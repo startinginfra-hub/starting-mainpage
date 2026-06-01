@@ -76,7 +76,7 @@ function ProductUI() {
             </div>
             <div className="pu-promo-glow" aria-hidden="true" />
             <div className="pu-promo-text">
-              <div className="pu-promo-title">헤드헌팅을 공고/검색 플랫폼 보다 저렴하게 이용하고 있어요!</div>
+              <div className="pu-promo-title">헤드헌팅을 채용 플랫폼 보다 가성비 있게 이용하고 있어요!</div>
               <div className="pu-promo-sub">담당 헤드헌터와, AI Agent가 성공적인 채용을 함께해요.</div>
             </div>
           </div>

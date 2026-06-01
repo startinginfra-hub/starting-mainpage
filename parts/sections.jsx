@@ -63,7 +63,7 @@ function Hero() {
       <div className="hero-glow" />
       <div className="wrap hero-inner">
         <h1 className="hero-headline">
-          공고 플랫폼을 대체하는<br />
+          채용 플랫폼을 대체하는<br />
           <span className="accent">AI Agent 헤드헌팅 솔루션</span>
         </h1>
         <p className="hero-sub">
@@ -140,7 +140,7 @@ function Comparison() {
   const cards = [
   {
     type: "normal",
-    tag: "공고/검색 플랫폼",
+    tag: "채용 플랫폼",
     fee: "연봉 7% 수수료",
     title: "직접 필터링",
     steps: ["공고 등록(혹은 인재 검색)", "다수 지원자 필터링(혹은 인재 설득)", "소싱 피로도 및 내부 비용 발생"],
@@ -169,7 +169,7 @@ function Comparison() {
       <div className="wrap">
         <div className="section-head">
           <h2 className="section-title compare-title">헤드헌팅 솔루션은 무엇이 다른가요?</h2>
-          <p className="section-sub">공고/검색 플랫폼, 서치펌 헤드헌팅과 어떻게 다른지 한눈에 비교해봤어요. 
+          <p className="section-sub">채용 플랫폼, 서치펌 헤드헌팅과 어떻게 다른지 한눈에 비교해봤어요. 
 
 
           </p>
@@ -337,7 +337,7 @@ function Features() {
             헤드헌팅의 그 이상의 정교함을<br />
             플랫폼 수준의 비용으로
           </h2>
-          <p className="section-sub">공고 플랫폼 대신 스타팅을 써야하는 3가지 이유</p>
+          <p className="section-sub">채용 플랫폼 대신 스타팅을 써야하는 3가지 이유</p>
         </div>
         <div className="features-grid">
           <Reveal className="feature-card f1" delay={0}>
