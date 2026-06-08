@@ -24,14 +24,6 @@ function Nav({ onToggleTheme, dark }) {
           <a href="https://blog.starting.kr/starting/ko" target="_blank" rel="noopener noreferrer" onClick={closeMenu}>블로그</a>
         </div>
         <div className="nav-cta">
-          <button
-            type="button"
-            className="btn btn-soft sm nav-theme-toggle"
-            onClick={onToggleTheme}
-            aria-label="테마 전환"
-          >
-            <Icon name={dark ? "sun" : "moon"} size={15} />
-          </button>
           <a className="btn btn-ghost sm nav-login" href="https://app.starting.kr/">로그인</a>
           <button
             type="button"
