@@ -1,0 +1,31 @@
+.jdlist-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: jdlistMarqueeLtr 50s linear infinite;
+  animation-play-state: running;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .jdlist-marquee-row:hover .jdlist-marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes jdlistMarqueeLtr {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.jdlist-marquee-fade {
+  mask-image: linear-gradient(to right, transparent, black 48px, black calc(100% - 48px), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jdlist-marquee-track {
+    animation: none;
+  }
+}

@@ -1,0 +1,112 @@
+/* Scroll reveal (minimal subset from intro.css) */
+.kosme-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.kosme-reveal.kosme-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.kosme-hero-emblem {
+  opacity: 0.16;
+  filter: saturate(0.85);
+  user-select: none;
+}
+
+.kosme-hero-section {
+  min-height: calc(100dvh - 3.5rem - 4.5rem);
+}
+
+@media (min-width: 640px) {
+  .kosme-hero-section {
+    min-height: calc(100dvh - 3.5rem);
+  }
+}
+
+.kosme-landing {
+  overflow-x: clip;
+}
+
+.kosme-sticky-cta-bar {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+}
+
+.kosme-participant-logo-frame {
+  position: relative;
+  width: min(100%, 6.5rem);
+  height: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .kosme-participant-logo-frame {
+    width: min(100%, 8rem);
+    height: 2.875rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .kosme-participant-logo-frame {
+    width: min(100%, 9.5rem);
+    height: 3.25rem;
+  }
+}
+
+.kosme-arrow-bounce {
+  animation: kosme-arrow-bounce 1.6s ease-in-out infinite;
+}
+
+@keyframes kosme-arrow-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.kosme-participant-logo {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.kosme-participant-card {
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.28s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.28s ease;
+}
+
+.kosme-participant-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(26, 124, 255, 0.22);
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, 0.06),
+    0 16px 40px rgba(26, 124, 255, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kosme-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .kosme-arrow-bounce {
+    animation: none;
+  }
+
+  .kosme-participant-card {
+    transition: none;
+  }
+
+  .kosme-participant-card:hover {
+    transform: none;
+  }
+}

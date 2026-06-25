@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_2" data-name="레이어 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 102.33 102.33">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="102.33" y1="0" x2="1.83" y2="100.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8520f5"/>
+      <stop offset="1" stop-color="#3f86f4"/>
+    </linearGradient>
+  </defs>
+  <g id="_레이어_1-2" data-name="레이어 1">
+    <g>
+      <rect class="cls-2" width="102.33" height="102.33"/>
+      <path class="cls-1" d="M73.45,46.71c-4.92-4.92-12.89-4.92-17.81,0l-17.81,17.81c-4.92,4.92-4.92,12.89,0,17.81,4.92,4.92,12.89,4.92,17.81,0l17.81-17.81c4.92-4.92,4.92-12.89,0-17.81Z"/>
+      <path class="cls-1" d="M64.55,20c-4.92-4.92-12.89-4.92-17.81,0l-17.81,17.81c-4.92,4.92-4.92,12.89,0,17.81,4.92,4.92,12.89,4.92,17.81,0l17.81-17.81c4.92-4.92,4.92-12.89,0-17.81Z"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,1 @@
+export const JDLIST_LIST_SCROLL_BATCH_SIZE = 24

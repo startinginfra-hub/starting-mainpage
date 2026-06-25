@@ -1,6 +1,11 @@
 .DS_Store
 node_modules/
 .env
+.next
 package-lock.json
+.pnpm-store/
+.npm-cache/
+tsconfig.tsbuildinfo
 .framer-company-ref.html
 .vercel
+_legacy/

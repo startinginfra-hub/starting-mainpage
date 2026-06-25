@@ -1,0 +1,608 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #1A7CFF;
+  --primary-foreground: #ffffff;
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: #1A7CFF;
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: #1A7CFF;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: #1A7CFF;
+  --primary-foreground: #ffffff;
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: #1A7CFF;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: #1A7CFF;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --font-sans: 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@keyframes screening-worm-dot {
+  0%,
+  100% {
+    transform: translateY(0) scale(0.62);
+    opacity: 0.32;
+  }
+  14% {
+    transform: translateY(-12px) scale(1.08);
+    opacity: 1;
+  }
+  28% {
+    transform: translateY(-5px) scale(0.9);
+    opacity: 0.68;
+  }
+}
+
+/** 막대그래프 로딩 — 세로 막대 펄스 */
+@keyframes wormBar {
+  0%,
+  100% {
+    transform: scaleY(0.6);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/** 스크리닝 제안 반영 — 좌측 폼 필드 강조 */
+@keyframes matching-screening-field-applied {
+  0% {
+    box-shadow: 0 0 0 0 rgba(26, 124, 255, 0.45);
+    background-color: rgba(26, 124, 255, 0.1);
+  }
+  40% {
+    box-shadow: 0 0 0 4px rgba(26, 124, 255, 0.28);
+    background-color: rgba(26, 124, 255, 0.14);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(26, 124, 255, 0);
+    background-color: transparent;
+  }
+}
+
+/** 공고 기반 추출하기 — 스파클 아이콘 */
+@keyframes matching-extract-sparkle {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.1) rotate(-12deg);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(0.94) rotate(10deg);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.06) rotate(-6deg);
+    opacity: 0.9;
+  }
+}
+
+/** 매칭 인사이트 카드 — AI 아이콘 살짝 움직임 */
+@keyframes matching-insight-ai-wiggle {
+  0%,
+  100% {
+    transform: rotate(-6deg) scale(1);
+  }
+  33% {
+    transform: rotate(7deg) scale(1.06);
+  }
+  66% {
+    transform: rotate(-4deg) scale(1.02);
+  }
+}
+
+/** 매칭 폼 우측 코디네이터 패널 — 파스텔 mesh 블롭 (참고 UI 배경) */
+@keyframes matching-coordinator-blob-blue {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.68) rotate(0deg);
+    opacity: 0.2;
+  }
+  25% {
+    transform: translate3d(14%, 10%, 0) scale(1.12) rotate(8deg);
+    opacity: 0.32;
+  }
+  50% {
+    transform: translate3d(6%, 22%, 0) scale(0.82) rotate(-4deg);
+    opacity: 0.24;
+  }
+  75% {
+    transform: translate3d(-10%, 12%, 0) scale(1.18) rotate(6deg);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.68) rotate(0deg);
+    opacity: 0.2;
+  }
+}
+
+@keyframes matching-coordinator-blob-pink {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.72) rotate(0deg);
+    opacity: 0.18;
+  }
+  25% {
+    transform: translate3d(-12%, 14%, 0) scale(1.08) rotate(-10deg);
+    opacity: 0.28;
+  }
+  50% {
+    transform: translate3d(-18%, 4%, 0) scale(0.78) rotate(5deg);
+    opacity: 0.2;
+  }
+  75% {
+    transform: translate3d(-6%, -12%, 0) scale(1.14) rotate(-6deg);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.72) rotate(0deg);
+    opacity: 0.18;
+  }
+}
+
+@keyframes matching-coordinator-blob-yellow {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.7) rotate(0deg);
+    opacity: 0.16;
+  }
+  25% {
+    transform: translate3d(-14%, -8%, 0) scale(1.1) rotate(7deg);
+    opacity: 0.26;
+  }
+  50% {
+    transform: translate3d(8%, -18%, 0) scale(0.8) rotate(-8deg);
+    opacity: 0.2;
+  }
+  75% {
+    transform: translate3d(16%, -4%, 0) scale(1.16) rotate(4deg);
+    opacity: 0.28;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.7) rotate(0deg);
+    opacity: 0.16;
+  }
+}
+
+/** 대시보드 업데이트 배너 — 테크 네트워크 라인·노드·보케 */
+@keyframes dashboard-banner-line-draw {
+  0%,
+  100% {
+    stroke-dashoffset: 140;
+    opacity: 0.35;
+  }
+  50% {
+    stroke-dashoffset: 0;
+    opacity: 0.95;
+  }
+}
+
+@keyframes dashboard-banner-node-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes dashboard-banner-bokeh-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.25;
+  }
+  33% {
+    transform: translate3d(6%, -4%, 0) scale(1.08);
+    opacity: 0.45;
+  }
+  66% {
+    transform: translate3d(-4%, 6%, 0) scale(0.92);
+    opacity: 0.3;
+  }
+}
+
+/** 매칭 인사이트 — 말풍선 안 흰 점 순차(지렁이) */
+@keyframes matching-insight-bubble-dot {
+  0%,
+  50%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate3d(0, -3px, 0);
+  }
+}
+
+@layer utilities {
+  .dashboard-banner-bg__grid {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      rgba(134, 172, 252, 0.05) 3px,
+      rgba(134, 172, 252, 0.05) 4px
+    );
+  }
+
+  .dashboard-banner-bg__bokeh {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    transform-origin: center;
+    will-change: transform, opacity;
+  }
+
+  .dashboard-banner-bg__bokeh--1 {
+    top: -20%;
+    left: 35%;
+    width: 45%;
+    height: 55%;
+    background: rgb(26 124 255 / 0.35);
+    animation: dashboard-banner-bokeh-drift 14s ease-in-out infinite;
+  }
+
+  .dashboard-banner-bg__bokeh--2 {
+    top: 20%;
+    right: -10%;
+    width: 40%;
+    height: 50%;
+    background: rgb(134 172 252 / 0.28);
+    animation: dashboard-banner-bokeh-drift 16s ease-in-out infinite;
+    animation-delay: -5s;
+  }
+
+  .dashboard-banner-bg__bokeh--3 {
+    bottom: -25%;
+    left: 55%;
+    width: 38%;
+    height: 48%;
+    background: rgb(59 130 246 / 0.22);
+    animation: dashboard-banner-bokeh-drift 12s ease-in-out infinite;
+    animation-delay: -8s;
+  }
+
+  .dashboard-banner-bg__bokeh--4 {
+    top: 40%;
+    left: -8%;
+    width: 32%;
+    height: 40%;
+    background: rgb(96 165 250 / 0.2);
+    animation: dashboard-banner-bokeh-drift 18s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+
+  .dashboard-banner-bg__line {
+    fill: none;
+    stroke-linecap: round;
+    stroke-dasharray: 140;
+    stroke-dashoffset: 140;
+    animation: dashboard-banner-line-draw 10s ease-in-out infinite;
+  }
+
+  .dashboard-banner-bg__line--main {
+    stroke: rgb(134 172 252);
+    stroke-width: 1.5px;
+    filter: drop-shadow(0 0 4px rgb(26 124 255 / 0.8));
+  }
+
+  .dashboard-banner-bg__line--sub {
+    stroke: rgb(134 172 252 / 0.45);
+    stroke-width: 1px;
+    animation-duration: 13s;
+  }
+
+  .dashboard-banner-bg__line--delay {
+    animation-delay: -4s;
+  }
+
+  .dashboard-banner-bg__node {
+    fill: rgb(134 172 252);
+    animation: dashboard-banner-node-pulse 3.2s ease-in-out infinite;
+    filter: drop-shadow(0 0 3px rgb(26 124 255 / 0.9));
+  }
+
+  .dashboard-banner-bg__node--bright {
+    fill: rgb(186 214 255);
+    animation-duration: 2.4s;
+  }
+
+  .dashboard-banner-bg__node--delay {
+    animation-delay: -1.2s;
+  }
+
+  .dashboard-banner-bg__node--delay2 {
+    animation-delay: -2s;
+  }
+
+  .dashboard-banner-bg__node--center {
+    fill: rgb(26 124 255 / 0.7);
+    animation-duration: 4s;
+    animation-delay: -0.8s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dashboard-banner-bg__line {
+      animation: none;
+      stroke-dashoffset: 0;
+      opacity: 0.55;
+    }
+
+    .dashboard-banner-bg__node {
+      animation: none;
+      opacity: 0.6;
+    }
+
+    .dashboard-banner-bg__bokeh {
+      animation: none;
+      opacity: 0.2;
+    }
+  }
+
+  .matching-coordinator-panel-bg {
+    position: relative;
+    isolation: isolate;
+    background-color: #ffffff;
+  }
+
+  .matching-coordinator-panel-bg__layer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .matching-coordinator-panel-bg__blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(88px);
+    transform-origin: center;
+    will-change: transform, opacity;
+  }
+
+  /* 좌상 — 연한 스카이 블루 */
+  .matching-coordinator-panel-bg__blob--blue {
+    top: -14%;
+    left: -22%;
+    width: 58%;
+    height: 46%;
+    background: rgb(186 214 255);
+    animation: matching-coordinator-blob-blue 9s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  }
+
+  /* 우상 — 연한 핑크·라벤더 */
+  .matching-coordinator-panel-bg__blob--pink {
+    top: 2%;
+    right: -24%;
+    width: 54%;
+    height: 42%;
+    background: rgb(255 192 214);
+    animation: matching-coordinator-blob-pink 11s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+    animation-delay: -3s;
+  }
+
+  /* 우측 중하 — 따뜻한 옅은 옐로·피치 */
+  .matching-coordinator-panel-bg__blob--yellow {
+    top: 38%;
+    right: -28%;
+    width: 50%;
+    height: 40%;
+    background: rgb(255 236 179);
+    animation: matching-coordinator-blob-yellow 10s cubic-bezier(0.4, 0.1, 0.6, 0.9) infinite;
+    animation-delay: -5s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .matching-coordinator-panel-bg__blob {
+      animation: none;
+      transform: scale(0.88);
+      opacity: 0.2;
+    }
+  }
+
+  .screening-worm-spinner__dot {
+    animation: screening-worm-dot 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .screening-worm-spinner__dot--static {
+    animation: none;
+    transform: none;
+    opacity: 0.78;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .screening-worm-spinner__dot {
+      animation: none;
+      transform: none;
+      opacity: 0.75;
+    }
+  }
+
+  .matching-insight-ai-motion {
+    animation: matching-insight-ai-wiggle 2.4s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .matching-insight-ai-motion {
+      animation: none;
+      transform: none;
+    }
+  }
+
+  .matching-extract-sparkle-motion {
+    animation: matching-extract-sparkle 2.2s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  .group:hover .matching-extract-sparkle-motion {
+    animation-duration: 1.4s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .matching-extract-sparkle-motion {
+      animation: none;
+      transform: none;
+    }
+  }
+
+  .matching-screening-field-applied {
+    animation: matching-screening-field-applied 1.75s ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .matching-screening-field-applied {
+      animation: none;
+      background-color: rgba(26, 124, 255, 0.1);
+      box-shadow: 0 0 0 2px rgba(26, 124, 255, 0.35);
+    }
+  }
+
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  [data-matching-form-scroll] {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  [data-matching-form-scroll]::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
+
+/* 매칭 인사이트 말풍선 점: @layer utilities 밖에 두어 SVG 애니메이션이 확실히 적용되도록 함 */
+.matching-insight-bubble-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: matching-insight-bubble-dot 1.25s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .matching-insight-bubble-dot {
+    animation: none;
+    transform: none;
+  }
+}
