@@ -352,7 +352,7 @@ export function IntroCompareSection() {
         <IntroSectionHeading
           title="헤드헌팅 솔루션은 무엇이 다른가요?"
           subtitle="채용 플랫폼, 서치펌 헤드헌팅과 어떻게 다른지 한눈에 비교해봤어요."
-          className="mb-6 max-md:[&_h2]:text-xl max-md:[&_p]:text-xs md:mb-12"
+          className="mb-6 max-md:[&_p]:text-xs md:mb-12"
         />
       </IntroReveal>
       <CompareMatrix />

@@ -190,9 +190,9 @@ function IntroCapabilityItem({
           </div>
         ) : null}
       </div>
-      <div className="mt-2 min-w-0 w-full flex-1 md:mt-0 md:pt-0.5">
+      <div className="mt-3.5 min-w-0 w-full flex-1 md:mt-0 md:pt-0.5">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="min-w-0 flex-1 text-[13px] font-semibold leading-snug text-[#0b0f1c] line-clamp-2 md:text-base md:line-clamp-none">
+          <h3 className="min-w-0 flex-1 font-semibold leading-snug text-[#0b0f1c] line-clamp-2 max-md:text-[15px] md:text-base md:line-clamp-none">
             {title}
           </h3>
           {kind || status ? (
@@ -202,7 +202,7 @@ function IntroCapabilityItem({
             </div>
           ) : null}
         </div>
-        <p className="intro-capability-description mt-1.5 max-md:!hidden text-sm leading-relaxed text-[#3f4a60]">
+        <p className="intro-capability-description mt-1.5 text-sm leading-relaxed text-[#3f4a60] max-md:text-xs">
           {description}
         </p>
       </div>
@@ -214,8 +214,8 @@ export function IntroCapabilitiesSection() {
   return (
     <IntroSection id="capabilities" className="bg-white">
       <IntroSectionHeading
-        title="스타팅을 한눈에"
-        subtitle="편의기능까지 한번에 제공돼요"
+        title="스타팅을 한눈에 확인해요"
+        subtitle="인재 매칭뿐만 아니라 편의 기능까지 제공"
       />
 
       <IntroReveal>

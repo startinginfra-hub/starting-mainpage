@@ -100,31 +100,81 @@ const REPORT_ROWS = [
   },
 ] as const
 
-function ReportVis() {
-  const cellCls = "px-2.5 py-3 align-middle text-[10px] leading-none md:px-3 md:py-3.5"
-  const resultCellCls =
-    "w-8 px-1 py-3 align-middle text-center text-[10px] leading-none md:w-9 md:px-1.5 md:py-3.5"
+const REQ_SKELETON_WIDTHS = ["w-[82%]", "w-[76%]", "w-[78%]", "w-[74%]", "w-[80%]"] as const
+
+const ANALYSIS_SKELETON_WIDTHS = [
+  ["w-[86%]", "w-[62%]"],
+  ["w-[84%]", "w-[58%]"],
+  ["w-[82%]", "w-[60%]"],
+  ["w-[80%]", "w-[64%]"],
+  ["w-[78%]", "w-[56%]"],
+] as const
+
+function ReportSkeletonCell({
+  variant,
+  rowIndex,
+}: {
+  variant: "req" | "analysis"
+  rowIndex: number
+}) {
+  if (variant === "req") {
+    const width = REQ_SKELETON_WIDTHS[rowIndex % REQ_SKELETON_WIDTHS.length]
+    return (
+      <div className="md:hidden" aria-hidden>
+        <div className={cn("fn-skeleton-line h-2.5 rounded", width)} />
+      </div>
+    )
+  }
+
+  const lines = ANALYSIS_SKELETON_WIDTHS[rowIndex % ANALYSIS_SKELETON_WIDTHS.length]
 
   return (
-    <div className="max-w-full overflow-x-auto overscroll-x-contain rounded-xl border border-[#e3e8f1] bg-white">
-      <table className="w-full table-fixed min-w-[20rem] text-[10px] leading-snug md:min-w-[24rem] md:leading-none">
+    <div className="space-y-1.5 md:hidden" aria-hidden>
+      {lines.map((width, lineIndex) => (
+        <div
+          key={lineIndex}
+          className={cn("fn-skeleton-line h-2.5 rounded", width)}
+          style={{ animationDelay: `${lineIndex * 0.1}s` }}
+        />
+      ))}
+    </div>
+  )
+}
+
+function ReportVis() {
+  const cellCls =
+    "px-2 py-2.5 align-middle text-[10px] leading-snug md:px-3 md:py-3.5 md:leading-none"
+  const resultCellCls =
+    "w-9 px-1 py-2.5 align-middle text-center text-[10px] leading-none md:w-9 md:px-1.5 md:py-3.5"
+
+  return (
+    <div className="max-w-full overflow-hidden rounded-xl border border-[#e3e8f1] bg-white">
+      <table className="w-full table-fixed border-separate border-spacing-0 text-[10px] leading-snug max-md:min-w-0 md:min-w-[24rem] md:leading-none">
         <colgroup>
-          <col className="w-[34%] md:w-[30%]" />
+          <col className="w-[36%] md:w-[30%]" />
           <col />
-          <col className="w-8 md:w-9" />
+          <col className="w-9" />
         </colgroup>
         <thead className="bg-[#f5f7fb] text-[10px] leading-snug text-[#5d6a82] md:leading-none">
           <tr>
-            <th className={cn(cellCls, "text-left font-medium md:whitespace-nowrap")}>기업 조건</th>
+            <th className={cn(cellCls, "rounded-tl-xl text-left font-medium md:whitespace-nowrap")}>
+              기업 조건
+            </th>
             <th className={cn(cellCls, "text-left font-medium")}>인재 분석</th>
-            <th className={cn(resultCellCls, "font-medium")}>결과</th>
+            <th className={cn(resultCellCls, "rounded-tr-xl font-medium")}>결과</th>
           </tr>
         </thead>
         <tbody>
-          {REPORT_ROWS.map((row) => (
+          {REPORT_ROWS.map((row, rowIndex) => (
             <tr key={row.id} className="border-t border-[#e3e8f1]">
-              <td className={cn(cellCls, "font-medium text-[#0b0f1c] md:whitespace-nowrap")}>{row.req}</td>
-              <td className={cn(cellCls, "text-[#3f4a60]")}>{row.analysis}</td>
+              <td className={cn(cellCls, "font-medium text-[#0b0f1c] md:whitespace-nowrap")}>
+                <span className="hidden md:inline">{row.req}</span>
+                <ReportSkeletonCell variant="req" rowIndex={rowIndex} />
+              </td>
+              <td className={cn(cellCls, "text-[#3f4a60]")}>
+                <span className="hidden md:inline">{row.analysis}</span>
+                <ReportSkeletonCell variant="analysis" rowIndex={rowIndex} />
+              </td>
               <td className={resultCellCls}>
                 <span
                   className="inline-flex shrink-0 items-center justify-center rounded-full bg-[#e8f2ff] p-1 text-[#1A7CFF]"

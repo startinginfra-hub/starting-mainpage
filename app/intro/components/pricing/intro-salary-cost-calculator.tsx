@@ -30,8 +30,12 @@ const COMPARE_CHANNELS = [
   { id: "headhunting", label: "헤드헌팅", caption: "연봉 15~30%", featured: false },
 ] as const
 
-const EXPENSIVE_BADGE_CLASS =
-  "border border-[#f5caca] bg-[#fef2f2] text-[#d94848] shadow-none"
+const PRICE_BADGE_BASE =
+  "inline-flex shrink-0 items-center rounded-full border px-2 py-1 text-[10px] font-semibold leading-none md:text-[11px]"
+
+const CHEAP_BADGE_CLASS = "border-[#1A7CFF] bg-[#1A7CFF] text-white shadow-sm"
+
+const EXPENSIVE_BADGE_CLASS = "border-[#f5caca] bg-[#fef2f2] text-[#d94848] shadow-none"
 
 const STARTING_PLAN_OPTIONS: ReadonlyArray<{ id: StartingPlanId; label: string }> = [
   { id: "prepaid", label: "선불" },
@@ -144,26 +148,17 @@ function CompareChannelRow({
         <div className="flex flex-wrap items-center gap-1.5">
           <p
             className={cn(
-              "text-xs font-semibold md:text-[13px]",
+              "text-sm font-semibold md:text-[15px]",
               featured ? "text-[#1A7CFF]" : "text-[#0b0f1c]",
             )}
           >
             {label}
           </p>
           {priceRank === "cheapest" ? (
-            <span className="inline-flex shrink-0 items-center rounded-full bg-[#1A7CFF] px-2 py-1 text-[10px] font-semibold leading-none text-white shadow-sm">
-              가장 저렴
-            </span>
+            <span className={cn(PRICE_BADGE_BASE, CHEAP_BADGE_CLASS)}>가장 저렴</span>
           ) : null}
           {priceRank === "most_expensive" ? (
-            <span
-              className={cn(
-                "inline-flex shrink-0 items-center rounded-full px-2 py-1 text-[10px] font-semibold leading-none md:text-[11px]",
-                EXPENSIVE_BADGE_CLASS,
-              )}
-            >
-              가장 비쌈
-            </span>
+            <span className={cn(PRICE_BADGE_BASE, EXPENSIVE_BADGE_CLASS)}>가장 비쌈</span>
           ) : null}
         </div>
         <p className="mt-0.5 text-[10px] text-[#5d6a82] md:text-[11px]">{caption}</p>
