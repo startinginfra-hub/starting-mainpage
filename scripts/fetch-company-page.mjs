@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Re-fetch the Framer-published /company page and write company/index.html.
+ * Re-fetch the Framer-published /company page and write public/company/index.html.
  * Strips Framer editor and analytics scripts that are not needed in production.
  *
  * Usage: node scripts/fetch-company-page.mjs
@@ -14,7 +14,7 @@ import { fileURLToPath } from "node:url";
 const FRAMER_URL =
   "https://physical-cogwheel-976158.framer.app/company";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const OUT = join(ROOT, "company", "index.html");
+const OUT = join(ROOT, "public", "company", "index.html");
 
 const HIDE_FRAMER_CHROME = `
 	<style id="hide-framer-chrome">

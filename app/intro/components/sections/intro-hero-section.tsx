@@ -2,7 +2,8 @@
 
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { INTRO_APP_URL, INTRO_SUPPORT_EMAIL } from "@/lib/intro/intro-tokens"
+import { ChannelTalkInquiryLink } from "@/app/components/app-shell/channel-talk-inquiry-link"
+import { INTRO_APP_URL } from "@/lib/intro/intro-tokens"
 import { cn } from "@/lib/utils"
 
 export function IntroHeroSection() {
@@ -24,9 +25,9 @@ export function IntroHeroSection() {
               인재 매칭받아보기
               <ArrowRight className="intro-hero-btn-arrow" strokeWidth={2.25} aria-hidden />
             </Link>
-            <a href={`mailto:${INTRO_SUPPORT_EMAIL}`} className="intro-hero-btn intro-hero-btn-ghost">
+            <ChannelTalkInquiryLink className="intro-hero-btn intro-hero-btn-ghost">
               문의하기
-            </a>
+            </ChannelTalkInquiryLink>
           </div>
 
           <p className="intro-hero-meta intro-hero-text-in intro-hero-text-in-delay-4">

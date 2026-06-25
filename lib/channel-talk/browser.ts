@@ -2,6 +2,7 @@ import type { ChannelTalkBootOptions, ChannelTalkClient, ChannelTalkWindow } fro
 
 const CHANNEL_TALK_SCRIPT_ATTR = "data-channel-talk-plugin"
 const CHANNEL_TALK_BOOT_FALLBACK_MS = 3000
+export const DEFAULT_CHANNEL_TALK_PLUGIN_KEY = "c9fcf001-feaf-4bbd-a760-5e89cd042f74"
 
 let bootPromise: Promise<void> | null = null
 let bootedPluginKey: string | null = null
@@ -23,7 +24,7 @@ export function readChannelTalkPluginKeyFromEnv(): string | null {
 export function resolveChannelTalkPluginKey(explicitKey?: string | null): string | null {
   const trimmed = explicitKey?.trim()
   if (trimmed) return trimmed
-  return readChannelTalkPluginKeyFromEnv()
+  return readChannelTalkPluginKeyFromEnv() ?? DEFAULT_CHANNEL_TALK_PLUGIN_KEY
 }
 
 export function hasChannelTalkPluginKey(explicitKey?: string | null): boolean {
@@ -120,7 +121,7 @@ export async function bootChannelTalk(
       "boot",
       {
         pluginKey,
-        hideChannelButtonOnBoot: true,
+        language: "ko",
         ...bootOptions,
       },
       () => {

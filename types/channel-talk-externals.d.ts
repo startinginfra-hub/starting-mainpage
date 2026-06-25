@@ -2,6 +2,7 @@
 
 export type ChannelTalkBootOptions = {
   pluginKey: string
+  language?: string
   hideChannelButtonOnBoot?: boolean
   memberId?: string
   profile?: Record<string, string | number | boolean | null | undefined>

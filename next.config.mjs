@@ -16,8 +16,6 @@ const nextConfig = {
       { source: "/intro/:path*", destination: "/", permanent: true },
       { source: "/jdlist/list", destination: "/jdlist", permanent: true },
       { source: "/jdlist/list/:path*", destination: "/jdlist", permanent: true },
-      { source: "/company", destination: "/", permanent: true },
-      { source: "/company/:path*", destination: "/", permanent: true },
       {
         source: "/(.*)",
         has: [{ type: "host", value: "blog.start-ing.kr" }],
@@ -27,6 +25,9 @@ const nextConfig = {
       { source: "/recruiting-partner", destination: "/", permanent: true },
       { source: "/faq", destination: "/", permanent: true },
     ]
+  },
+  async rewrites() {
+    return [{ source: "/company", destination: "/company/index.html" }]
   },
 }
 

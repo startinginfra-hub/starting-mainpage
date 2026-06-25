@@ -1,10 +1,10 @@
 import { ChannelTalkConfigProvider } from "@/app/components/app-shell/channel-talk-config"
-import { readChannelTalkPluginKeyFromEnv } from "@/lib/channel-talk/browser"
+import { resolveChannelTalkPluginKey } from "@/lib/channel-talk/browser"
 import { JdListShell } from "./components/jdlist-shell"
 import "./jdlist.css"
 
 export default function JdListLayout({ children }: { children: React.ReactNode }) {
-  const channelTalkPluginKey = readChannelTalkPluginKeyFromEnv()
+  const channelTalkPluginKey = resolveChannelTalkPluginKey()
 
   return (
     <ChannelTalkConfigProvider pluginKey={channelTalkPluginKey}>

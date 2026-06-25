@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { ChannelTalkInquiryLink } from "@/app/components/app-shell/channel-talk-inquiry-link"
 import { StartingWordmark } from "@/app/components/starting-wordmark"
 import { INTRO_CONTENT_MAX } from "@/lib/intro/intro-tokens"
 import { cn } from "@/lib/utils"
@@ -44,7 +45,7 @@ export function IntroFooter() {
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#0b0f1c]">회사</p>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className={footerLinkClass}>
+                <Link href="/company" className={footerLinkClass}>
                   회사 소개
                 </Link>
               </li>
@@ -64,9 +65,7 @@ export function IntroFooter() {
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#0b0f1c]">지원</p>
             <ul className="space-y-2">
               <li>
-                <a href="mailto:support@starting.kr" className={footerLinkClass}>
-                  문의하기
-                </a>
+                <ChannelTalkInquiryLink className={footerLinkClass}>문의하기</ChannelTalkInquiryLink>
               </li>
             </ul>
           </div>
