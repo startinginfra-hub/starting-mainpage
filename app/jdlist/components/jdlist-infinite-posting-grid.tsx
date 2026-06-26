@@ -12,7 +12,8 @@ type LoopedPostingItem = {
 }
 
 type JdListInfinitePostingGridProps = {
-  postings: JdListHomePostingRow[]
+  initialPostings: JdListHomePostingRow[]
+  totalCount: number
   batchSize?: number
   className?: string
 }
@@ -31,28 +32,69 @@ function buildLoopedPostings(postings: JdListHomePostingRow[], visibleCount: num
 }
 
 export function JdListInfinitePostingGrid({
-  postings,
+  initialPostings,
+  totalCount,
   batchSize = JDLIST_LIST_SCROLL_BATCH_SIZE,
   className,
 }: JdListInfinitePostingGridProps) {
   const sentinelRef = useRef<HTMLDivElement | null>(null)
+  const [postings, setPostings] = useState(initialPostings)
+  const [isFetching, setIsFetching] = useState(false)
   const [visibleCount, setVisibleCount] = useState(() =>
-    postings.length === 0 ? 0 : Math.min(batchSize, postings.length),
+    initialPostings.length === 0 ? 0 : Math.min(batchSize, initialPostings.length),
   )
 
   useEffect(() => {
-    setVisibleCount(postings.length === 0 ? 0 : Math.min(batchSize, postings.length))
-  }, [postings, batchSize])
+    setPostings(initialPostings)
+    setVisibleCount(
+      initialPostings.length === 0 ? 0 : Math.min(batchSize, initialPostings.length),
+    )
+  }, [initialPostings, batchSize])
 
   const loopedPostings = useMemo(
     () => buildLoopedPostings(postings, visibleCount),
     [postings, visibleCount],
   )
 
+  const fetchMorePostings = useCallback(async () => {
+    if (isFetching || postings.length >= totalCount) return
+
+    setIsFetching(true)
+    try {
+      const response = await fetch(
+        `/api/jdlist/postings?offset=${postings.length}&limit=${batchSize}`,
+      )
+      if (!response.ok) return
+
+      const data = (await response.json()) as {
+        rows: JdListHomePostingRow[]
+      }
+
+      if (data.rows.length === 0) return
+
+      setPostings((current) => [...current, ...data.rows])
+    } finally {
+      setIsFetching(false)
+    }
+  }, [batchSize, isFetching, postings.length, totalCount])
+
   const loadMore = useCallback(() => {
     if (postings.length === 0) return
+
+    if (visibleCount < postings.length) {
+      setVisibleCount((current) => current + batchSize)
+      return
+    }
+
+    if (postings.length < totalCount) {
+      void fetchMorePostings().then(() => {
+        setVisibleCount((current) => current + batchSize)
+      })
+      return
+    }
+
     setVisibleCount((current) => current + batchSize)
-  }, [batchSize, postings.length])
+  }, [batchSize, fetchMorePostings, postings.length, totalCount, visibleCount])
 
   useEffect(() => {
     if (postings.length === 0) return
@@ -88,6 +130,11 @@ export function JdListInfinitePostingGrid({
         ))}
       </div>
       <div ref={sentinelRef} className="h-px w-full" aria-hidden />
+      {isFetching ? (
+        <p className="py-2 text-center text-xs text-muted-foreground" aria-live="polite">
+          공고를 불러오는 중…
+        </p>
+      ) : null}
     </div>
   )
 }

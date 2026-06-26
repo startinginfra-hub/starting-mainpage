@@ -1,3 +1,4 @@
+import { cache } from "react"
 import { normalizeBillingChargeTypeKey } from "@/lib/admin/company-profile-charge-type-filter"
 import { classifyJdListRoleBucket, type JdListRoleBucket } from "@/lib/jdlist/jdlist-role-buckets"
 import { formatCareerYearsLabel } from "@/lib/job-posting/format-career-years-label"
@@ -106,7 +107,7 @@ function toHomePostingRow(
   }
 }
 
-async function loadJdListPostingsCore(): Promise<JdListPostingWithBucket[]> {
+const loadJdListPostingsCore = cache(async (): Promise<JdListPostingWithBucket[]> => {
   const supabase = await createClient()
   const { data, error } = await supabase
     .from("job_postings")
@@ -192,7 +193,7 @@ async function loadJdListPostingsCore(): Promise<JdListPostingWithBucket[]> {
   }
 
   return results
-}
+})
 
 export async function loadJdListHomePostings(): Promise<JdListHomePostings> {
   const coreRows = await loadJdListPostingsCore()

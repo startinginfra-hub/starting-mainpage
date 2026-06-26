@@ -5,14 +5,16 @@ import { JdListInfinitePostingGrid } from "./jdlist-infinite-posting-grid"
 
 type JdListPostingGridSectionProps = {
   title: string
-  postings: JdListHomePostingRow[]
+  initialPostings: JdListHomePostingRow[]
+  totalCount: number
   seeMoreHref?: string
   className?: string
 }
 
 export function JdListPostingGridSection({
   title,
-  postings,
+  initialPostings,
+  totalCount,
   seeMoreHref,
   className,
 }: JdListPostingGridSectionProps) {
@@ -27,7 +29,7 @@ export function JdListPostingGridSection({
         ) : null}
       </div>
 
-      <JdListInfinitePostingGrid postings={postings} />
+      <JdListInfinitePostingGrid initialPostings={initialPostings} totalCount={totalCount} />
     </section>
   )
 }

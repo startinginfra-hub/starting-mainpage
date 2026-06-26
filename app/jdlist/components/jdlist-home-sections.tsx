@@ -4,14 +4,24 @@ import { JdListPostingGridSection } from "./jdlist-posting-grid-section"
 
 type JdListHomeSectionsProps = {
   prepaidPostings: JdListHomePostingRow[]
-  allPostings: JdListHomePostingRow[]
+  initialAllPostings: JdListHomePostingRow[]
+  allPostingsTotalCount: number
 }
 
-export function JdListHomeSections({ prepaidPostings, allPostings }: JdListHomeSectionsProps) {
+export function JdListHomeSections({
+  prepaidPostings,
+  initialAllPostings,
+  allPostingsTotalCount,
+}: JdListHomeSectionsProps) {
   return (
     <>
       <JdListPostingCarouselSection title="적극 채용중인 기업" postings={prepaidPostings} variant="marquee" />
-      <JdListPostingGridSection title="전체 공고" postings={allPostings} className="mt-10" />
+      <JdListPostingGridSection
+        title="전체 공고"
+        initialPostings={initialAllPostings}
+        totalCount={allPostingsTotalCount}
+        className="mt-10"
+      />
     </>
   )
 }

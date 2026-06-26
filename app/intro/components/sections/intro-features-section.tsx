@@ -9,8 +9,8 @@ import { useStickyScrollScrub } from "@/lib/intro/use-sticky-scroll-scrub"
 import { usePrefersReducedMotion } from "@/lib/intro/use-prefers-reduced-motion"
 import { cn } from "@/lib/utils"
 
-/** Header sits outside `main[data-app-main]`; sticky pins to the scroll container top. */
-const STICKY_TOP_PX = 0
+/** Shared header (`h-14`) sticks to the top of `main[data-app-main]`. */
+const STICKY_TOP_PX = 56
 
 const FEATURES_HEADING = <>헤드헌팅 그 이상의 정교함</>
 

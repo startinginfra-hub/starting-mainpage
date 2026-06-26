@@ -1,7 +1,7 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import { useCallback, useEffect, useReducer, useRef, useState } from "react"
-import { FunnelApplyScene } from "@/app/intro/components/funnel/funnel-apply-scene"
 import {
   getManualFlowSceneIndex,
   isManualFlowScene,
@@ -11,14 +11,50 @@ import {
   sceneToTab,
   type FunnelScene,
 } from "@/app/intro/components/funnel/funnel-constants"
-import { FunnelInterviewScene } from "@/app/intro/components/funnel/funnel-interview-scene"
-import { FunnelMatchingReportScene } from "@/app/intro/components/funnel/funnel-matching-report-scene"
-import { FunnelPaymentScene } from "@/app/intro/components/funnel/funnel-payment-scene"
-import { FunnelScreeningScene } from "@/app/intro/components/funnel/funnel-screening-scene"
 import { FunnelStepTabs, tabIndexToScene } from "@/app/intro/components/funnel/funnel-step-tabs"
 import { useInView } from "@/lib/intro/use-in-view"
 import { usePrefersReducedMotion } from "@/lib/intro/use-prefers-reduced-motion"
 import { cn } from "@/lib/utils"
+
+const FunnelApplyScene = dynamic(
+  () =>
+    import("@/app/intro/components/funnel/funnel-apply-scene").then((module) => ({
+      default: module.FunnelApplyScene,
+    })),
+  { loading: () => <div className="min-h-[18rem] animate-pulse rounded-xl bg-neutral-200/40" aria-hidden /> },
+)
+
+const FunnelScreeningScene = dynamic(
+  () =>
+    import("@/app/intro/components/funnel/funnel-screening-scene").then((module) => ({
+      default: module.FunnelScreeningScene,
+    })),
+  { loading: () => <div className="min-h-[18rem] animate-pulse rounded-xl bg-neutral-200/40" aria-hidden /> },
+)
+
+const FunnelMatchingReportScene = dynamic(
+  () =>
+    import("@/app/intro/components/funnel/funnel-matching-report-scene").then((module) => ({
+      default: module.FunnelMatchingReportScene,
+    })),
+  { loading: () => <div className="min-h-[18rem] animate-pulse rounded-xl bg-neutral-200/40" aria-hidden /> },
+)
+
+const FunnelInterviewScene = dynamic(
+  () =>
+    import("@/app/intro/components/funnel/funnel-interview-scene").then((module) => ({
+      default: module.FunnelInterviewScene,
+    })),
+  { loading: () => <div className="min-h-[18rem] animate-pulse rounded-xl bg-neutral-200/40" aria-hidden /> },
+)
+
+const FunnelPaymentScene = dynamic(
+  () =>
+    import("@/app/intro/components/funnel/funnel-payment-scene").then((module) => ({
+      default: module.FunnelPaymentScene,
+    })),
+  { loading: () => <div className="min-h-[18rem] animate-pulse rounded-xl bg-neutral-200/40" aria-hidden /> },
+)
 
 function useSceneAutoAdvance({
   scene,
@@ -80,6 +116,63 @@ function useSceneAutoAdvance({
     timeoutRef.current = setTimeout(() => onAdvanceRef.current(), remaining)
     return clearScheduled
   }, [inView, reducedMotion, isHovered, scene])
+}
+
+function ActiveFunnelScene({
+  scene,
+  animate,
+  paused,
+  onAdvanceToNext,
+  onAdvanceFromInterview,
+}: {
+  scene: FunnelScene
+  animate: boolean
+  paused: boolean
+  onAdvanceToNext: () => void
+  onAdvanceFromInterview: () => void
+}) {
+  switch (scene) {
+    case "apply":
+      return (
+        <FunnelApplyScene
+          active
+          animate={animate}
+          paused={paused}
+          onAdvanceScene={onAdvanceToNext}
+        />
+      )
+    case "screening":
+      return (
+        <FunnelScreeningScene
+          active
+          animate={animate}
+          paused={paused}
+          onAdvanceScene={onAdvanceToNext}
+        />
+      )
+    case "matching":
+      return (
+        <FunnelMatchingReportScene
+          active
+          animate={animate}
+          paused={paused}
+          onAdvanceScene={onAdvanceToNext}
+        />
+      )
+    case "interview":
+      return (
+        <FunnelInterviewScene
+          active
+          animate={animate}
+          paused={paused}
+          onAdvanceScene={onAdvanceFromInterview}
+        />
+      )
+    case "payment":
+      return <FunnelPaymentScene active animate={animate} paused={paused} />
+    default:
+      return null
+  }
 }
 
 export function IntroHeroFunnel() {
@@ -174,72 +267,18 @@ export function IntroHeroFunnel() {
             <div className="fn-scene-stack relative z-[1]">
               <div
                 className={cn(
-                  "fn-scene-layer items-stretch !p-0",
-                  scene === "apply" && "fn-scene-layer-active",
+                  "fn-scene-layer fn-scene-layer-active items-stretch !p-0",
+                  scene === "screening" && "fn-scene-layer-screening",
+                  scene === "matching" && "fn-scene-layer-report",
+                  scene === "interview" && "fn-scene-layer-interview",
                 )}
-                aria-hidden={scene !== "apply"}
               >
-                <FunnelApplyScene
-                  active={scene === "apply"}
+                <ActiveFunnelScene
+                  scene={scene}
                   animate={animate}
                   paused={isHovered}
-                  onAdvanceScene={advanceToNextScene}
-                />
-              </div>
-
-              <div
-                className={cn(
-                  "fn-scene-layer fn-scene-layer-screening",
-                  scene === "screening" && "fn-scene-layer-active",
-                )}
-                aria-hidden={scene !== "screening"}
-              >
-                <FunnelScreeningScene
-                  active={scene === "screening"}
-                  animate={animate}
-                  paused={isHovered}
-                  onAdvanceScene={advanceToNextScene}
-                />
-              </div>
-
-              <div
-                className={cn(
-                  "fn-scene-layer fn-scene-layer-report",
-                  scene === "matching" && "fn-scene-layer-active",
-                )}
-                aria-hidden={scene !== "matching"}
-              >
-                <FunnelMatchingReportScene
-                  active={scene === "matching"}
-                  animate={animate}
-                  paused={isHovered}
-                  onAdvanceScene={advanceToNextScene}
-                />
-              </div>
-
-              <div
-                className={cn(
-                  "fn-scene-layer fn-scene-layer-interview",
-                  scene === "interview" && "fn-scene-layer-active",
-                )}
-                aria-hidden={scene !== "interview"}
-              >
-                <FunnelInterviewScene
-                  active={scene === "interview"}
-                  animate={animate}
-                  paused={isHovered}
-                  onAdvanceScene={advanceFromInterview}
-                />
-              </div>
-
-              <div
-                className={cn("fn-scene-layer", scene === "payment" && "fn-scene-layer-active")}
-                aria-hidden={scene !== "payment"}
-              >
-                <FunnelPaymentScene
-                  active={scene === "payment"}
-                  animate={animate}
-                  paused={isHovered}
+                  onAdvanceToNext={advanceToNextScene}
+                  onAdvanceFromInterview={advanceFromInterview}
                 />
               </div>
             </div>

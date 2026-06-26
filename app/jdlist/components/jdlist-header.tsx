@@ -11,7 +11,7 @@ import { JdListHeaderMobileMenu } from "./jdlist-header-mobile-menu"
 import { JDLIST_HEADER_NAV, isJdListHeaderNavActive } from "./jdlist-nav"
 
 const headerClass =
-  "relative z-20 shrink-0 border-b border-neutral-200/75 bg-white/55 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] backdrop-blur-2xl supports-[backdrop-filter]:bg-white/45"
+  "sticky top-0 z-30 isolate shrink-0 border-b border-neutral-200/75 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.75)]"
 
 const headerOutlineBtn =
   "border border-neutral-200/75 bg-white/45 shadow-none backdrop-blur-md hover:bg-white/70"

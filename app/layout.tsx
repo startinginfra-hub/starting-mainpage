@@ -1,4 +1,7 @@
 import type { Metadata } from "next"
+import { ChannelTalkConfigProvider } from "@/app/components/app-shell/channel-talk-config"
+import { AppShell } from "@/app/components/app-shell/app-shell"
+import { resolveChannelTalkPluginKey } from "@/lib/channel-talk/browser"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -28,9 +31,15 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const channelTalkPluginKey = resolveChannelTalkPluginKey()
+
   return (
     <html lang="ko">
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className="min-h-screen antialiased">
+        <ChannelTalkConfigProvider pluginKey={channelTalkPluginKey}>
+          <AppShell>{children}</AppShell>
+        </ChannelTalkConfigProvider>
+      </body>
     </html>
   )
 }

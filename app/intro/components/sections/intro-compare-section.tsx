@@ -50,9 +50,9 @@ const COMPARE_ROWS: readonly CompareRow[] = [
     cells: [
       "다수 지원자 직접 걸러냄",
       {
-        lines: ["1차 : 조건 기반 AI 필터링", "2차 : 헤드헌터 추가 검증"],
+        lines: ["1차 : 정교한 AI 필터링", "2차 : 헤드헌터 최종 검수"],
       },
-      "매니저 단독 검증",
+      "헤드헌터 단독 검증",
     ],
   },
   {
@@ -70,9 +70,9 @@ const COMPARE_ROWS: readonly CompareRow[] = [
     label: "비용 특징",
     variant: "text",
     cells: [
-      "연봉 오를수록 수수료 증가",
+      "연봉 비례 수수료",
       "연봉 무관 정찰제",
-      "연봉 오를수록 수수료 증가",
+      "연봉 비례 수수료",
     ],
   },
   {
