@@ -15,7 +15,7 @@ export function IntroFooter() {
           <StartingWordmark href="/" className="[&_img:last-child]:brightness-0" />
         </div>
 
-        <div className="mb-10 grid grid-cols-2 gap-8 md:grid-cols-3">
+        <div className="mb-10 grid grid-cols-2 gap-8 max-[600px]:grid-cols-1 md:grid-cols-3">
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#0b0f1c]">솔루션</p>
             <ul className="space-y-2">
@@ -61,7 +61,7 @@ export function IntroFooter() {
               </li>
             </ul>
           </div>
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-2 max-[600px]:col-span-1 md:col-span-1">
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#0b0f1c]">지원</p>
             <ul className="space-y-2">
               <li>
@@ -71,19 +71,31 @@ export function IntroFooter() {
           </div>
         </div>
 
-        <div className="space-y-1.5 text-xs leading-relaxed break-words text-[#5d6a82]">
-          <p className="font-medium text-[#3f4a60]">스타팅파트너스(주)</p>
-          <p>
-            대표이사 : 김홍찬 | 사업자 등록번호 : 313-88-02066 | 통신판매번호 : 2025-서울광진-0701
-          </p>
-          <p>
-            직업정보제공번호 : 서울동부 제 2026-6 호 | 유료직업소개번호 : 제 2025-3040234-14-5-00005
-            호
-          </p>
-          <p>
-            본사 : 서울특별시 광진구 능동로 81, 3층 | 지사/연구소 : 서울특별시 중구 퇴계로 15, 5층
-          </p>
-          <p>문의 : 1688-7360 / support@starting.kr</p>
+        <div className="text-xs leading-relaxed break-words text-[#5d6a82]">
+          <div className="hidden space-y-1.5 md:block">
+            <p className="font-medium text-[#3f4a60]">스타팅파트너스(주)</p>
+            <p>
+              대표이사 : 김홍찬 | 사업자 등록번호 : 313-88-02066 | 통신판매번호 : 2025-서울광진-0701
+            </p>
+            <p>
+              직업정보제공번호 : 서울동부 제 2026-6 호 | 유료직업소개번호 : 제 2025-3040234-14-5-00005
+              호
+            </p>
+            <p>
+              본사 : 서울특별시 광진구 능동로 81, 3층 | 지사/연구소 : 서울특별시 중구 퇴계로 15, 5층
+            </p>
+            <p>문의 : 1688-7360 / support@starting.kr</p>
+          </div>
+          <div className="space-y-1 md:hidden">
+            <p className="font-medium text-[#3f4a60]">스타팅파트너스(주)</p>
+            <p>대표이사 : 김홍찬 | 사업자 등록번호 : 313-88-02066</p>
+            <p>통신판매번호 : 2025-서울광진-0701</p>
+            <p>직업정보제공번호 : 서울동부 제 2026-6 호</p>
+            <p>유료직업소개번호 : 제 2025-3040234-14-5-00005 호</p>
+            <p>본사 : 서울특별시 광진구 능동로 81, 3층</p>
+            <p>지사/연구소 : 서울특별시 중구 퇴계로 15, 5층</p>
+            <p>문의 : 1688-7360 / support@starting.kr</p>
+          </div>
           <p className="pt-4 text-[#5d6a82]">&copy; 2026, Starting Partners Inc.</p>
         </div>
       </div>

@@ -71,7 +71,7 @@ const COMPARE_ROWS: readonly CompareRow[] = [
     variant: "text",
     cells: [
       "연봉 오를수록 수수료 증가",
-      "연봉 관계 없는 정찰제",
+      "연봉 무관 정찰제",
       "연봉 오를수록 수수료 증가",
     ],
   },

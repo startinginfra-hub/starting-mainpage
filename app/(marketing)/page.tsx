@@ -15,7 +15,6 @@ import { IntroStatsSection } from "@/app/intro/components/sections/intro-stats-s
 import { IntroTestimonialsSection } from "@/app/intro/components/sections/intro-testimonials-section"
 
 export const metadata: Metadata = {
-  title: "스타팅",
   description: "채용 플랫폼을 대체하는 AI Agent 헤드헌팅 솔루션",
 }
 
