@@ -52,7 +52,7 @@ const COMPARE_ROWS: readonly CompareRow[] = [
       {
         lines: ["1차 : 정교한 AI 필터링", "2차 : 헤드헌터 최종 검수"],
       },
-      "헤드헌터 단독 검증",
+      "헤드헌터 단독 검수",
     ],
   },
   {
