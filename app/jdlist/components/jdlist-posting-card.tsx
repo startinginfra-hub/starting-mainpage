@@ -49,6 +49,8 @@ export function JdListPostingCard({ posting, className, layout = "carousel" }: J
   return (
     <Link
       href={`${MATCHING_DETAIL_BASE_URL}/matching/${posting.publicNumber}`}
+      target="_blank"
+      rel="noopener noreferrer"
       draggable={false}
       className={cn(
         "group flex h-full min-h-[11.5rem] flex-col rounded-xl border border-neutral-200/80 bg-white px-4 pt-4 pb-0 transition-[border-color] hover:border-[#1A7CFF]/25",

@@ -22,6 +22,13 @@ function isFramedPath(pathname: string): boolean {
   return pathname.startsWith("/jdlist") || pathname.startsWith("/project")
 }
 
+function isKosmeLandingPath(pathname: string): boolean {
+  return pathname === "/project/kosme-2025"
+}
+
+const kosmeStickyBarOffsetClassName =
+  "pb-[calc(4.75rem+env(safe-area-inset-bottom,0px))] md:pb-[calc(5.25rem+env(safe-area-inset-bottom,0px))]"
+
 function resetMainScroll(main: HTMLElement | null) {
   if (!main) return
   main.scrollTop = 0
@@ -89,7 +96,12 @@ export function AppShell({ children }: AppShellProps) {
           {framed ? (
             <div className={cn(jdlistContentFrameClassName, "py-4 md:py-5")}>
               {children}
-              <JdListFooter className="mt-10 md:mt-12" />
+              <JdListFooter
+                className={cn(
+                  "mt-10 md:mt-12",
+                  isKosmeLandingPath(pathname) && kosmeStickyBarOffsetClassName,
+                )}
+              />
             </div>
           ) : (
             <>
