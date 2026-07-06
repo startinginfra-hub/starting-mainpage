@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://starting.kr"),
   title: {
     default: "스타팅",
-    template: "%s | 스타팅",
   },
   description:
     "채용 플랫폼을 대체하는 AI Agent 헤드헌팅 솔루션, 정확히 필터링된 인재를 부담없는 정찰제로",

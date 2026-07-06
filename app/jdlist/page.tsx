@@ -6,6 +6,7 @@ import { loadJdListAllPostings, loadJdListHomePostings } from "@/lib/jdlist/load
 
 export const metadata: Metadata = {
   title: "채용 공고",
+  description: "기업 브랜딩까지 신경 써주는 스타팅의 실시간 채용공고를 확인하세요",
 }
 
 export default async function JdListHomePage() {

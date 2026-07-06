@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
 import { SectionSkeleton } from "@/app/components/section-skeleton"
@@ -52,9 +51,6 @@ const IntroFaqSection = dynamic(
   { loading: () => <SectionSkeleton rows={4} /> },
 )
 
-export const metadata: Metadata = {
-  description: "채용 플랫폼을 대체하는 AI Agent 헤드헌팅 솔루션",
-}
 
 function ActivePostingsFallback() {
   return <SectionSkeleton rows={3} className="bg-[#fbfcfe]" />
