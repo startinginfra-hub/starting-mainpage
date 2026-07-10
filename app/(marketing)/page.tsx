@@ -7,7 +7,8 @@ import { IntroCompareSection } from "@/app/intro/components/sections/intro-compa
 import { IntroHeroSection } from "@/app/intro/components/sections/intro-hero-section"
 import { IntroLogoMarqueeSection } from "@/app/intro/components/sections/intro-logo-marquee-section"
 import { IntroLicensingTrustSection } from "@/app/intro/components/sections/intro-licensing-trust-section"
-import { IntroPricingSection } from "@/app/intro/components/sections/intro-pricing-section"
+import { IntroGeneralPricingSection } from "@/app/intro/components/sections/intro-general-pricing-section"
+import { IntroCreditPricingSection } from "@/app/intro/components/sections/intro-credit-pricing-section"
 import { IntroProcessSection } from "@/app/intro/components/sections/intro-process-section"
 import { IntroStatsSection } from "@/app/intro/components/sections/intro-stats-section"
 
@@ -76,7 +77,8 @@ export default function HomePage() {
       <IntroProcessSection />
       <IntroTestimonialsSection />
       <IntroCostCalculatorSection />
-      <IntroPricingSection />
+      <IntroGeneralPricingSection />
+      <IntroCreditPricingSection />
       <IntroFaqSection />
       <IntroLicensingTrustSection />
     </div>

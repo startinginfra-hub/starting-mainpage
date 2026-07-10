@@ -4,9 +4,8 @@ import type { ReactNode } from "react"
 import { useEffect, useLayoutEffect, useRef } from "react"
 import { usePathname } from "next/navigation"
 import { ChannelTalkBoot } from "@/app/components/app-shell/channel-talk-boot"
-import { IntroFooter } from "@/app/intro/components/intro-footer"
+import { SiteFooter } from "@/app/components/site-footer/site-footer"
 import { jdlistContentFrameClassName } from "@/app/jdlist/components/jdlist-content-frame"
-import { JdListFooter } from "@/app/jdlist/components/jdlist-footer"
 import { JdListHeader } from "@/app/jdlist/components/jdlist-header"
 import { cn } from "@/lib/utils"
 
@@ -94,21 +93,16 @@ export function AppShell({ children }: AppShellProps) {
         >
           <JdListHeader />
           {framed ? (
-            <div className={cn(jdlistContentFrameClassName, "py-4 md:py-5")}>
-              {children}
-              <JdListFooter
-                className={cn(
-                  "mt-10 md:mt-12",
-                  isKosmeLandingPath(pathname) && kosmeStickyBarOffsetClassName,
-                )}
-              />
-            </div>
+            <div className={cn(jdlistContentFrameClassName, "py-4 md:py-5")}>{children}</div>
           ) : (
-            <>
-              {children}
-              {home ? <IntroFooter /> : null}
-            </>
+            children
           )}
+          <SiteFooter
+            className={cn(
+              framed && "mt-10 md:mt-12",
+              isKosmeLandingPath(pathname) && kosmeStickyBarOffsetClassName,
+            )}
+          />
         </main>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ChannelTalkInquiryLink } from "@/app/components/app-shell/channel-talk-inquiry-link"
+import { TermsOfServiceDialogLink } from "@/app/components/legal/terms-of-service-dialog"
 import { StartingWordmark } from "@/app/components/starting-wordmark"
 import { INTRO_CONTENT_MAX } from "@/lib/intro/intro-tokens"
 import { cn } from "@/lib/utils"
@@ -7,9 +8,13 @@ import { cn } from "@/lib/utils"
 const footerLinkClass =
   "text-sm text-[#5d6a82] transition-colors hover:text-[#0b0f1c]"
 
-export function IntroFooter() {
+type SiteFooterProps = {
+  className?: string
+}
+
+export function SiteFooter({ className }: SiteFooterProps) {
   return (
-    <footer className="border-t border-[#e3e8f1] bg-[#fbfcfe] py-12 md:py-16">
+    <footer className={cn("border-t border-[#e3e8f1] bg-[#fbfcfe] py-12 md:py-16", className)}>
       <div className={cn(INTRO_CONTENT_MAX, "mx-auto w-full px-4 md:px-8")}>
         <div className="mb-10">
           <StartingWordmark href="/" className="[&_img:last-child]:brightness-0" />
@@ -20,22 +25,22 @@ export function IntroFooter() {
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#0b0f1c]">솔루션</p>
             <ul className="space-y-2">
               <li>
-                <Link href="#features" className={footerLinkClass}>
+                <Link href="/#features" className={footerLinkClass}>
                   특징
                 </Link>
               </li>
               <li>
-                <Link href="#process" className={footerLinkClass}>
+                <Link href="/#process" className={footerLinkClass}>
                   이용 순서
                 </Link>
               </li>
               <li>
-                <Link href="#pricing" className={footerLinkClass}>
+                <Link href="/#pricing" className={footerLinkClass}>
                   요금
                 </Link>
               </li>
               <li>
-                <Link href="#faq" className={footerLinkClass}>
+                <Link href="/#faq" className={footerLinkClass}>
                   FAQ
                 </Link>
               </li>
@@ -66,6 +71,9 @@ export function IntroFooter() {
             <ul className="space-y-2">
               <li>
                 <ChannelTalkInquiryLink className={footerLinkClass}>문의하기</ChannelTalkInquiryLink>
+              </li>
+              <li>
+                <TermsOfServiceDialogLink className={footerLinkClass} />
               </li>
               <li>
                 <Link href="/privacy" className={footerLinkClass}>

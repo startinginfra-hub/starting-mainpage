@@ -10,10 +10,10 @@ import { cn } from "@/lib/utils"
 const PROCESS_STEPS = [
   {
     id: "01",
-    title: "계약서 작성",
+    title: "약관 동의",
     body: (
       <>
-        스타팅 채용 서비스 표준 계약서를 온라인으로 작성·체결해요.
+        서비스 이용 전 온라인으로 약관을 확인하고 동의해요.
         <br />
         <strong className="font-semibold text-[#0b0f1c]">이용, 지불방식, 환불 등</strong> 자세한 내용을
         확인할 수 있어요.

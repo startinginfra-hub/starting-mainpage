@@ -1,139 +1,188 @@
 "use client"
 
-import { type CSSProperties } from "react"
-import { Check } from "lucide-react"
+import { useEffect, useState } from "react"
+import { X } from "lucide-react"
+import { FunnelAdvanceButton } from "@/app/intro/components/funnel/funnel-scene-nav"
 import { useInView } from "@/lib/intro/use-in-view"
+import { usePrefersReducedMotion } from "@/lib/intro/use-prefers-reduced-motion"
 import { cn } from "@/lib/utils"
 
-const CLAUSE_LINES = [
-  "제1조 (서비스 범위) · 스타팅 채용 서비스 이용 조건",
-  "제2조 (수수료) · 입사 확인 후 정찰제 수수료 적용",
-  "제3조 (기밀 유지) · 채용 정보 및 후보자 정보 비공개",
+const TERMS_SKELETON_SECTIONS = [
+  {
+    titleWidth: "w-[34%]",
+    lines: ["w-full", "w-[96%]", "w-[90%]", "w-[72%]"],
+  },
+  {
+    titleWidth: "w-[52%]",
+    lines: ["w-full", "w-[94%]", "w-[88%]", "w-[96%]", "w-[68%]"],
+  },
+  {
+    titleWidth: "w-[40%]",
+    lines: ["w-[92%]", "w-full", "w-[84%]", "w-[78%]"],
+  },
 ] as const
 
-function ContractSealStamp({
-  topLine,
-  bottomLine,
-  visible,
-  rotate,
-  delayMs = 0,
-  className,
+const CONFIRM_TEXT = "확인했습니다."
+const TYPING_START_MS = 400
+const TYPING_CHAR_MS = 80
+const PAUSE_AFTER_COMPLETE_MS = 1200
+
+function TermsSkeletonSection({
+  titleWidth,
+  lines,
+  sectionIndex,
 }: {
-  topLine: string
-  bottomLine: string
-  visible: boolean
-  rotate: string
-  delayMs?: number
-  className?: string
+  titleWidth: string
+  lines: readonly string[]
+  sectionIndex: number
 }) {
   return (
-    <div
-      className={cn(
-        "intro-contract-stamp absolute flex size-11 flex-col items-center justify-center rounded-full md:size-12",
-        visible ? "intro-contract-stamp-in" : "scale-[1.35] opacity-0",
-        className,
-      )}
-      style={
-        {
-          "--stamp-rotate": rotate,
-          animationDelay: visible ? `${delayMs}ms` : undefined,
-        } as CSSProperties
-      }
-      aria-hidden
-    >
-      <span className="intro-contract-stamp-ring" />
-      <span className="intro-contract-stamp-inner" />
-      <span className="relative z-[1] text-[7px] font-bold leading-[1.15] tracking-tight text-[#c41e3a] md:text-[8px]">
-        {topLine}
-      </span>
-      <span className="relative z-[1] mt-0.5 text-[6px] font-semibold leading-none text-[#c41e3a]/90 md:text-[7px]">
-        {bottomLine}
-      </span>
+    <div className={cn(sectionIndex > 0 && "mt-5")}>
+      <div
+        className={cn("fn-skeleton-line h-3 rounded", titleWidth)}
+        style={{ animationDelay: `${sectionIndex * 0.08}s` }}
+        aria-hidden
+      />
+      <div className="mt-2.5 space-y-2">
+        {lines.map((width, lineIndex) => (
+          <div
+            key={lineIndex}
+            className={cn("fn-skeleton-line h-2.5 rounded", width)}
+            style={{ animationDelay: `${sectionIndex * 0.08 + lineIndex * 0.06}s` }}
+            aria-hidden
+          />
+        ))}
+      </div>
     </div>
   )
 }
 
 export function ProcessContractVis() {
   const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.2 })
+  const reducedMotion = usePrefersReducedMotion()
+  const [typedLength, setTypedLength] = useState(0)
+
+  useEffect(() => {
+    if (!inView) {
+      setTypedLength(0)
+    }
+  }, [inView])
+
+  useEffect(() => {
+    if (inView && reducedMotion) {
+      setTypedLength(CONFIRM_TEXT.length)
+    }
+  }, [inView, reducedMotion])
+
+  useEffect(() => {
+    if (!inView || reducedMotion) return
+
+    let cancelled = false
+    const timeoutIds: ReturnType<typeof setTimeout>[] = []
+
+    const delay = (ms: number) =>
+      new Promise<void>((resolve) => {
+        const id = setTimeout(() => {
+          if (!cancelled) resolve()
+        }, ms)
+        timeoutIds.push(id)
+      })
+
+    const runTypingLoop = async () => {
+      while (!cancelled) {
+        setTypedLength(0)
+        await delay(TYPING_START_MS)
+        if (cancelled) break
+
+        for (let index = 0; index < CONFIRM_TEXT.length; index += 1) {
+          setTypedLength(index + 1)
+          await delay(TYPING_CHAR_MS)
+          if (cancelled) break
+        }
+        if (cancelled) break
+
+        await delay(PAUSE_AFTER_COMPLETE_MS)
+      }
+    }
+
+    void runTypingLoop()
+
+    return () => {
+      cancelled = true
+      timeoutIds.forEach(clearTimeout)
+    }
+  }, [inView, reducedMotion])
+
+  const typedText = CONFIRM_TEXT.slice(0, typedLength)
+  const isTyping = typedLength > 0 && typedLength < CONFIRM_TEXT.length
+  const isConfirmComplete = typedLength === CONFIRM_TEXT.length
 
   return (
-    <div ref={ref} className="relative rounded-xl border border-[#e3e8f1] bg-white p-4 md:p-5">
-      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#e3e8f1] pb-3">
-        <div className="min-w-0">
-          <p className="text-sm font-semibold text-[#0b0f1c] md:text-[15px]">
-            스타팅 채용 서비스 표준 계약서
-          </p>
-          <p className="mt-1 text-[10px] text-[#5d6a82] md:text-[11px]">
-            에이비씨기업 ↔ 스타팅파트너스(주)
-          </p>
-        </div>
-        <span
-          className={cn(
-            "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-semibold transition-opacity duration-500 md:text-[11px]",
-            inView
-              ? "intro-pop-in bg-[#e8f2ff] text-[#1A7CFF]"
-              : "bg-[#eef1f7] text-transparent opacity-0",
-          )}
+    <div
+      ref={ref}
+      className="intro-terms-card relative overflow-hidden rounded-2xl border border-[#e3e8f1] bg-white shadow-[0_8px_28px_rgba(15,23,42,0.08)]"
+    >
+      <div className="relative border-b border-[#e8ecf4] px-4 pb-3.5 pt-4 md:px-5 md:pb-4 md:pt-5">
+        <button
+          type="button"
+          className="absolute right-3 top-3 flex size-7 items-center justify-center rounded-md text-[#8b95a8] md:right-4 md:top-4"
+          aria-hidden
+          tabIndex={-1}
         >
-          <Check className="size-3" strokeWidth={3} aria-hidden />
-          체결 완료
-        </span>
+          <X className="size-4" strokeWidth={2} />
+        </button>
+        <p className="text-[11px] font-semibold text-[#1A7CFF] md:text-xs">이용약관</p>
+        <h3 className="mt-1 pr-8 text-base font-bold leading-snug text-[#0b0f1c] md:text-[17px]">
+          스타팅 채용 서비스 이용약관
+        </h3>
       </div>
 
-      <div className="mt-3 space-y-2">
-        {CLAUSE_LINES.map((line, index) => (
-          <div
-            key={line}
-            className="intro-shimmer h-2.5 rounded"
-            style={{ width: `${92 - index * 8}%`, animationDelay: `${index * 0.15}s` }}
-            aria-hidden
-          />
-        ))}
-        <p className="sr-only">{CLAUSE_LINES.join(" ")}</p>
-      </div>
-
-      <div className="mt-4 grid grid-cols-2 gap-3 border-t border-[#e3e8f1] pt-4">
-        <div className="rounded-lg border border-dashed border-[#d4dbe7] bg-[#fbfcfe] px-3 py-3">
-          <p className="text-[10px] font-semibold text-[#5d6a82]">고객사</p>
-          <p className="mt-2 text-[11px] font-medium text-[#0b0f1c]">에이비씨기업</p>
-          <div className="relative mt-3 h-12">
-            <div
-              className={cn(
-                "absolute inset-x-0 bottom-0 h-6 rounded border border-[#e3e8f1] transition-opacity duration-300",
-                inView ? "opacity-0" : "intro-shimmer opacity-100",
-              )}
-              aria-hidden
+      <div className="relative border-b border-[#e8ecf4]">
+        <div
+          className="intro-terms-scroll max-h-[9.5rem] overflow-y-auto px-4 py-3.5 md:max-h-[10.5rem] md:px-5 md:py-4"
+          aria-hidden
+        >
+          {TERMS_SKELETON_SECTIONS.map((section, sectionIndex) => (
+            <TermsSkeletonSection
+              key={sectionIndex}
+              titleWidth={section.titleWidth}
+              lines={section.lines}
+              sectionIndex={sectionIndex}
             />
-            <ContractSealStamp
-              topLine="에이비씨"
-              bottomLine="직인"
-              visible={inView}
-              rotate="-11deg"
-              delayMs={120}
-              className="right-0 bottom-0"
-            />
-          </div>
+          ))}
         </div>
-        <div className="rounded-lg border border-dashed border-[#d4dbe7] bg-[#fbfcfe] px-3 py-3">
-          <p className="text-[10px] font-semibold text-[#5d6a82]">수행사</p>
-          <p className="mt-2 text-[11px] font-medium text-[#0b0f1c]">스타팅파트너스(주)</p>
-          <div className="relative mt-3 h-12">
-            <div
-              className={cn(
-                "absolute inset-x-0 bottom-0 h-6 rounded border border-[#e3e8f1] transition-opacity duration-300",
-                inView ? "opacity-0" : "intro-shimmer opacity-100",
-              )}
-              aria-hidden
-            />
-            <ContractSealStamp
-              topLine="스타팅"
-              bottomLine="파트너스"
-              visible={inView}
-              rotate="9deg"
-              delayMs={320}
-              className="right-0 bottom-0"
-            />
-          </div>
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-white via-white/90 to-transparent"
+          aria-hidden
+        />
+        <p className="pointer-events-none absolute inset-x-0 bottom-2 text-center text-[10px] text-[#9aa5b8] md:text-[11px]">
+          ∨ 스크롤을 내려 확인해주세요 ∨
+        </p>
+      </div>
+
+      <div className="px-4 py-3.5 md:px-5 md:py-4">
+        <div className="flex items-center gap-2 sm:gap-2.5">
+          <input
+            readOnly
+            className={cn(
+              "h-11 min-w-0 flex-1 rounded-xl border border-dashed border-[#c8d0de] bg-[#fbfcfe] px-3.5 text-[12px] text-[#0b0f1c] placeholder:text-[#9aa5b8] md:h-12 md:px-4 md:text-[13px]",
+              typedLength === 0 && "intro-shimmer text-transparent",
+              isTyping && "border-[#1A7CFF]/50 bg-white",
+            )}
+            value={typedText}
+            placeholder="확인했습니다."
+            aria-label="약관 확인 문구"
+          />
+          <FunnelAdvanceButton
+            label="동의하기"
+            active={isConfirmComplete}
+            onClick={() => {}}
+            className={cn(
+              "fn-funnel-advance-btn shrink-0",
+              !isConfirmComplete &&
+                "!cursor-not-allowed !border-[#e3e8f1] !bg-[#eef1f7] !text-[#9aa5b8] !shadow-none",
+            )}
+          />
         </div>
       </div>
     </div>

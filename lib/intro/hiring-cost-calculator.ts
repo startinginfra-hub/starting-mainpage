@@ -1,5 +1,3 @@
-export type StartingPlanId = "postpaid" | "prepaid"
-
 export const DEFAULT_SALARY_MANWON = 5000
 /** 2026년 최저임금 기준 연봉(만 원) */
 export const MIN_SALARY_MANWON = 2588
@@ -9,10 +7,7 @@ const PLATFORM_FEE_RATE = 0.07
 const HEADHUNTING_MIN_RATE = 0.15
 const HEADHUNTING_MAX_RATE = 0.3
 
-export const STARTING_FEES: Record<StartingPlanId, number> = {
-  postpaid: 300,
-  prepaid: 250,
-}
+export const STARTING_FEE = 300
 
 export type HiringCostBreakdown = {
   salaryManwon: number
@@ -71,16 +66,13 @@ export function formatSalaryInput(value: number): string {
   return value.toLocaleString("ko-KR")
 }
 
-export function calculateHiringCosts(
-  salaryManwon: number,
-  startingPlan: StartingPlanId,
-): HiringCostBreakdown {
+export function calculateHiringCosts(salaryManwon: number): HiringCostBreakdown {
   const salary =
     Number.isFinite(salaryManwon) && salaryManwon > 0
       ? clampSalaryManwon(salaryManwon)
       : DEFAULT_SALARY_MANWON
   const platformFee = Math.round(salary * PLATFORM_FEE_RATE)
-  const startingFee = STARTING_FEES[startingPlan]
+  const startingFee = STARTING_FEE
   const headhuntingMin = Math.round(salary * HEADHUNTING_MIN_RATE)
   const headhuntingMax = Math.round(salary * HEADHUNTING_MAX_RATE)
 
