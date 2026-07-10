@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { PrivacyPolicyDialogLink } from "@/app/components/legal/privacy-policy-dialog"
 import { TermsOfServiceLink } from "@/app/components/legal/terms-of-service-link"
 import { cn } from "@/lib/utils"
 
@@ -23,7 +22,9 @@ export function JdListFooter({ className }: JdListFooterProps) {
             서비스 소개
           </Link>
           <TermsOfServiceLink className={footerLinkClassName} />
-          <PrivacyPolicyDialogLink className={footerLinkClassName} />
+          <Link href="/privacy" className={footerLinkClassName}>
+            개인정보처리방침
+          </Link>
         </nav>
         <p className="shrink-0 text-xs text-neutral-500">&copy; 2026 Starting Partners Inc.</p>
       </div>

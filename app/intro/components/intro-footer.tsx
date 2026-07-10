@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { ChannelTalkInquiryLink } from "@/app/components/app-shell/channel-talk-inquiry-link"
-import { PrivacyPolicyDialogLink } from "@/app/components/legal/privacy-policy-dialog"
 import { StartingWordmark } from "@/app/components/starting-wordmark"
 import { INTRO_CONTENT_MAX } from "@/lib/intro/intro-tokens"
 import { cn } from "@/lib/utils"
@@ -69,7 +68,9 @@ export function IntroFooter() {
                 <ChannelTalkInquiryLink className={footerLinkClass}>문의하기</ChannelTalkInquiryLink>
               </li>
               <li>
-                <PrivacyPolicyDialogLink className={footerLinkClass} />
+                <Link href="/privacy" className={footerLinkClass}>
+                  개인정보처리방침
+                </Link>
               </li>
             </ul>
           </div>
