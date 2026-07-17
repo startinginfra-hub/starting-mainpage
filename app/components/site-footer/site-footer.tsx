@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { ChannelTalkInquiryLink } from "@/app/components/app-shell/channel-talk-inquiry-link"
-import { TermsOfServiceDialogLink } from "@/app/components/legal/terms-of-service-dialog"
 import { StartingWordmark } from "@/app/components/starting-wordmark"
 import { INTRO_CONTENT_MAX } from "@/lib/intro/intro-tokens"
 import { cn } from "@/lib/utils"
@@ -73,7 +72,9 @@ export function SiteFooter({ className }: SiteFooterProps) {
                 <ChannelTalkInquiryLink className={footerLinkClass}>문의하기</ChannelTalkInquiryLink>
               </li>
               <li>
-                <TermsOfServiceDialogLink className={footerLinkClass} />
+                <Link href="/tos" className={footerLinkClass}>
+                  이용약관
+                </Link>
               </li>
               <li>
                 <Link href="/privacy" className={footerLinkClass}>

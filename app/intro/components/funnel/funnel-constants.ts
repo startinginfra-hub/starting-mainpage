@@ -375,7 +375,7 @@ export const FUNNEL_PAYMENT_DEMO = {
 } as const
 
 export const FUNNEL_TAX_INVOICE_DEMO = {
-  cardHeadline: "미리 결제 하지 않아요, 입사 후 결제해요",
+  cardHeadline: "미리 충전해 두고, 입사 시 크레딧이 차감돼요",
   title: "전자세금계산서",
   statusLabel: "발행 완료",
   issuerName: "스타팅파트너스(주)",
@@ -387,7 +387,7 @@ export const FUNNEL_TAX_INVOICE_DEMO = {
   supplyAmount: "3,000,000",
   vatAmount: "300,000",
   totalAmount: "3,300,000",
-  notice: "연봉 상관 없이 정찰제 비용이 적용돼요",
+  notice: "연봉과 무관하게 1명당 300 크레딧이 차감돼요",
 } as const
 
 export const PAYMENT_FUNNEL_PHASE_DELAYS = {
@@ -406,19 +406,6 @@ export const PAYMENT_JOIN_DATE_DELAYS = {
 
 export const PAYMENT_INVOICE_DELAYS = {
   issued: PAYMENT_FUNNEL_PHASE_DELAYS.invoice + 700,
-} as const
-
-export const PAYMENT_PLAN = {
-  title: "합격 후 결제",
-  price: "₩300만 원",
-  meta: "VAT 별도 · 입사 이후 결제",
-  perUnit: "1명 기준",
-  features: [
-    "기업 내부 조건에 맞는 인재 프리미엄 매칭",
-    "신속한 서류 검토 · 유사도 분석 리포트 제공",
-    "면접 일정 조율 및 처우 협의 서포트",
-  ],
-  total: "300만 원 (VAT 별도)",
 } as const
 
 export type SceneAction = { type: "next" } | { type: "set"; scene: FunnelScene }

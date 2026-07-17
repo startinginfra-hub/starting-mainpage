@@ -4,10 +4,10 @@ import { IntroPricingCreditCard } from "../pricing/intro-pricing-credit-card"
 
 export function IntroCreditPricingSection() {
   return (
-    <IntroSection id="pricing-credit" variant="default">
+    <IntroSection variant="default">
       <IntroSectionHeading
-        title="정찰제 가격도 부담스럽다면?"
-        subtitle="크레딧 충전 후 이용해보세요"
+        title="크레딧으로 채용 비용을 낮춰보세요"
+        subtitle="미리 충전하고, 채용 1명당 크레딧이 차감돼요"
       />
 
       <div className="mx-auto max-w-md md:max-w-lg">

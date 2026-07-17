@@ -49,13 +49,13 @@ const PROCESS_STEPS = [
   },
   {
     id: "04",
-    title: "합격 후 결제",
+    title: "합격 후 크레딧 차감",
     body: (
       <>
-        <strong className="font-semibold text-[#0b0f1c]">입사일 예정일</strong>에 정찰제 수수료가
-        청구돼요.
+        <strong className="font-semibold text-[#0b0f1c]">입사일 예정일</strong>에 크레딧이
+        차감돼요.
         <br />
-        연봉과 무관하게 1명당 고정 비용이에요.
+        연봉과 무관하게 1명당 300 크레딧이에요.
       </>
     ),
     vis: "payment",
@@ -209,7 +209,7 @@ export function IntroProcessSection() {
     <IntroSection id="process" className="bg-white">
       <IntroSectionHeading
         title="서비스 이용 순서"
-        subtitle="계약부터 포지션 등록, 인재 검토, 입사 후 결제까지"
+        subtitle="계약부터 포지션 등록, 인재 검토, 입사 후 크레딧 차감까지"
       />
 
       <div className="space-y-6 md:space-y-8">

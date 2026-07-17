@@ -1,4 +1,5 @@
-export const GENERAL_FEE_MANWON = 300
+/** Face-value hire fee in manwon (1 credit ≈ 1만 원 list price). */
+export const LIST_FEE_MANWON = 300
 export const CREDIT_PER_HIRE = 300
 export const CREDIT_CHARGE_BASE_CREDITS = 600
 export const CREDIT_CHARGE_BASE_MANWON = 600
@@ -76,22 +77,6 @@ export function getCreditPerHireAmountManwon(
 
 export function getHireCapacityFromCredits(credits: number): number {
   return Math.floor(credits / CREDIT_PER_HIRE)
-}
-
-export function getSavingsVsGeneralManwon(method: CreditChargeMethod): number {
-  return GENERAL_FEE_MANWON - getCreditPerHireAmountManwon(method)
-}
-
-export function getTotalSavingsVsGeneralManwon(
-  method: CreditChargeMethod,
-  hireCapacity: number,
-): number {
-  return getSavingsVsGeneralManwon(method) * hireCapacity
-}
-
-export function getMaxSavingsVsGeneralManwon(): number {
-  const bankPerHire = getCreditPerHireAmountManwon("bank")
-  return GENERAL_FEE_MANWON - bankPerHire
 }
 
 export function getCreditChargeDiscountPercent(method: CreditChargeMethod): number {
