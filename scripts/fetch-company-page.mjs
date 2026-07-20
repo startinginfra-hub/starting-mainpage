@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Re-fetch the Framer-published /company page and write public/company/index.html.
+ * Re-fetch Framer-published company pages and write them under public/company/.
  * Strips Framer editor and analytics scripts that are not needed in production.
  *
  * Usage: node scripts/fetch-company-page.mjs
@@ -11,10 +11,16 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const FRAMER_URL =
-  "https://physical-cogwheel-976158.framer.app/company";
+const FRAMER_ORIGIN = "https://physical-cogwheel-976158.framer.app";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const OUT = join(ROOT, "public", "company", "index.html");
+
+const PAGES = [
+  { path: "/company", out: join(ROOT, "public", "company", "index.html") },
+  {
+    path: "/company/hr",
+    out: join(ROOT, "public", "company", "hr", "index.html"),
+  },
+];
 
 const HIDE_FRAMER_CHROME = `
 	<style id="hide-framer-chrome">
@@ -94,14 +100,20 @@ function ensureRobotsIndexFollow(html) {
   return html.replace(robotsMeta, `<meta name="robots" content="${content}">`);
 }
 
-console.log(`Fetching ${FRAMER_URL} ...`);
-const raw = execSync(`curl -fsSL "${FRAMER_URL}"`, {
-  encoding: "utf8",
-  maxBuffer: 10 * 1024 * 1024,
-});
+function fetchPage({ path, out }) {
+  const url = `${FRAMER_ORIGIN}${path}`;
+  console.log(`Fetching ${url} ...`);
+  const raw = execSync(`curl -fsSL "${url}"`, {
+    encoding: "utf8",
+    maxBuffer: 10 * 1024 * 1024,
+  });
 
-const html = ensureRobotsIndexFollow(stripProductionScripts(raw));
-mkdirSync(dirname(OUT), { recursive: true });
-writeFileSync(OUT, html, "utf8");
+  const html = ensureRobotsIndexFollow(stripProductionScripts(raw));
+  mkdirSync(dirname(out), { recursive: true });
+  writeFileSync(out, html, "utf8");
+  console.log(`Wrote ${out} (${html.length} bytes)`);
+}
 
-console.log(`Wrote ${OUT} (${html.length} bytes)`);
+for (const page of PAGES) {
+  fetchPage(page);
+}

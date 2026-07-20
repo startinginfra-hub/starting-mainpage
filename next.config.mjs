@@ -27,7 +27,10 @@ const nextConfig = {
     ]
   },
   async rewrites() {
-    return [{ source: "/company", destination: "/company/index.html" }]
+    return [
+      { source: "/company", destination: "/company/index.html" },
+      { source: "/company/hr", destination: "/company/hr/index.html" },
+    ]
   },
 }
 
