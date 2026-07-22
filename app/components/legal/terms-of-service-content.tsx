@@ -278,7 +278,7 @@ export function TermsOfServiceContent() {
               </table>
             </div>
           </li>
-          <li>크레딧은 사전 충전 후, 채용 성사 시(최종 입사일 기준) 자동으로 차감된다.</li>
+          <li>크레딧은 사전 충전 후, 채용 성사 시(최종 입사일 기준) 자동으로 차감되며 입사일 기준 최대 14일 이내 결제를 완료해야한다.</li>
         </ol>
 
         <h3 className={sectionTitleClassName}>제12조 (환불 및 크레딧 복구 접수 절차)</h3>
