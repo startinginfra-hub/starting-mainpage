@@ -1,0 +1,115 @@
+.company-contact {
+  background: #f4f7fb;
+}
+
+.company-contact-wash {
+  background:
+    linear-gradient(165deg, #eef3f9 0%, #f7f9fc 42%, #eef4fa 100%),
+    radial-gradient(ellipse 80% 60% at 12% 20%, rgba(59, 158, 255, 0.14), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 88% 78%, rgba(59, 158, 255, 0.1), transparent 50%);
+}
+
+.company-contact-glow {
+  background: radial-gradient(
+    ellipse 55% 45% at 40% 55%,
+    rgba(59, 158, 255, 0.16),
+    transparent 68%
+  );
+  animation: company-contact-glow-breathe 7s ease-in-out infinite;
+}
+
+.company-contact-grid {
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(15, 35, 60, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 35, 60, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 92%);
+}
+
+.company-contact-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border: 1px solid rgba(15, 35, 60, 0.08);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 1.25rem 1.35rem;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  backdrop-filter: blur(8px);
+  transition:
+    border-color 200ms ease,
+    background-color 200ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+@media (max-width: 767.98px) {
+  .company-contact-cta {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.company-contact-cta:hover {
+  border-color: rgba(59, 158, 255, 0.35);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 10px 28px rgba(59, 158, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.company-contact-cta:focus-visible {
+  outline: 2px solid #3b9eff;
+  outline-offset: 3px;
+}
+
+.company-contact-cta-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #7a8799;
+}
+
+.company-contact-cta-value {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #0a0a0a;
+  transition: color 200ms ease;
+}
+
+@media (min-width: 768px) {
+  .company-contact-cta {
+    padding: 1.5rem 1.65rem;
+  }
+
+  .company-contact-cta-value {
+    font-size: 1.2rem;
+  }
+}
+
+@keyframes company-contact-glow-breathe {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .company-contact-glow {
+    animation: none;
+  }
+
+  .company-contact-cta {
+    transition: none;
+  }
+
+  .company-contact-cta:hover {
+    transform: none;
+  }
+}

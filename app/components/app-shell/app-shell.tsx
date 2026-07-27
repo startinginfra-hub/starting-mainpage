@@ -17,6 +17,10 @@ function isHomePath(pathname: string): boolean {
   return pathname === "/"
 }
 
+function isCompanyPath(pathname: string): boolean {
+  return pathname === "/company" || pathname.startsWith("/company/")
+}
+
 function isFramedPath(pathname: string): boolean {
   return pathname.startsWith("/jdlist") || pathname.startsWith("/project")
 }
@@ -38,6 +42,8 @@ export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname()
   const mainRef = useRef<HTMLElement>(null)
   const home = isHomePath(pathname)
+  const company = isCompanyPath(pathname)
+  const lightMarketing = home || company
   const framed = isFramedPath(pathname)
 
   useLayoutEffect(() => {
@@ -54,12 +60,12 @@ export function AppShell({ children }: AppShellProps) {
     <div
       className={cn(
         "relative flex h-dvh max-h-dvh max-w-full flex-col overflow-hidden text-foreground",
-        home && "intro-page text-[#0b0f1c]",
+        lightMarketing && "intro-page text-[#0b0f1c]",
       )}
     >
       <ChannelTalkBoot />
 
-      {!home ? (
+      {!lightMarketing ? (
         <>
           <div
             className="pointer-events-none absolute -left-24 top-16 size-88 rounded-full bg-neutral-200/45 blur-[4.5rem]"
@@ -79,7 +85,7 @@ export function AppShell({ children }: AppShellProps) {
       <div
         className={cn(
           "relative flex min-h-0 flex-1 flex-col",
-          home ? "bg-[#fbfcfe]" : "bg-white",
+          lightMarketing ? "bg-[#fbfcfe]" : "bg-white",
         )}
       >
         <main
@@ -87,22 +93,24 @@ export function AppShell({ children }: AppShellProps) {
           data-app-main
           className={cn(
             "relative flex min-h-0 min-w-0 flex-1 flex-col overflow-x-clip overflow-y-auto [overflow-anchor:none]",
-            home ? "bg-[#fbfcfe]" : "overflow-x-hidden bg-[#FBFBFB]",
+            lightMarketing ? "bg-[#fbfcfe]" : "overflow-x-hidden bg-[#FBFBFB]",
             framed && pathname.startsWith("/project") && "bg-white",
           )}
         >
-          <JdListHeader />
+          {!company ? <JdListHeader /> : null}
           {framed ? (
             <div className={cn(jdlistContentFrameClassName, "py-4 md:py-5")}>{children}</div>
           ) : (
             children
           )}
-          <SiteFooter
-            className={cn(
-              framed && "mt-10 md:mt-12",
-              isKosmeLandingPath(pathname) && kosmeStickyBarOffsetClassName,
-            )}
-          />
+          {!company ? (
+            <SiteFooter
+              className={cn(
+                framed && "mt-10 md:mt-12",
+                isKosmeLandingPath(pathname) && kosmeStickyBarOffsetClassName,
+              )}
+            />
+          ) : null}
         </main>
       </div>
     </div>

@@ -11,6 +11,8 @@ type IntroRevealProps = {
   delayMs?: number
   yOffset?: "16" | "24"
   threshold?: number
+  /** Observe inside AppShell `main[data-app-main]` scroll root. */
+  useAppMainScrollRoot?: boolean
 }
 
 export function IntroReveal({
@@ -19,8 +21,9 @@ export function IntroReveal({
   delayMs = 0,
   yOffset = "16",
   threshold = 0.12,
+  useAppMainScrollRoot = false,
 }: IntroRevealProps) {
-  const { ref, inView } = useInView<HTMLDivElement>({ threshold })
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold, useAppMainScrollRoot })
 
   useEffect(() => {
     const node = ref.current

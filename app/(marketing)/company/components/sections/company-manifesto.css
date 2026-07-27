@@ -1,0 +1,43 @@
+/* Manifesto — stacked chevrons floating */
+
+.company-manifesto-arrows {
+  position: relative;
+  width: 1.75rem;
+  height: 2.25rem;
+  animation: company-manifesto-bob 2.4s ease-in-out infinite;
+}
+
+.company-manifesto-arrow {
+  position: absolute;
+  left: 50%;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #0a0a0a;
+  transform: translateX(-50%);
+}
+
+.company-manifesto-arrow-back {
+  top: 0;
+  opacity: 0.28;
+}
+
+.company-manifesto-arrow-front {
+  top: 0.55rem;
+  opacity: 0.85;
+}
+
+@keyframes company-manifesto-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .company-manifesto-arrows {
+    animation: none;
+  }
+}

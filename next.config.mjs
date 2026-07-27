@@ -1,7 +1,16 @@
+import path from "node:path"
+import { fileURLToPath } from "node:url"
+
+const projectRoot = path.dirname(fileURLToPath(import.meta.url))
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
+  },
+  // Keep Turbopack scoped to this app (avoids broad parent-root memory pressure).
+  turbopack: {
+    root: projectRoot,
   },
   images: {
     remotePatterns: [
@@ -24,12 +33,6 @@ const nextConfig = {
       },
       { source: "/recruiting-partner", destination: "/", permanent: true },
       { source: "/faq", destination: "/", permanent: true },
-    ]
-  },
-  async rewrites() {
-    return [
-      { source: "/company", destination: "/company/index.html" },
-      { source: "/company/hr", destination: "/company/hr/index.html" },
     ]
   },
 }

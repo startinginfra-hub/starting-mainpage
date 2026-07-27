@@ -1,0 +1,71 @@
+/* Y-merge path — continuous blue pulse flowing along smooth gray curves */
+
+.dilemma-y-base {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.dilemma-y-base.is-active {
+  opacity: 1;
+}
+
+.dilemma-y-pulse {
+  --path-len: 800px;
+  --pulse-len: 110px;
+  stroke-dasharray: var(--pulse-len) var(--path-len);
+  stroke-dashoffset: 0;
+  opacity: 0;
+}
+
+.dilemma-y-pulse.is-active {
+  opacity: 1;
+  animation: dilemma-y-flow 3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+@keyframes dilemma-y-flow {
+  from {
+    stroke-dashoffset: var(--pulse-len);
+  }
+  to {
+    stroke-dashoffset: calc(-1 * var(--path-len));
+  }
+}
+
+/* 결과 카피+로고 — 약하게 위아래 둥둥 */
+.dilemma-y-float {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dilemma-y-float.is-active {
+  animation: dilemma-y-bob 4.2s ease-in-out 0.6s infinite;
+}
+
+@keyframes dilemma-y-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dilemma-y-base {
+    opacity: 1;
+    transition: none;
+  }
+
+  .dilemma-y-pulse.is-active {
+    animation: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    opacity: 0.5;
+  }
+
+  .dilemma-y-float.is-active {
+    animation: none;
+  }
+}

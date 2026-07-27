@@ -1,0 +1,189 @@
+@keyframes company-hero-keyword-pulse {
+  0%,
+  100% {
+    border-color: rgba(59, 158, 255, 0.2);
+    box-shadow: 0 0 0 0 rgba(59, 158, 255, 0);
+    background-color: rgba(59, 158, 255, 0.05);
+    color: rgba(255, 255, 255, 0.5);
+  }
+  40%,
+  55% {
+    border-color: rgba(59, 158, 255, 0.85);
+    box-shadow: 0 0 22px 0 rgba(59, 158, 255, 0.4);
+    background-color: rgba(59, 158, 255, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+  }
+}
+
+@keyframes company-hero-keyword-pulse-soft {
+  0%,
+  100% {
+    border-color: rgba(59, 158, 255, 0.12);
+    box-shadow: 0 0 0 0 rgba(59, 158, 255, 0);
+    background-color: rgba(59, 158, 255, 0.03);
+    color: rgba(255, 255, 255, 0.35);
+  }
+  40%,
+  55% {
+    border-color: rgba(59, 158, 255, 0.4);
+    box-shadow: 0 0 14px 0 rgba(59, 158, 255, 0.15);
+    background-color: rgba(59, 158, 255, 0.1);
+    color: rgba(255, 255, 255, 0.65);
+  }
+}
+
+@keyframes company-hero-keyword-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes company-hero-agent-breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.62;
+    transform: scale(1.02);
+  }
+}
+
+.company-hero-agent-core {
+  position: absolute;
+  top: 50%;
+  left: 74%;
+  display: grid;
+  width: min(24vw, 280px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  place-items: center;
+}
+
+.company-hero-agent-core::before {
+  position: absolute;
+  inset: -12%;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 158, 255, 0.08) 0%,
+    rgba(59, 158, 255, 0.03) 42%,
+    transparent 70%
+  );
+  content: "";
+  filter: blur(22px);
+}
+
+.company-hero-agent-core-ring {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  border: none;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(59, 158, 255, 0.06), rgba(59, 158, 255, 0.015) 55%, transparent 72%);
+  box-shadow: none;
+  animation: company-hero-agent-breathe 7s ease-in-out infinite;
+}
+
+.company-hero-agent-core-ring::before {
+  display: none;
+}
+
+.company-hero-agent-core-ring span {
+  color: rgba(180, 220, 255, 0.82);
+  font-size: clamp(0.95rem, 1.6vw, 1.35rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 24px rgba(59, 158, 255, 0.35);
+}
+
+.company-hero-filter {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.company-hero-filter-keyword {
+  position: absolute;
+  top: var(--d-top);
+  left: var(--d-left);
+  z-index: 0;
+  border: 1px solid rgba(59, 158, 255, 0.2);
+  border-radius: 999px;
+  padding: 0.4rem 0.95rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  background-color: rgba(59, 158, 255, 0.05);
+  max-width: calc(100% - 1rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation:
+    company-hero-keyword-float 5.5s ease-in-out infinite,
+    company-hero-keyword-pulse 5.6s ease-in-out infinite;
+}
+
+.company-hero-filter-keyword.is-compact {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.75rem;
+}
+
+.company-hero-filter-keyword.is-static {
+  animation: company-hero-keyword-float 6.5s ease-in-out infinite;
+}
+
+@media (max-width: 767.98px) {
+  .company-hero-agent-core {
+    top: 52%;
+    left: 50%;
+    width: min(58vw, 240px);
+    opacity: 0.55;
+  }
+
+  .company-hero-filter-keyword {
+    top: var(--m-top);
+    left: var(--m-left);
+    font-size: 0.6875rem;
+    padding: 0.3rem 0.7rem;
+    opacity: 0.55;
+    border-color: rgba(59, 158, 255, 0.12);
+    color: rgba(255, 255, 255, 0.35);
+    background-color: rgba(59, 158, 255, 0.03);
+    animation:
+      company-hero-keyword-float 5.5s ease-in-out infinite,
+      company-hero-keyword-pulse-soft 5.6s ease-in-out infinite;
+  }
+
+  .company-hero-filter-keyword.is-compact {
+    font-size: 0.625rem;
+    padding: 0.28rem 0.6rem;
+  }
+
+  .company-hero-filter-keyword.is-static {
+    animation: company-hero-keyword-float 6.5s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .company-hero-agent-core-ring {
+    animation: none;
+  }
+
+  .company-hero-filter-keyword {
+    animation: none !important;
+    border-color: rgba(59, 158, 255, 0.35);
+    color: rgba(255, 255, 255, 0.75);
+  }
+}
