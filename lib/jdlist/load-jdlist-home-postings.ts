@@ -26,6 +26,16 @@ export type JdListHomePostingRow = {
   workAddressShort: string
   companyIntro: string
   investmentStage: string
+  isNew: boolean
+}
+
+const NEW_POSTING_WINDOW_MS = 14 * 24 * 60 * 60 * 1000
+
+function isNewPosting(createdAt: unknown): boolean {
+  if (createdAt == null) return false
+  const createdMs = new Date(String(createdAt)).getTime()
+  if (!Number.isFinite(createdMs)) return false
+  return Date.now() - createdMs <= NEW_POSTING_WINDOW_MS
 }
 
 export type JdListHomePostings = {
@@ -104,6 +114,7 @@ function toHomePostingRow(
     workAddressShort: shortenWorkAddress(text(row.work_address)),
     companyIntro: formatCompanyIntroPreview(text(company?.company_intro)),
     investmentStage: text(company?.investment_stage),
+    isNew: isNewPosting(row.created_at),
   }
 }
 

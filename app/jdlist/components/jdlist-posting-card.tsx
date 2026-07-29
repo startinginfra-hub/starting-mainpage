@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { PostingRecruitmentBadge } from "@/app/matching/[publicNumber]/components/recruiting-open-badge"
 import type { JdListHomePostingRow } from "@/lib/jdlist/load-jdlist-home-postings"
 import {
   getInvestmentStageBadgeClassName,
@@ -17,14 +16,22 @@ const MATCHING_DETAIL_BASE_URL =
 function JdListCompanyLogo({ logoUrl, name }: { logoUrl: string | null; name: string }) {
   if (logoUrl) {
     return (
-      <div className="relative size-9 shrink-0 overflow-hidden rounded-lg border border-neutral-200/80 bg-white">
-        <Image src={logoUrl} alt={`${name} 로고`} fill className="object-contain p-1" sizes="36px" />
+      <div className="relative flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-neutral-200/80 bg-white p-2">
+        <div className="relative h-full w-full">
+          <Image
+            src={logoUrl}
+            alt={`${name} 로고`}
+            fill
+            className="object-contain object-center"
+            sizes="40px"
+          />
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#1A7CFF] text-sm font-bold text-white">
+    <div className="flex size-14 shrink-0 items-center justify-center rounded-lg bg-[#1A7CFF] text-lg font-bold text-white">
       {name.charAt(0) || "S"}
     </div>
   )
@@ -63,19 +70,24 @@ export function JdListPostingCard({ posting, className, layout = "carousel" }: J
         }
       }}
     >
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex min-w-0 flex-1 items-start gap-2.5">
-          <JdListCompanyLogo logoUrl={posting.companyLogoUrl} name={posting.companyName} />
-          <div className="min-w-0 flex-1">
-            <p className="line-clamp-2 text-sm font-semibold leading-snug text-foreground group-hover:text-[#126FE3]">
-              {posting.title}
-            </p>
-            {companyMetaLine ? (
-              <p className="mt-0.5 line-clamp-2 text-xs leading-snug text-muted-foreground">{companyMetaLine}</p>
+      <div className="flex min-w-0 items-center gap-2.5">
+        <JdListCompanyLogo logoUrl={posting.companyLogoUrl} name={posting.companyName} />
+        <div className="min-w-0 flex-1">
+          <p className="line-clamp-2 text-sm font-semibold leading-snug text-foreground group-hover:text-[#126FE3]">
+            {posting.title}
+            {posting.isNew ? (
+              <span
+                className="ml-1 inline-flex size-4 shrink-0 translate-y-[-1px] items-center justify-center rounded-full bg-[#1A7CFF] align-middle text-[10px] font-bold leading-none text-white"
+                aria-label="신규 공고"
+              >
+                N
+              </span>
             ) : null}
-          </div>
+          </p>
+          {companyMetaLine ? (
+            <p className="mt-0.5 line-clamp-2 text-xs leading-snug text-muted-foreground">{companyMetaLine}</p>
+          ) : null}
         </div>
-        <PostingRecruitmentBadge status="open" size="sm" />
       </div>
 
       <div className="mt-3 flex min-h-0 flex-1 flex-col">
@@ -92,24 +104,31 @@ export function JdListPostingCard({ posting, className, layout = "carousel" }: J
                   investmentStageClassName,
                 )}
               >
-                {investmentStageLabel}
+                #{investmentStageLabel}
               </span>
             ) : null}
             <span className="rounded-md bg-neutral-100 px-2 py-0.5 text-[11px] font-medium text-neutral-600">
-              상시 채용
+              #상시 채용
             </span>
             {posting.contractType ? (
               <span className="rounded-md bg-neutral-100 px-2 py-0.5 text-[11px] font-medium text-neutral-600">
-                {posting.contractType}
+                #{posting.contractType}
               </span>
             ) : null}
             {posting.workAddressShort ? (
               <span className="rounded-md bg-neutral-100 px-2 py-0.5 text-[11px] font-medium text-neutral-600">
-                {posting.workAddressShort}
+                #{posting.workAddressShort}
               </span>
             ) : null}
           </div>
-          <p className="mt-3 border-t border-neutral-100/80 py-3 text-[11px] leading-snug text-muted-foreground">
+          <p className="mt-3 flex items-center gap-1.5 border-t border-neutral-100/80 py-3 text-[11px] leading-snug text-muted-foreground">
+            <span
+              className="relative flex size-1.5 shrink-0 items-center justify-center"
+              aria-hidden
+            >
+              <span className="absolute inline-flex size-full rounded-full bg-[#1A7CFF]/40 motion-safe:animate-ping motion-reduce:animate-none" />
+              <span className="relative size-1 rounded-full bg-[#1A7CFF]" />
+            </span>
             담당 헤드헌터의 검토를 통과한 인재만 매칭받고 있어요.
           </p>
         </div>
