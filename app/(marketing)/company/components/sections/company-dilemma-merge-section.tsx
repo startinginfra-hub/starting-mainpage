@@ -21,7 +21,7 @@ const RIGHT_PATH =
   "M 750 8 L 750 58 Q 750 68 740 68 L 510 68 Q 500 68 500 78 L 500 140"
 
 /**
- * 핵심 장표 — HR 플랫폼 × 헤드헌팅이 부드러운 Y 곡선으로 모여
+ * 핵심 장표 — 채용 플랫폼 × 헤드헌팅이 부드러운 Y 곡선으로 모여
  * 스타팅 워드마크로 결합되는 장면. 블루 펄스가 계속 흘러내림.
  */
 export function CompanyDilemmaMergeSection() {

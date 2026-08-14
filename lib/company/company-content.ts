@@ -10,7 +10,7 @@ export const companyHero = {
   brand: "스타팅파트너스",
   headline: "채용의 딜레마를,",
   headlineLine2: "본질부터 바꿉니다",
-  sub: "실무자급 채용 필터링에 특화된 AI Agent 헤드헌팅 솔루션 ‘스타팅’",
+  sub: "실무자급 채용 딜레마를 해결하는 AI Agent 헤드헌팅 솔루션 ‘스타팅’",
   primaryCta: { label: "서비스 보기", href: "/" },
   secondaryCta: { label: "HR 문화", href: "/company/hr" },
 } as const
@@ -54,8 +54,8 @@ export const companyManifesto = {
     {
       id: "p5",
       lines: [
-        "직접 걸러내고도 수수료를 지불하던 딜레마.",
-        "더 이상 느낄 수 없는 놀라운 경험을 제공합니다.",
+        "어느 한 쪽을 선택해도 풀리지 않던 딜레마,",
+        "리텐션으로 증명되는 놀라운 경험을 제공합니다.",
       ],
     },
   ],
@@ -98,7 +98,7 @@ export const companyIndicators = {
   title: "우리가 바라보는 채용 시장",
   lead: "DX·AX가 가속하는 시장에서, 유료 채용을 이미 쓰는 기업을 정조준합니다.",
   headline: "청년 인구는 줄어도,\nDX·AX 채용 수요는 매년 3만 명씩 성장",
-  sub: "HR 서비스 중 LTV가 가장 높은 2030 신산업 실무자급 채용 시장",
+  sub: "LTV 가장 높은 B2B 필수재, 2030 신산업 실무자급 채용 시장",
   source: "출처: 통계청 산업별·연령별 취업자",
   sourceNote: "신산업 업종: 지식기반 서비스업(정보통신, 전문·과학·기술)",
   employmentLabel: "신산업 청년 취업자",
@@ -130,7 +130,7 @@ export const companyIndicators = {
 
 export const companyDilemmaMerge = {
   left: {
-    eyebrow: "HR 플랫폼",
+    eyebrow: "채용 플랫폼",
     title: "저렴하지만,",
     body: "모든 걸 직접하며\nAI 추천이 정확하지 않습니다",
   },
@@ -181,6 +181,8 @@ export const companyHistory: readonly CompanyHistoryYear[] = [
   {
     year: "2026",
     items: [
+      "인하대학교 창업지원단 '초기창업패키지 보육기업 채용지원' 사업 수주",
+      "'프로젝트에 기반한 인재 추천 방법 및 장치' 특허 등록",
       "딥테크 창업사관학교 1기 선정",
       "중소벤처기업부 기술혁신형중소기업 이노비즈 인증",
       "스타팅파트너스 주식회사 사명 변경",
@@ -193,7 +195,7 @@ export const companyHistory: readonly CompanyHistoryYear[] = [
       "KU 스타트업 펀딩업 데모데이 '대상' 수상",
       "'프로젝트 연관성 기반 채용 적합도 분석 장치 및 방법' 특허 등록",
       "강원창조경제혁신센터X더존비즈온 오픈이노베이션 사업 단독 선정",
-      "중소벤처기업진흥공단 '신산업 전문인력 채용 지원사업' 용역 계약 체결",
+      "중소벤처기업진흥공단 '신산업 전문인력 채용 지원' 사업 수주",
       "KU 창업 아이디어 경진대회 '최우수상' 수상",
       "강한 소상공인 성장지원사업(글로벌유형) 파트너사 선정",
     ],
