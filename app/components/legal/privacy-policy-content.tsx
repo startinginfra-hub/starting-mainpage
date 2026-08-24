@@ -1,11 +1,11 @@
-const policyTableClassName =
-  "w-full border-collapse text-left text-xs leading-relaxed text-neutral-700 [&_th]:border [&_th]:border-neutral-200 [&_th]:bg-neutral-50 [&_th]:px-2 [&_th]:py-1.5 [&_th]:font-semibold [&_td]:border [&_td]:border-neutral-200 [&_td]:px-2 [&_td]:py-1.5 [&_td]:align-top"
+import {
+  bodyClassName,
+  listClassName,
+  policyTableClassName,
+  sectionTitleClassName,
+} from "@/app/components/legal/privacy-policy-styles"
 
-const sectionTitleClassName = "mt-6 text-sm font-semibold text-neutral-900 first:mt-0"
-const bodyClassName = "mt-2 space-y-2 text-sm leading-relaxed text-neutral-700"
-const listClassName = "mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-neutral-700"
-
-export function PrivacyPolicyContent() {
+export function PrivacyPolicyContent20250619() {
   return (
     <div className="space-y-4">
       <p className="text-sm leading-relaxed text-neutral-700">
