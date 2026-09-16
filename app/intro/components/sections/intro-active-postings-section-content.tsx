@@ -1,10 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 import { JdListPostingCard } from "@/app/jdlist/components/jdlist-posting-card"
 import type { JdListHomePostingRow } from "@/lib/jdlist/load-jdlist-home-postings"
+import { INTRO_CAREER_URL } from "@/lib/intro/intro-tokens"
 import { IntroReveal } from "../intro-reveal"
 import { IntroSection, IntroSectionHeading } from "../intro-section"
 
@@ -73,13 +73,13 @@ export function IntroActivePostingsSectionContent({ postings }: IntroActivePosti
 
       <IntroReveal delayMs={120 + postings.length * 80}>
         <div className="mt-10 text-center">
-          <Link
-            href="/jdlist"
+          <a
+            href={INTRO_CAREER_URL}
             className="inline-flex items-center gap-0.5 text-xs font-medium text-[#5d6a82] transition-colors hover:text-[#3f4a60] md:text-sm"
           >
             전체 공고 보기
             <ChevronRight className="size-3.5 shrink-0" aria-hidden />
-          </Link>
+          </a>
         </div>
       </IntroReveal>
     </IntroSection>

@@ -18,6 +18,7 @@ export const introTokens = {
 export const INTRO_CONTENT_MAX = "max-w-[1180px]"
 
 export const INTRO_APP_URL = "https://app.starting.kr/"
+export const INTRO_CAREER_URL = "https://app.starting.kr/career"
 export const INTRO_SUPPORT_EMAIL = "support@starting.kr"
 
 export type IntroClientLogoItem = {
