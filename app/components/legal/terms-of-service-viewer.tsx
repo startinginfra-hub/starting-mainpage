@@ -1,33 +1,38 @@
 import Link from "next/link"
-import { PrivacyPolicyContentAlliance } from "@/app/components/legal/privacy-policy-content-alliance"
-import { PrivacyPolicyStartingVersions } from "@/app/components/legal/privacy-policy-starting-versions"
+import { TermsOfServiceContent } from "@/app/components/legal/terms-of-service-content"
+import { TermsOfServiceContentAlliance } from "@/app/components/legal/terms-of-service-content-alliance"
 import { cn } from "@/lib/utils"
 
-const PRIVACY_PRODUCT_TABS = [
+const TERMS_TABS = [
   {
     id: "starting",
     label: "스타팅",
-    href: "/privacy",
+    href: "/tos",
+    Content: TermsOfServiceContent,
   },
   {
     id: "alliance",
     label: "스타팅 얼라이언스",
-    href: "/privacy/alliance",
+    href: "/tos/alliance",
+    Content: TermsOfServiceContentAlliance,
   },
 ] as const
 
-export type PrivacyPolicyProductId = (typeof PRIVACY_PRODUCT_TABS)[number]["id"]
+export type TermsOfServiceTabId = (typeof TERMS_TABS)[number]["id"]
 
-type PrivacyPolicyViewerProps = {
-  activeId: PrivacyPolicyProductId
+type TermsOfServiceViewerProps = {
+  activeId: TermsOfServiceTabId
 }
 
-export function PrivacyPolicyViewer({ activeId }: PrivacyPolicyViewerProps) {
+export function TermsOfServiceViewer({ activeId }: TermsOfServiceViewerProps) {
+  const activeTab = TERMS_TABS.find((tab) => tab.id === activeId) ?? TERMS_TABS[0]
+  const Content = activeTab.Content
+
   return (
     <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-10">
-      <nav aria-label="개인정보처리방침 구분" className="md:sticky md:top-24 md:w-48 md:shrink-0">
+      <nav aria-label="이용약관 구분" className="md:sticky md:top-24 md:w-48 md:shrink-0">
         <ul className="flex flex-wrap gap-2 md:flex-col md:gap-1.5" role="tablist">
-          {PRIVACY_PRODUCT_TABS.map((tab) => {
+          {TERMS_TABS.map((tab) => {
             const isActive = tab.id === activeId
             return (
               <li key={tab.id}>
@@ -50,7 +55,7 @@ export function PrivacyPolicyViewer({ activeId }: PrivacyPolicyViewerProps) {
         </ul>
       </nav>
       <div className="min-w-0 flex-1" role="tabpanel">
-        {activeId === "alliance" ? <PrivacyPolicyContentAlliance /> : <PrivacyPolicyStartingVersions />}
+        <Content />
       </div>
     </div>
   )
