@@ -975,7 +975,7 @@ export function TermsOfServiceContentAlliance() {
 
         <h3 className={sectionTitleClassName}>부칙</h3>
         <div className={bodyClassName}>
-          <p>① 본 약관은 2026년 09월 28일부터 시행한다.</p>
+          <p>① 본 약관은 2026년 09월 18일부터 시행한다.</p>
           <p>② 이 약관 시행 전에 발생한 사항에 대하여는 종전의 약관 또는 개별 계약에 따른다.</p>
           <p>
             ③ 이 약관 시행 당시 유효한 개별 계약(인재 추천 및 채용 컨설팅 서비스 계약서 등)을 체결하고 있는 고객사에
