@@ -333,6 +333,9 @@
 .intro-hero-headline-accent {
   display: block;
   margin-top: 0.22em;
+  /* background-clip: text only paints inside the box; keep descenders (g) visible */
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
   color: #1a7cff;
   background: linear-gradient(120deg, #1a7cff, #0b4eae);
   -webkit-background-clip: text;

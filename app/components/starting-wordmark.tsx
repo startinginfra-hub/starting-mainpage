@@ -11,6 +11,10 @@ type StartingWordmarkProps = {
   className?: string
   /** `icon`: 심볼 로고, `wordmark`: 텍스트 로고(기본), `both`: 심볼 + 텍스트 */
   variant?: "icon" | "wordmark" | "both"
+  /** `onDark`: 어두운 배경용 흰색 텍스트 로고 */
+  tone?: "default" | "onDark"
+  /** 클라이언트 라우팅 대신 문서 전체를 새로 불러옵니다. */
+  reloadDocument?: boolean
 }
 
 export function StartingWordmark({
@@ -18,6 +22,8 @@ export function StartingWordmark({
   onClick,
   className,
   variant = "wordmark",
+  tone = "default",
+  reloadDocument = false,
 }: StartingWordmarkProps) {
   const interactiveClassName = [
     "group rounded-md outline-none",
@@ -46,7 +52,7 @@ export function StartingWordmark({
       {(variant === "wordmark" || variant === "both") && (
         /* eslint-disable-next-line @next/next/no-img-element -- 정적 브랜드 SVG */
         <img
-          src="/starting-text-black.svg"
+          src={tone === "onDark" ? "/starting-text-white.svg" : "/starting-text-black.svg"}
           alt=""
           className="pointer-events-none block h-[22px] w-auto select-none md:h-[26px]"
         />
@@ -64,6 +70,14 @@ export function StartingWordmark({
     }
 
     return <span className={classNames}>{content}</span>
+  }
+
+  if (reloadDocument) {
+    return (
+      <a href={href} className={classNames}>
+        {content}
+      </a>
+    )
   }
 
   return (

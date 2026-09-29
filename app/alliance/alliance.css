@@ -1,0 +1,265 @@
+.alliance-page {
+  --alliance-bg: #07090f;
+  --alliance-surface: #0f131c;
+  --alliance-surface-raised: #151a26;
+  --alliance-border: rgb(255 255 255 / 0.08);
+  --alliance-gold: #d9b877;
+  --alliance-gold-soft: #f1dfb4;
+  --alliance-blue: #1a7cff;
+  background-color: var(--alliance-bg);
+  color: #fff;
+  color-scheme: dark;
+}
+
+.alliance-hero {
+  padding-top: clamp(88px, 11vw, 148px);
+  padding-bottom: clamp(72px, 9vw, 120px);
+}
+
+.alliance-hero-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 75% at 50% 0%, black 15%, transparent 78%);
+}
+
+.alliance-hero-glow {
+  top: -220px;
+  left: 50%;
+  width: 100%;
+  height: 820px;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(ellipse 45% 50% at 38% 0%, rgb(26 124 255 / 0.32) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 45% at 64% 8%, rgb(217 184 119 / 0.2) 0%, transparent 70%);
+  filter: blur(8px);
+}
+
+.alliance-hero-headline {
+  margin: 28px 0 0;
+  font-size: clamp(32px, 8.5vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  color: #fff;
+}
+
+.alliance-text-gold {
+  color: var(--alliance-gold);
+  background: linear-gradient(120deg, #f6e6bf 0%, #d9b877 45%, #b8934f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .alliance-text-gold {
+    color: transparent;
+    padding-bottom: 0.08em;
+  }
+}
+
+.alliance-btn-ghost {
+  background: rgb(255 255 255 / 0.04);
+  color: #fff;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  backdrop-filter: blur(8px);
+}
+
+.alliance-btn-ghost:hover {
+  background: rgb(255 255 255 / 0.08);
+  border-color: rgb(255 255 255 / 0.28);
+}
+
+.alliance-logo-mono .intro-marquee-logo__img {
+  filter: brightness(0) invert(1);
+  opacity: 0.55;
+}
+
+.alliance-card-gold {
+  position: relative;
+  background:
+    linear-gradient(var(--alliance-surface), var(--alliance-surface)) padding-box,
+    linear-gradient(140deg, rgb(241 223 180 / 0.7), rgb(217 184 119 / 0.15) 45%, rgb(217 184 119 / 0.5)) border-box;
+  border: 1px solid transparent;
+}
+
+.alliance-flow-energy {
+  filter: drop-shadow(0 0 4px rgb(26 124 255 / 0.7));
+  animation: allianceFlowEnergy 2.8s linear infinite both;
+}
+
+@keyframes allianceFlowEnergy {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.alliance-browser-glow {
+  inset: -12% -8% -18%;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 50% 45% at 30% 20%, rgb(26 124 255 / 0.28), transparent 70%),
+    radial-gradient(ellipse 45% 45% at 75% 85%, rgb(217 184 119 / 0.18), transparent 70%);
+  filter: blur(24px);
+}
+
+.alliance-persona-screen {
+  animation: alliancePersonaScreenIn 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes alliancePersonaScreenIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alliance-persona-progress {
+  transform-origin: left center;
+  animation: alliancePersonaProgress var(--alliance-step-ms, 5200ms) linear both;
+}
+
+@keyframes alliancePersonaProgress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.alliance-persona-tabs {
+  scrollbar-width: none;
+}
+
+.alliance-persona-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.persona-apply-in {
+  animation: personaApplyIn 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms) both;
+}
+
+.persona-apply-transient {
+  animation:
+    personaApplyIn 0.25s ease var(--d, 0ms) both,
+    personaApplyOut 0.2s ease var(--d-out, 1000ms) forwards;
+}
+
+.persona-apply-paste {
+  animation: personaApplyPaste 1s ease var(--d, 0ms) both;
+}
+
+.persona-apply-press {
+  animation: personaApplyPress 0.3s ease var(--d, 0ms) both;
+}
+
+.persona-apply-progress {
+  transform-origin: left center;
+  animation:
+    personaApplyProgress 0.9s ease-in-out var(--d, 0ms) both,
+    personaApplyOut 0.2s ease var(--d-out, 1000ms) forwards;
+}
+
+.persona-apply-field-flash {
+  animation: personaApplyFieldFlash 1.1s ease var(--d, 0ms) both;
+}
+
+@keyframes personaApplyIn {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes personaApplyOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes personaApplyPaste {
+  0% {
+    opacity: 0;
+    background-color: rgb(26 124 255 / 0.25);
+  }
+  12% {
+    opacity: 1;
+    background-color: rgb(26 124 255 / 0.25);
+  }
+  100% {
+    opacity: 1;
+    background-color: transparent;
+  }
+}
+
+@keyframes personaApplyPress {
+  50% {
+    transform: scale(0.92);
+    background-color: #0e62db;
+  }
+}
+
+@keyframes personaApplyProgress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes personaApplyFieldFlash {
+  0% {
+    border-color: #e3e8f1;
+    background-color: #fff;
+  }
+  20% {
+    border-color: #1a7cff;
+    background-color: #eef5ff;
+  }
+  100% {
+    border-color: #e3e8f1;
+    background-color: #fff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alliance-persona-screen,
+  .alliance-persona-progress,
+  .persona-apply-in,
+  .persona-apply-paste,
+  .persona-apply-press,
+  .persona-apply-field-flash {
+    animation: none;
+  }
+
+  .persona-apply-transient,
+  .persona-apply-progress {
+    display: none;
+  }
+}
+
+@media (min-width: 601px) {
+  .alliance-hero-headline {
+    font-size: clamp(40px, 6vw, 58px);
+  }
+}
+
+@media (min-width: 901px) {
+  .alliance-hero-headline {
+    font-size: clamp(44px, 5.6vw, 68px);
+  }
+}

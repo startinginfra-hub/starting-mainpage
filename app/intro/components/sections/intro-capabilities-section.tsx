@@ -21,7 +21,7 @@ import { IntroReveal } from "../intro-reveal"
 import { IntroSection, IntroSectionHeading } from "../intro-section"
 import { cn } from "@/lib/utils"
 
-type CapabilityKind = "기능" | "특징"
+export type CapabilityKind = "기능" | "특징"
 
 const KIND_BADGE_CLASS: Record<CapabilityKind, string> = {
   기능: "bg-[#eef5ff] text-[#1A7CFF]",
@@ -41,13 +41,15 @@ const ICON_ACCENT_CLASS: Record<CapabilityKind, { wrap: string; icon: string }> 
 const DEFAULT_ICON_ACCENT = ICON_ACCENT_CLASS.기능
 
 // 특징(서비스 순) → 기능(포지션 준비 → 매칭 → 채용 마무리)
-const CAPABILITIES: ReadonlyArray<{
+export type IntroCapability = {
   icon: LucideIcon
   title: string
   description: ReactNode
   kind?: CapabilityKind
   status?: "제공 예정"
-}> = [
+}
+
+export const CAPABILITIES: ReadonlyArray<IntroCapability> = [
   {
     icon: UserRoundCheck,
     title: "담당 헤드헌터 배정",

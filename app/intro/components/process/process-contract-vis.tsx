@@ -57,7 +57,13 @@ function TermsSkeletonSection({
   )
 }
 
-export function ProcessContractVis() {
+export function ProcessContractVis({
+  title = "스타팅 채용 서비스 이용약관",
+  onConfirm,
+}: {
+  title?: string
+  onConfirm?: () => void
+}) {
   const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.2 })
   const reducedMotion = usePrefersReducedMotion()
   const [typedLength, setTypedLength] = useState(0)
@@ -133,13 +139,13 @@ export function ProcessContractVis() {
         </button>
         <p className="text-[11px] font-semibold text-[#1A7CFF] md:text-xs">이용약관</p>
         <h3 className="mt-1 pr-8 text-base font-bold leading-snug text-[#0b0f1c] md:text-[17px]">
-          스타팅 채용 서비스 이용약관
+          {title}
         </h3>
       </div>
 
       <div className="relative border-b border-[#e8ecf4]">
         <div
-          className="intro-terms-scroll max-h-[9.5rem] overflow-y-auto px-4 py-3.5 md:max-h-[10.5rem] md:px-5 md:py-4"
+          className="intro-terms-scroll max-h-[13rem] overflow-y-auto px-4 py-3.5 md:max-h-[15rem] md:px-5 md:py-4"
           aria-hidden
         >
           {TERMS_SKELETON_SECTIONS.map((section, sectionIndex) => (
@@ -176,7 +182,9 @@ export function ProcessContractVis() {
           <FunnelAdvanceButton
             label="동의하기"
             active={isConfirmComplete}
-            onClick={() => {}}
+            onClick={() => {
+              if (isConfirmComplete) onConfirm?.()
+            }}
             className={cn(
               "fn-funnel-advance-btn shrink-0",
               !isConfirmComplete &&

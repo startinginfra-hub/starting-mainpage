@@ -3,6 +3,7 @@
 import type { ReactNode } from "react"
 import { useEffect, useLayoutEffect, useRef } from "react"
 import { usePathname } from "next/navigation"
+import { AllianceHeader } from "@/app/alliance/components/alliance-header"
 import { ChannelTalkBoot } from "@/app/components/app-shell/channel-talk-boot"
 import { SiteFooter } from "@/app/components/site-footer/site-footer"
 import { jdlistContentFrameClassName } from "@/app/jdlist/components/jdlist-content-frame"
@@ -19,6 +20,10 @@ function isHomePath(pathname: string): boolean {
 
 function isCompanyPath(pathname: string): boolean {
   return pathname === "/company" || pathname.startsWith("/company/")
+}
+
+function isAlliancePath(pathname: string): boolean {
+  return pathname === "/alliance"
 }
 
 function isFramedPath(pathname: string): boolean {
@@ -43,7 +48,9 @@ export function AppShell({ children }: AppShellProps) {
   const mainRef = useRef<HTMLElement>(null)
   const home = isHomePath(pathname)
   const company = isCompanyPath(pathname)
+  const alliance = isAlliancePath(pathname)
   const lightMarketing = home || company
+  const marketing = lightMarketing || alliance
   const framed = isFramedPath(pathname)
 
   useLayoutEffect(() => {
@@ -61,11 +68,12 @@ export function AppShell({ children }: AppShellProps) {
       className={cn(
         "relative flex h-dvh max-h-dvh max-w-full flex-col overflow-hidden text-foreground",
         lightMarketing && "intro-page text-[#0b0f1c]",
+        alliance && "intro-page text-white",
       )}
     >
       <ChannelTalkBoot />
 
-      {!lightMarketing ? (
+      {!marketing ? (
         <>
           <div
             className="pointer-events-none absolute -left-24 top-16 size-88 rounded-full bg-neutral-200/45 blur-[4.5rem]"
@@ -85,7 +93,7 @@ export function AppShell({ children }: AppShellProps) {
       <div
         className={cn(
           "relative flex min-h-0 flex-1 flex-col",
-          lightMarketing ? "bg-[#fbfcfe]" : "bg-white",
+          alliance ? "bg-[#07090f]" : lightMarketing ? "bg-[#fbfcfe]" : "bg-white",
         )}
       >
         <main
@@ -93,11 +101,15 @@ export function AppShell({ children }: AppShellProps) {
           data-app-main
           className={cn(
             "relative flex min-h-0 min-w-0 flex-1 flex-col overflow-x-clip overflow-y-auto [overflow-anchor:none]",
-            lightMarketing ? "bg-[#fbfcfe]" : "overflow-x-hidden bg-[#FBFBFB]",
+            alliance
+              ? "bg-[#07090f]"
+              : lightMarketing
+                ? "bg-[#fbfcfe]"
+                : "overflow-x-hidden bg-[#FBFBFB]",
             framed && pathname.startsWith("/project") && "bg-white",
           )}
         >
-          {!company ? <JdListHeader /> : null}
+          {alliance ? <AllianceHeader /> : !company ? <JdListHeader /> : null}
           {framed ? (
             <div className={cn(jdlistContentFrameClassName, "py-4 md:py-5")}>{children}</div>
           ) : (
@@ -105,6 +117,7 @@ export function AppShell({ children }: AppShellProps) {
           )}
           {!company ? (
             <SiteFooter
+              variant={alliance ? "alliance" : "default"}
               className={cn(
                 framed && "mt-10 md:mt-12",
                 isKosmeLandingPath(pathname) && kosmeStickyBarOffsetClassName,

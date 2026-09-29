@@ -4,59 +4,93 @@ import { StartingWordmark } from "@/app/components/starting-wordmark"
 import { INTRO_CONTENT_MAX } from "@/lib/intro/intro-tokens"
 import { cn } from "@/lib/utils"
 
-const footerLinkClass =
-  "text-sm text-[#5d6a82] transition-colors hover:text-[#0b0f1c]"
+type SiteFooterVariant = "default" | "alliance"
+
+const footerTheme = {
+  default: {
+    root: "border-[#e3e8f1] bg-[#fbfcfe]",
+    link: "text-sm text-[#5d6a82] transition-colors hover:text-[#0b0f1c]",
+    heading: "text-[#0b0f1c]",
+    body: "text-[#5d6a82]",
+    company: "text-[#3f4a60]",
+  },
+  alliance: {
+    root: "border-white/[0.08] bg-[#07090f]",
+    link: "text-sm text-white/45 transition-colors hover:text-white",
+    heading: "text-white/80",
+    body: "text-white/40",
+    company: "text-white/60",
+  },
+} as const
+
+const footerLinks = {
+  default: {
+    solution: [
+      { href: "/#features", label: "특징" },
+      { href: "/#process", label: "이용 순서" },
+      { href: "/#pricing", label: "요금" },
+      { href: "/#faq", label: "FAQ" },
+    ],
+    tos: "/tos",
+    privacy: "/privacy",
+  },
+  alliance: {
+    solution: [
+      { href: "/alliance#eligibility", label: "요금" },
+      { href: "/alliance#features", label: "특징" },
+      { href: "/alliance#faq", label: "FAQ" },
+    ],
+    tos: "/tos/alliance",
+    privacy: "/privacy/alliance",
+  },
+} as const
 
 type SiteFooterProps = {
   className?: string
+  variant?: SiteFooterVariant
 }
 
-export function SiteFooter({ className }: SiteFooterProps) {
+export function SiteFooter({ className, variant = "default" }: SiteFooterProps) {
+  const theme = footerTheme[variant]
+  const links = footerLinks[variant]
+  const headingClass = cn("mb-3 text-xs font-semibold uppercase tracking-wide", theme.heading)
+
   return (
-    <footer className={cn("border-t border-[#e3e8f1] bg-[#fbfcfe] py-12 md:py-16", className)}>
+    <footer className={cn("border-t py-12 md:py-16", theme.root, className)}>
       <div className={cn(INTRO_CONTENT_MAX, "mx-auto w-full px-4 md:px-8")}>
         <div className="mb-10">
-          <StartingWordmark href="/" className="[&_img:last-child]:brightness-0" />
+          {variant === "alliance" ? (
+            <StartingWordmark href="/" tone="onDark" />
+          ) : (
+            <StartingWordmark href="/" className="[&_img:last-child]:brightness-0" />
+          )}
         </div>
 
         <div className="mb-10 grid grid-cols-2 gap-8 max-[600px]:grid-cols-1 md:grid-cols-3">
           <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#0b0f1c]">솔루션</p>
+            <p className={headingClass}>솔루션</p>
             <ul className="space-y-2">
-              <li>
-                <Link href="/#features" className={footerLinkClass}>
-                  특징
-                </Link>
-              </li>
-              <li>
-                <Link href="/#process" className={footerLinkClass}>
-                  이용 순서
-                </Link>
-              </li>
-              <li>
-                <Link href="/#pricing" className={footerLinkClass}>
-                  요금
-                </Link>
-              </li>
-              <li>
-                <Link href="/#faq" className={footerLinkClass}>
-                  FAQ
-                </Link>
-              </li>
+              {links.solution.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className={theme.link}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#0b0f1c]">회사</p>
+            <p className={headingClass}>회사</p>
             <ul className="space-y-2">
               <li>
-                <Link href="/company" className={footerLinkClass}>
+                <Link href="/company" className={theme.link}>
                   회사 소개
                 </Link>
               </li>
               <li>
                 <a
                   href="https://blog.starting.kr/ko"
-                  className={footerLinkClass}
+                  className={theme.link}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -66,18 +100,18 @@ export function SiteFooter({ className }: SiteFooterProps) {
             </ul>
           </div>
           <div className="col-span-2 max-[600px]:col-span-1 md:col-span-1">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#0b0f1c]">지원</p>
+            <p className={headingClass}>지원</p>
             <ul className="space-y-2">
               <li>
-                <ChannelTalkInquiryLink className={footerLinkClass}>문의하기</ChannelTalkInquiryLink>
+                <ChannelTalkInquiryLink className={theme.link}>문의하기</ChannelTalkInquiryLink>
               </li>
               <li>
-                <Link href="/tos" className={footerLinkClass}>
+                <Link href={links.tos} className={theme.link}>
                   이용약관
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className={footerLinkClass}>
+                <Link href={links.privacy} className={theme.link}>
                   개인정보처리방침
                 </Link>
               </li>
@@ -85,9 +119,9 @@ export function SiteFooter({ className }: SiteFooterProps) {
           </div>
         </div>
 
-        <div className="text-xs leading-relaxed break-words text-[#5d6a82]">
+        <div className={cn("text-xs leading-relaxed break-words", theme.body)}>
           <div className="hidden space-y-1.5 md:block">
-            <p className="font-medium text-[#3f4a60]">스타팅파트너스(주)</p>
+            <p className={cn("font-medium", theme.company)}>스타팅파트너스(주)</p>
             <p>
               대표이사 : 김홍찬 | 사업자 등록번호 : 313-88-02066 | 통신판매번호 : 2025-서울광진-0701
             </p>
@@ -101,7 +135,7 @@ export function SiteFooter({ className }: SiteFooterProps) {
             <p>문의 : 1688-7360 / support@starting.kr</p>
           </div>
           <div className="space-y-1 md:hidden">
-            <p className="font-medium text-[#3f4a60]">스타팅파트너스(주)</p>
+            <p className={cn("font-medium", theme.company)}>스타팅파트너스(주)</p>
             <p>대표이사 : 김홍찬 | 사업자 등록번호 : 313-88-02066</p>
             <p>통신판매번호 : 2025-서울광진-0701</p>
             <p>직업정보제공번호 : 서울동부 제 2026-6 호</p>
@@ -110,7 +144,7 @@ export function SiteFooter({ className }: SiteFooterProps) {
             <p>지사/연구소 : 서울특별시 중구 퇴계로 15, 5층</p>
             <p>문의 : 1688-7360 / support@starting.kr</p>
           </div>
-          <p className="pt-4 text-[#5d6a82]">&copy; 2026, Starting Partners Inc.</p>
+          <p className={cn("pt-4", theme.body)}>&copy; 2026, Starting Partners Inc.</p>
         </div>
       </div>
     </footer>
