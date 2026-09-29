@@ -33,6 +33,8 @@ const nextConfig = {
       },
       { source: "/recruiting-partner", destination: "/", permanent: true },
       { source: "/faq", destination: "/", permanent: true },
+      { source: "/tos/alliance", destination: "/alliance/tos", permanent: true },
+      { source: "/privacy/alliance", destination: "/alliance/privacy", permanent: true },
     ]
   },
 }

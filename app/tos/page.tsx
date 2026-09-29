@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { TermsOfServiceViewer } from "@/app/components/legal/terms-of-service-viewer"
+import { TermsOfServiceContent } from "@/app/components/legal/terms-of-service-content"
 
 export const metadata: Metadata = {
   title: "이용약관",
@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 
 export default function TermsOfServicePage() {
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-10 md:px-8 md:py-14">
+    <div className="mx-auto w-full max-w-4xl px-4 py-10 md:px-8 md:py-14">
       <h1 className="mb-8 text-2xl font-semibold tracking-tight text-neutral-900 md:text-3xl">이용약관</h1>
-      <TermsOfServiceViewer activeId="starting" />
+      <TermsOfServiceContent />
     </div>
   )
 }

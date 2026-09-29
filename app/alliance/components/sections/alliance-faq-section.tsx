@@ -88,7 +88,7 @@ export function AllianceFaqSection() {
 
       <p className="mt-6 text-center text-xs text-white/40 md:text-sm">
         자세한 이용 조건은{" "}
-        <Link href="/tos/alliance" className="text-white/70 underline underline-offset-4 hover:text-white">
+        <Link href="/alliance/tos" className="text-white/70 underline underline-offset-4 hover:text-white">
           스타팅 얼라이언스 이용약관
         </Link>
         에서 확인할 수 있어요.

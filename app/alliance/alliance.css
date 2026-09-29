@@ -11,6 +11,29 @@
   color-scheme: dark;
 }
 
+/* Legal content components hardcode light-theme neutral colors. */
+.alliance-legal .text-neutral-700,
+.alliance-legal .text-neutral-800 {
+  color: rgb(255 255 255 / 0.68);
+}
+
+.alliance-legal .text-neutral-900 {
+  color: rgb(255 255 255 / 0.92);
+}
+
+.alliance-legal .bg-neutral-50 {
+  background-color: rgb(255 255 255 / 0.06);
+}
+
+.alliance-legal th,
+.alliance-legal td {
+  border-color: rgb(255 255 255 / 0.12);
+}
+
+.alliance-legal th {
+  background-color: rgb(255 255 255 / 0.04);
+  color: rgb(255 255 255 / 0.85);
+}
 .alliance-hero {
   padding-top: clamp(88px, 11vw, 148px);
   padding-bottom: clamp(72px, 9vw, 120px);

@@ -40,8 +40,8 @@ const footerLinks = {
       { href: "/alliance#features", label: "특징" },
       { href: "/alliance#faq", label: "FAQ" },
     ],
-    tos: "/tos/alliance",
-    privacy: "/privacy/alliance",
+    tos: "/alliance/tos",
+    privacy: "/alliance/privacy",
   },
 } as const
 

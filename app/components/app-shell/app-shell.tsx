@@ -23,7 +23,7 @@ function isCompanyPath(pathname: string): boolean {
 }
 
 function isAlliancePath(pathname: string): boolean {
-  return pathname === "/alliance"
+  return pathname === "/alliance" || pathname.startsWith("/alliance/")
 }
 
 function isFramedPath(pathname: string): boolean {
