@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { StartingWordmark } from "@/app/components/starting-wordmark"
 import { Button } from "@/components/ui/button"
-import { INTRO_APP_URL, INTRO_CAREER_URL } from "@/lib/intro/intro-tokens"
+import { APP_LOGIN_PATH, INTRO_CAREER_URL, buildAppUrl } from "@/lib/intro/intro-tokens"
 import { cn } from "@/lib/utils"
 import { jdlistContentFrameClassName } from "./jdlist-content-frame"
 import { JdListHeaderMobileMenu } from "./jdlist-header-mobile-menu"
@@ -61,7 +61,7 @@ export function JdListHeader() {
               className="h-9 rounded-xl bg-[#1A7CFF] px-3 text-xs font-medium text-white hover:bg-[#126FE3]"
               asChild
             >
-              <a href={INTRO_APP_URL}>로그인</a>
+              <a href={buildAppUrl(APP_LOGIN_PATH, "starting")}>로그인</a>
             </Button>
             <Button
               type="button"

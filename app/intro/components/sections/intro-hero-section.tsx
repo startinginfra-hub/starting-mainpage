@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { ChannelTalkInquiryLink } from "@/app/components/app-shell/channel-talk-inquiry-link"
-import { INTRO_APP_URL } from "@/lib/intro/intro-tokens"
+import { APP_LOGIN_PATH, buildAppUrl } from "@/lib/intro/intro-tokens"
 import { cn } from "@/lib/utils"
 
 export function IntroHeroSection() {
@@ -21,7 +21,7 @@ export function IntroHeroSection() {
           </p>
 
           <div className="intro-hero-cta intro-hero-text-in intro-hero-text-in-delay-3">
-            <Link href={INTRO_APP_URL} className="intro-hero-btn intro-hero-btn-primary group">
+            <Link href={buildAppUrl(APP_LOGIN_PATH, "starting")} className="intro-hero-btn intro-hero-btn-primary group">
               인재 매칭받아보기
               <ArrowRight className="intro-hero-btn-arrow" strokeWidth={2.25} aria-hidden />
             </Link>
@@ -44,7 +44,7 @@ export function IntroHeroSection() {
 export function IntroCtaButtons({ className }: { className?: string }) {
   return (
     <div className={cn("intro-hero-cta", className)}>
-      <Link href={INTRO_APP_URL} className="intro-hero-btn intro-hero-btn-primary group">
+      <Link href={buildAppUrl(APP_LOGIN_PATH, "starting")} className="intro-hero-btn intro-hero-btn-primary group">
         인재 매칭받아보기
         <ArrowRight className="intro-hero-btn-arrow" strokeWidth={2.25} aria-hidden />
       </Link>

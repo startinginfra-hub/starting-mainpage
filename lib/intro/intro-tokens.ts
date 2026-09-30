@@ -17,7 +17,17 @@ export const introTokens = {
 
 export const INTRO_CONTENT_MAX = "max-w-[1180px]"
 
-export const INTRO_APP_URL = "https://app.starting.kr/"
+const APP_ORIGIN = "https://app.starting.kr"
+export const APP_LOGIN_PATH = "/auth/login"
+
+export type AppSignupService = "starting" | "alliance"
+
+export function buildAppUrl(path: string, service: AppSignupService) {
+  const url = new URL(path, APP_ORIGIN)
+  url.searchParams.set("service", service)
+  return url.toString()
+}
+
 export const INTRO_CAREER_URL = "https://app.starting.kr/career"
 export const INTRO_SUPPORT_EMAIL = "support@starting.kr"
 
