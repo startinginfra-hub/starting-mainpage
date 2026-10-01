@@ -49,12 +49,10 @@ const PROCESS_STEPS = [
   },
   {
     id: "04",
-    title: "입사 후 크레딧 차감",
+    title: "입사 후 결제",
     body: (
       <>
-        입사가 확정되면 <strong className={strongCls}>계약 연봉 기준 20%</strong>로 크레딧이 차감돼요.
-        <br />
-        크레딧 충전 시 10% 할인된 금액으로 결제할 수 있어요.
+        입사가 확정되면 <strong className={strongCls}>계약 연봉의 18%</strong>를 결제해요.
       </>
     ),
     vis: "payment",
@@ -131,7 +129,7 @@ export function AllianceProcessSection() {
     <AllianceSection id="process" className="border-t border-white/[0.06]">
       <AllianceSectionHeading
         title="서비스 이용 순서"
-        subtitle="약관 동의부터 포지션 신청, 인재 검토, 입사 후 크레딧 차감까지"
+        subtitle="약관 동의부터 포지션 신청, 인재 검토, 입사 후 결제까지"
       />
 
       <div className="space-y-6 md:space-y-8">

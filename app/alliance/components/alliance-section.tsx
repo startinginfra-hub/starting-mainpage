@@ -43,10 +43,10 @@ export function AllianceSectionHeading({
   className?: string
 }) {
   return (
-    <div className={cn("mx-auto mb-10 max-w-3xl text-center md:mb-14", className)}>
-      <h2 className="text-2xl font-bold leading-tight tracking-tight text-white md:text-4xl">{title}</h2>
+    <div className={cn("mx-auto mb-8 max-w-3xl text-center md:mb-14", className)}>
+      <h2 className="text-2xl font-bold tracking-tight text-white md:text-4xl md:leading-tight">{title}</h2>
       {subtitle ? (
-        <p className="mt-4 text-sm leading-relaxed text-white/55 md:text-base">{subtitle}</p>
+        <p className="mt-3 text-sm leading-relaxed text-white/55 md:mt-4 md:text-base">{subtitle}</p>
       ) : null}
     </div>
   )

@@ -1,12 +1,7 @@
 import { FUNNEL_REPORT_APPLICANT } from "@/app/intro/components/funnel/funnel-constants"
-import {
-  ALLIANCE_CREDIT_DISCOUNT_RATE,
-  ALLIANCE_FEE_RATE,
-  calculateAllianceFee,
-  formatRatePercent,
-} from "@/lib/alliance/alliance-fee"
+import { ALLIANCE_FEE_RATE, calculateAllianceFee, formatRatePercent } from "@/lib/alliance/alliance-fee"
 
-export const PERSONA_SALARY_MANWON = 7000
+export const PERSONA_SALARY_MANWON = 5000
 
 const personaFee = calculateAllianceFee(PERSONA_SALARY_MANWON)
 const personaFeeManwon = personaFee.eligible ? personaFee.feeManwon : 0
@@ -40,7 +35,7 @@ export const PERSONA_STEPS = [
     labelShort: "약관",
     description: "서비스 이용 전 스타팅 얼라이언스 약관을 확인하고 온라인으로 동의해요.",
     url: "app.starting.kr/alliance/terms",
-    durationMs: 5000,
+    durationMs: 3500,
   },
   {
     id: "apply",
@@ -48,7 +43,7 @@ export const PERSONA_STEPS = [
     labelShort: "신청",
     description: "기존 채용공고 URL만 붙여넣으면 포지션 정보가 한 번에 채워져요.",
     url: "app.starting.kr/positions/new",
-    durationMs: 7000,
+    durationMs: 6000,
   },
   {
     id: "report",
@@ -70,9 +65,9 @@ export const PERSONA_STEPS = [
     id: "payment",
     label: "입사 확정 · 결제",
     labelShort: "결제",
-    description: "입사가 확정되면 계약 연봉 기준으로 정산하고, 크레딧 충전 시 10% 할인해 드려요.",
+    description: "입사가 확정되면 계약 연봉 기준으로 바로 결제해요.",
     url: "app.starting.kr/billing/invoices",
-    durationMs: 10500,
+    durationMs: 7500,
   },
 ] as const
 
@@ -82,9 +77,10 @@ const PERSONA_CANDIDATE_NAME = FUNNEL_REPORT_APPLICANT.name
 
 const WON_PER_MANWON = 10000
 
+const VAT_RATE = 0.1
+
 const personaFeeWon = personaFeeManwon * WON_PER_MANWON
-const personaDiscountWon = Math.round(personaFeeWon * ALLIANCE_CREDIT_DISCOUNT_RATE)
-const personaTotalWon = personaFeeWon - personaDiscountWon
+const personaVatWon = Math.round(personaFeeWon * VAT_RATE)
 
 const formatWon = (won: number) => won.toLocaleString("ko-KR")
 
@@ -92,9 +88,7 @@ export const PERSONA_PAYMENT = {
   candidateName: PERSONA_CANDIDATE_NAME,
   finalStage: "최종합격",
   contractSalaryLabel: PERSONA_SALARY_MANWON.toLocaleString("ko-KR"),
-  discountRateLabel: formatRatePercent(ALLIANCE_CREDIT_DISCOUNT_RATE),
   feeAmount: formatWon(personaFeeWon),
-  discountAmount: formatWon(personaDiscountWon),
-  totalAmount: formatWon(personaTotalWon),
-  totalCredits: (personaTotalWon / WON_PER_MANWON).toLocaleString("ko-KR"),
+  vatAmount: formatWon(personaVatWon),
+  totalAmount: formatWon(personaFeeWon + personaVatWon),
 } as const

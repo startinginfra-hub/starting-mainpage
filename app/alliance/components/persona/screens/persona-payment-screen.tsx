@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useState } from "react"
-import { Banknote, FileText } from "lucide-react"
+import { FileText } from "lucide-react"
 import {
   FUNNEL_PAYMENT_DEMO,
   FUNNEL_TAX_INVOICE_DEMO,
@@ -107,10 +107,6 @@ export function InvoicePanel({ animateIn, issued }: { animateIn: boolean; issued
   return (
     <div className="fn-interview-email fn-payment-invoice-phase">
       <div className="fn-interview-email-wrap">
-        <p className="fn-interview-email-notice fn-payment-invoice-headline max-md:!hidden">
-          <Banknote className="fn-interview-email-notice-icon" aria-hidden />
-          <span>{invoice.cardHeadline}</span>
-        </p>
         <article className={cn("fn-payment-invoice-card", animateIn && "intro-pop-in")}>
           <div className="fn-payment-invoice-header">
             <div className="flex items-start gap-2.5">
@@ -141,7 +137,7 @@ export function InvoicePanel({ animateIn, issued }: { animateIn: boolean; issued
             <div className="fn-payment-invoice-item-head max-md:!hidden">
               <span>품목</span>
               <span>공급가액</span>
-              <span>크레딧</span>
+              <span>세액</span>
             </div>
             <div className="fn-payment-invoice-item-row">
               <div className="min-w-0">
@@ -154,24 +150,16 @@ export function InvoicePanel({ animateIn, issued }: { animateIn: boolean; issued
                 {PERSONA_PAYMENT.feeAmount}
               </span>
               <span className="fn-payment-invoice-item-amount max-md:!hidden tabular-nums">
-                {PERSONA_PAYMENT.totalCredits}
+                {PERSONA_PAYMENT.vatAmount}
               </span>
             </div>
           </div>
 
           <dl className="fn-payment-invoice-summary">
             <InvoiceRow label="공급가액" value={`${PERSONA_PAYMENT.feeAmount}원`} />
-            <InvoiceRow
-              label={`크레딧 충전 할인 (${PERSONA_PAYMENT.discountRateLabel})`}
-              value={`-${PERSONA_PAYMENT.discountAmount}원`}
-              className="!text-[#1A7CFF] font-semibold"
-            />
+            <InvoiceRow label="세액" value={`${PERSONA_PAYMENT.vatAmount}원`} />
             <InvoiceRow label="합계" value={`${PERSONA_PAYMENT.totalAmount}원`} strong />
           </dl>
-
-          <p className="fn-payment-invoice-notice">
-            계약 연봉 기준 {PERSONA_POSITION.rateLabel} 요율로 {PERSONA_PAYMENT.totalCredits} 크레딧이 차감돼요
-          </p>
         </article>
       </div>
     </div>

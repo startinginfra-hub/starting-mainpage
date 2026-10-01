@@ -21,12 +21,13 @@ const SCREENS: Record<PersonaStepId, ComponentType<PersonaScreenProps>> = {
   payment: PersonaPaymentScreen,
 }
 
+const MOBILE_FIXED_HEIGHT_STEPS = new Set<PersonaStepId>(["report", "interview", "payment"])
+
 export function AlliancePersonaDemo({ className }: { className?: string }) {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [paused, setPaused] = useState(false)
   const reducedMotion = usePrefersReducedMotion()
   const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.35 })
-  const autoPlaying = inView && !paused && !reducedMotion
+  const autoPlaying = inView && !reducedMotion
 
   useEffect(() => {
     if (!autoPlaying) return
@@ -37,7 +38,6 @@ export function AlliancePersonaDemo({ className }: { className?: string }) {
   }, [activeIndex, autoPlaying])
 
   const selectStep = (index: number) => {
-    setPaused(true)
     setActiveIndex(index)
   }
 
@@ -83,7 +83,7 @@ export function AlliancePersonaDemo({ className }: { className?: string }) {
                   {active && autoPlaying ? (
                     <span
                       key={`progress-${activeIndex}`}
-                      className="alliance-persona-progress absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-[#1A7CFF] to-[#d9b877]"
+                      className="alliance-persona-progress absolute inset-x-0 bottom-0 h-0.5 bg-[#1A7CFF]"
                       style={{ "--alliance-step-ms": `${step.durationMs}ms` } as CSSProperties}
                       aria-hidden
                     />
@@ -96,12 +96,13 @@ export function AlliancePersonaDemo({ className }: { className?: string }) {
 
         <div className="min-w-0">
           <div
-            className="alliance-persona-tabs -mx-4 mb-4 flex gap-2 overflow-x-auto px-4 lg:hidden"
+            className="alliance-persona-tabs -mx-4 mb-4 flex justify-center-safe gap-2 overflow-x-auto px-4 lg:hidden"
             role="tablist"
             aria-label="채용 단계"
           >
             {PERSONA_STEPS.map((step, index) => {
               const active = index === activeIndex
+              const showProgress = active && autoPlaying
               return (
                 <button
                   key={step.id}
@@ -110,13 +111,23 @@ export function AlliancePersonaDemo({ className }: { className?: string }) {
                   aria-selected={active}
                   onClick={() => selectStep(index)}
                   className={cn(
-                    "shrink-0 cursor-pointer rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors",
+                    "relative shrink-0 cursor-pointer overflow-hidden rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors",
                     active
-                      ? "border-[#1A7CFF] bg-[#1A7CFF] text-white"
+                      ? cn("border-[#1A7CFF] text-white", showProgress ? "bg-[#1A7CFF]/25" : "bg-[#1A7CFF]")
                       : "border-white/10 bg-white/[0.03] text-white/55",
                   )}
                 >
-                  {index + 1}. {step.labelShort}
+                  {showProgress ? (
+                    <span
+                      key={`mobile-progress-${activeIndex}`}
+                      className="alliance-persona-progress absolute inset-0 bg-[#1A7CFF]"
+                      style={{ "--alliance-step-ms": `${step.durationMs}ms` } as CSSProperties}
+                      aria-hidden
+                    />
+                  ) : null}
+                  <span className="relative">
+                    {index + 1}. {step.labelShort}
+                  </span>
                 </button>
               )
             })}
@@ -125,7 +136,10 @@ export function AlliancePersonaDemo({ className }: { className?: string }) {
           <AllianceBrowserFrame url={activeStep.url}>
             <div
               key={activeStep.id}
-              className="alliance-persona-screen min-h-[26rem] md:h-[34rem] md:min-h-0 lg:h-[38rem]"
+              className={cn(
+                "alliance-persona-screen min-h-[26rem] md:h-[34rem] md:min-h-0 lg:h-[38rem]",
+                MOBILE_FIXED_HEIGHT_STEPS.has(activeStep.id) && "max-md:h-[32rem]",
+              )}
             >
               <ActiveScreen onNext={goNext} />
             </div>

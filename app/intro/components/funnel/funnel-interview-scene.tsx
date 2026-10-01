@@ -162,7 +162,14 @@ function ProposalModal({
 
       const target = body.querySelector<HTMLElement>(`[data-proposal-step="${filledStep}"]`)
       if (target) {
-        target.scrollIntoView({ block: "nearest", behavior: "smooth" })
+        // scrollIntoView는 페이지까지 스크롤하므로 모달 본문만 직접 스크롤한다
+        const bodyRect = body.getBoundingClientRect()
+        const targetRect = target.getBoundingClientRect()
+        if (targetRect.bottom > bodyRect.bottom) {
+          body.scrollTo({ top: body.scrollTop + targetRect.bottom - bodyRect.bottom, behavior: "smooth" })
+        } else if (targetRect.top < bodyRect.top) {
+          body.scrollTo({ top: body.scrollTop - (bodyRect.top - targetRect.top), behavior: "smooth" })
+        }
         return
       }
 

@@ -264,7 +264,7 @@ export function AllianceHeadhuntersSection() {
         <AllianceSectionHeading
           title={
             <>
-              분야마다, 그 분야를
+              그 분야를
               <br className="md:hidden" /> <span className="alliance-text-gold">가장 잘 아는</span> 헤드헌터
             </>
           }

@@ -60,9 +60,11 @@ function TermsSkeletonSection({
 export function ProcessContractVis({
   title = "스타팅 채용 서비스 이용약관",
   onConfirm,
+  loop = true,
 }: {
   title?: string
   onConfirm?: () => void
+  loop?: boolean
 }) {
   const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.2 })
   const reducedMotion = usePrefersReducedMotion()
@@ -105,7 +107,7 @@ export function ProcessContractVis({
           await delay(TYPING_CHAR_MS)
           if (cancelled) break
         }
-        if (cancelled) break
+        if (cancelled || !loop) break
 
         await delay(PAUSE_AFTER_COMPLETE_MS)
       }
@@ -117,7 +119,7 @@ export function ProcessContractVis({
       cancelled = true
       timeoutIds.forEach(clearTimeout)
     }
-  }, [inView, reducedMotion])
+  }, [inView, reducedMotion, loop])
 
   const typedText = CONFIRM_TEXT.slice(0, typedLength)
   const isTyping = typedLength > 0 && typedLength < CONFIRM_TEXT.length

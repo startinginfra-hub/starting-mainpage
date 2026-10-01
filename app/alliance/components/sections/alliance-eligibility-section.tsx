@@ -5,14 +5,16 @@ import { Info } from "lucide-react"
 import { IntroReveal } from "@/app/intro/components/intro-reveal"
 import {
   ALLIANCE_DEFAULT_SALARY_MANWON,
-  ALLIANCE_EFFECTIVE_RATE,
   calculateAllianceFee,
   formatRatePercent,
   normalizeAllianceSalaryInput,
   parseAllianceSalaryInput,
 } from "@/lib/alliance/alliance-fee"
 import { formatManwon } from "@/lib/intro/hiring-cost-calculator"
+import { cn } from "@/lib/utils"
 import { AllianceSection, AllianceSectionHeading } from "../alliance-section"
+
+const MOBILE_SALARY_PRESETS = [4000, 6000, 8000, 10000] as const
 
 export function AllianceEligibilitySection() {
   const [salaryInput, setSalaryInput] = useState(
@@ -33,12 +35,15 @@ export function AllianceEligibilitySection() {
       />
 
       <IntroReveal yOffset="16">
-        <div className="grid overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0f131c] md:grid-cols-3">
-          <div className="p-6 md:p-8">
-            <label htmlFor="alliance-salary" className="text-sm font-medium text-white/60">
-              채용 후보자 연봉
-            </label>
-            <div className="mt-3 flex items-baseline gap-2 border-b border-white/15 pb-2 focus-within:border-[#1A7CFF]">
+        <div className="grid overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0f131c] md:grid-cols-2">
+          <div className="p-5 md:p-8">
+            <div className="flex items-baseline justify-between gap-2">
+              <label htmlFor="alliance-salary" className="text-sm font-medium text-white/60">
+                채용 후보자 연봉
+              </label>
+              <span className="text-[11px] text-white/35 md:hidden">최소 4,000만 원</span>
+            </div>
+            <div className="mt-2 flex items-baseline gap-2 border-b border-white/15 pb-2 focus-within:border-[#1A7CFF] md:mt-3">
               <input
                 id="alliance-salary"
                 inputMode="numeric"
@@ -50,40 +55,53 @@ export function AllianceEligibilitySection() {
               />
               <span className="shrink-0 text-base text-white/50">만 원</span>
             </div>
-            <p className="mt-3 text-xs text-white/35">최소 연봉 4,000만 원</p>
+            <p className="mt-3 hidden text-xs text-white/35 md:block">최소 연봉 4,000만 원</p>
+            <div className="mt-3 grid grid-cols-4 gap-1.5 md:hidden">
+              {MOBILE_SALARY_PRESETS.map((preset) => {
+                const active = salaryManwon === preset
+                return (
+                  <button
+                    key={preset}
+                    type="button"
+                    onClick={() => setSalaryInput(preset.toLocaleString("ko-KR"))}
+                    className={cn(
+                      "cursor-pointer rounded-lg border py-1.5 text-xs font-semibold tabular-nums transition-colors",
+                      active
+                        ? "border-[#1A7CFF] bg-[#1A7CFF]/15 text-[#74acff]"
+                        : "border-white/10 bg-white/[0.03] text-white/55",
+                    )}
+                  >
+                    {preset >= 10000 ? `${preset / 10000}억` : `${preset / 1000}천만`}
+                  </button>
+                )
+              })}
+            </div>
           </div>
 
           {result.eligible ? (
-            <>
-              <div
-                className="flex flex-col justify-center border-t border-white/[0.08] p-6 md:border-t-0 md:border-l md:p-8"
-                aria-live="polite"
-              >
-                <p className="flex items-center justify-between gap-2 text-sm text-white/55">
-                  적용 요율
-                  <span className="shrink-0 rounded-full bg-white/[0.06] px-2 py-0.5 text-[11px] font-semibold text-white/60">
-                    {formatRatePercent(result.rate)}
-                  </span>
-                </p>
-                <p className="mt-2 text-3xl font-bold tracking-tight text-white/40 tabular-nums line-through decoration-white/40 decoration-2">
-                  {formatManwon(result.feeManwon)}
+            <div
+              className="flex items-center justify-between gap-3 border-t border-white/[0.08] bg-[#1A7CFF]/[0.05] p-5 md:flex-col md:items-stretch md:justify-center md:gap-0 md:border-t-0 md:border-l md:p-8"
+              aria-live="polite"
+            >
+              <div className="min-w-0 md:hidden">
+                <p className="text-sm text-white/55">예상 수수료</p>
+                <p className="mt-0.5 text-[11px] text-white/35 tabular-nums">
+                  {formatManwon(result.salaryManwon)} × {formatRatePercent(result.rate)}
                 </p>
               </div>
-              <div className="flex flex-col justify-center border-t border-white/[0.08] bg-[#1A7CFF]/[0.05] p-6 md:border-t-0 md:border-l md:p-8">
-                <p className="flex items-center justify-between gap-2 text-sm text-white/55">
-                  크레딧 충전 시 실결제
-                  <span className="shrink-0 rounded-full bg-[#1A7CFF]/15 px-2 py-0.5 text-[11px] font-semibold text-[#74acff]">
-                    {formatRatePercent(ALLIANCE_EFFECTIVE_RATE)}
-                  </span>
-                </p>
-                <p className="mt-2 text-3xl font-bold tracking-tight text-[#74acff] tabular-nums">
-                  {formatManwon(result.paidManwon)}
-                </p>
-              </div>
-            </>
+              <p className="hidden items-center justify-between gap-2 text-sm text-white/55 md:flex">
+                예상 수수료
+                <span className="shrink-0 rounded-full bg-[#1A7CFF]/15 px-2 py-0.5 text-[11px] font-semibold text-[#74acff]">
+                  {formatRatePercent(result.rate)}
+                </span>
+              </p>
+              <p className="shrink-0 text-2xl font-bold tracking-tight text-[#74acff] tabular-nums md:mt-2 md:text-3xl">
+                {formatManwon(result.feeManwon)}
+              </p>
+            </div>
           ) : (
             <div
-              className="flex items-center gap-3 border-t border-white/[0.08] p-6 md:col-span-2 md:border-t-0 md:border-l md:p-8"
+              className="flex items-center gap-3 border-t border-white/[0.08] p-5 md:border-t-0 md:border-l md:p-8"
               aria-live="polite"
             >
               <Info className="size-5 shrink-0 text-white/40" strokeWidth={2} aria-hidden />
@@ -94,7 +112,7 @@ export function AllianceEligibilitySection() {
       </IntroReveal>
 
       <p className="mt-6 text-center text-[11px] leading-relaxed text-white/35 md:text-xs">
-        ※ 부가가치세 별도 · 채용 확정 시 차감
+        ※ 부가가치세 별도 · 입사 확정 후 결제
       </p>
     </AllianceSection>
   )
