@@ -288,7 +288,7 @@ export function PrivacyPolicyContentCurrent() {
             <li>이용자 본인의 동의가 있는 경우</li>
             <li>통계·연구 목적으로 특정 개인을 식별할 수 없는 형태로 제공하는 경우</li>
           </ul>
-          <p>③ 채용 추천에 따른 제3자 제공</p>
+          <p>③ 채용 추천 및 추천인에 따른 제3자 제공</p>
           <div className="overflow-x-auto">
             <table className={policyTableClassName}>
               <thead>
@@ -310,6 +310,12 @@ export function PrivacyPolicyContentCurrent() {
                     채용절차 종료 후 지체 없이 파기. 다만 채용이 확정된 경우에는 근로관계 관련 법령에서 정한 기간
                   </td>
                 </tr>
+                <tr>
+                  <td>스타팅 파트너(추천인)</td>
+                  <td>지원 안내 및 추천 수수료 정산 확인</td>
+                  <td>후보자의 성명, 연락처(전화번호·이메일), 지원 공고, 전형 진행 상황, 입사 여부</td>
+                  <td>추천 수수료 정산 완료 또는 파트너 활동 종료 시까지</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -317,6 +323,10 @@ export function PrivacyPolicyContentCurrent() {
             ④ 회사는 후보자를 특정 고객사에 추천하기 전에 해당 고객사의 명칭, 제공 항목, 제공 목적 및 보유·이용
             기간을 후보자에게 개별적으로 알리고 동의를 받은 후에 제공합니다. 후보자가 동의하지 아니하는 경우 회사는
             해당 고객사에 후보자의 개인정보를 제공하지 아니하며, 이를 이유로 후보자에게 불이익을 주지 아니합니다.
+          </p>
+          <p>
+            ⑤ 스타팅 파트너(추천인)에 대한 제공은 후보자가 추천 링크를 통해 지원하면서 별도로 동의한 경우에만
+            이루어지며, 동의하지 않은 후보자의 정보는 추천인에게 제공하지 않습니다.
           </p>
         </div>
       </section>
@@ -477,7 +487,7 @@ export function PrivacyPolicyContentCurrent() {
         <h3 className={sectionTitleClassName}>제11조 (고지 및 시행일)</h3>
         <div className={bodyClassName}>
           <p>
-            ① 본 방침은 공고일자 2026년 8월 24일, 시행일자 2026년 9월 23일부터 적용됩니다.
+            ① 본 방침은 공고일자 2026년 10월 14일, 시행일자 2026년 10월 21일부터 적용됩니다.
           </p>
           <p>
             ② 회사는 본 처리방침의 내용을 변경하는 경우 변경 사항의 시행일자와 변경된 내용을 시행일자로부터 최소

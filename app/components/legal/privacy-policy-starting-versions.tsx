@@ -2,14 +2,20 @@
 
 import { useState } from "react"
 import { PrivacyPolicyContentCurrent } from "@/app/components/legal/privacy-policy-content-current"
+import { PrivacyPolicyContent20260824 } from "@/app/components/legal/privacy-policy-content-20260824"
 import { PrivacyPolicyContent20250619 } from "@/app/components/legal/privacy-policy-content"
 import { cn } from "@/lib/utils"
 
 const PRIVACY_POLICY_VERSIONS = [
   {
     id: "current",
-    label: "2026.08.24 (개정)",
+    label: "2026.10.21 (개정)",
     Content: PrivacyPolicyContentCurrent,
+  },
+  {
+    id: "2026-08-24",
+    label: "2026.08.24",
+    Content: PrivacyPolicyContent20260824,
   },
   {
     id: "2025-06-19",
