@@ -29,6 +29,7 @@ export function buildAppUrl(path: string, service: AppSignupService) {
 }
 
 export const INTRO_CAREER_URL = "https://app.starting.kr/career"
+export const PARTNER_LOGIN_URL = `${APP_ORIGIN}/career/login?next=${encodeURIComponent("/career/partner")}`
 export const INTRO_SUPPORT_EMAIL = "support@starting.kr"
 
 export type IntroClientLogoItem = {
