@@ -283,11 +283,31 @@ function CycleTimelineMobile() {
   )
 }
 
-function SectionHeading({ title }: { title: ReactNode }) {
+function SectionHeading({ title, eyebrow }: { title: ReactNode; eyebrow?: string }) {
   return (
-    <div className="flex flex-col gap-2 text-center">
+    <div className="flex flex-col items-center gap-3 text-center">
+      {eyebrow ? (
+        <span className="inline-flex items-center rounded-full bg-[#1A7CFF]/10 px-3 py-1 text-[12px] font-bold text-[#126FE3]">
+          {eyebrow}
+        </span>
+      ) : null}
       <h2 className="text-[24px] font-extrabold tracking-[-0.02em] text-zinc-900 sm:text-[30px]">{title}</h2>
     </div>
+  )
+}
+
+function SectionBand({ tone, className, children }: { tone: "white" | "tint"; className?: string; children: ReactNode }) {
+  return (
+    <section className={cn("relative isolate flex w-full flex-col gap-8 py-16 sm:py-24", className)}>
+      <div
+        className={cn(
+          "pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2",
+          tone === "white" ? "bg-white" : "bg-[#F2F5FA]",
+        )}
+        aria-hidden
+      />
+      {children}
+    </section>
   )
 }
 
@@ -303,7 +323,7 @@ function HeroPreview() {
 
 export function PartnerLanding() {
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-col gap-24 break-keep pb-6 sm:gap-36">
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 break-keep sm:gap-12">
       <section className="relative py-8 sm:py-12">
         <div className="relative grid items-center gap-12 lg:grid-cols-[1.15fr_1fr] xl:gap-16">
           <div className="flex flex-col items-center gap-5 text-center lg:items-start lg:text-left">
@@ -329,144 +349,149 @@ export function PartnerLanding() {
         </div>
       </section>
 
-      <section className="flex w-full flex-col gap-8">
-        <div className="flex flex-col gap-2">
-          <SectionHeading title="가입하고 인증받으면 바로 시작" />
-          <p className="text-center text-[14px] text-zinc-500 sm:text-[15px]">
-            헤드헌터·리크루터 경력을 확인하고 인증 파트너를 부여해요.
-          </p>
-        </div>
-        <PartnerLandingVerifySteps />
-      </section>
-
-      <section className="flex w-full flex-col gap-8">
-        <div className="flex flex-col gap-2">
-          <SectionHeading title="인증 파트너만 받는 정보" />
-          <p className="text-center text-[14px] text-zinc-500 sm:text-[15px]">
-            기업 인재상부터 탈락 사유까지, 적합한 후보자만 추천할 수 있도록 정리해 드려요.
-          </p>
-        </div>
-        <PartnerLandingTierCompare />
-      </section>
-
-      <section className="flex w-full flex-col gap-8">
-        <SectionHeading title="추천만 하면, 이후는 스타팅 헤드헌터가 관리해요" />
-        <CycleTimelineDesktop />
-        <CycleTimelineMobile />
-      </section>
-
-      <section className="flex w-full flex-col gap-8">
-        <div className="flex flex-col gap-2">
-          <SectionHeading
-            title={
-              <>
-                내가 한 일은 추천 한 번,{" "}
-                <span className="whitespace-nowrap bg-gradient-to-r from-[#1A7CFF] to-[#6B5CFF] bg-clip-text text-transparent">
-                  수수료는 확실하게
-                </span>
-              </>
-            }
-          />
-          <p className="text-center text-[14px] text-zinc-500 sm:text-[15px]">
-            연봉이 높은 공고일수록 정산 수수료도 커져요. 최소 {manWon(PARTNER_STANDARD_FEE_MAN_WON)}부터 시작해요.
-          </p>
-        </div>
-
-        <PartnerLandingPostingPreview />
-
-        <div className="flex flex-col overflow-hidden rounded-[1.5rem] bg-white ring-1 ring-zinc-200/80 sm:flex-row sm:items-stretch">
-          <div className="flex flex-1 flex-col justify-center p-6">
-            <p className="text-[16px] font-bold tracking-tight text-zinc-900">후보자도 이직 축하금을 챙겨가요</p>
-            <p className="mt-1 text-[13px] leading-relaxed text-zinc-500">
-              수수료와 별개로 스타팅이 입사한 후보자에게 지급해요. 제안이 훨씬 쉬워져요.
+      <div className="mx-auto flex w-full flex-col lg:max-w-5xl">
+        <SectionBand tone="white">
+          <div className="flex flex-col gap-2">
+            <SectionHeading eyebrow="파트너 인증" title="가입하고 인증받으면 바로 시작" />
+            <p className="text-center text-[14px] text-zinc-500 sm:text-[15px]">
+              헤드헌터·리크루터 경력을 확인하고 인증 파트너를 부여해요.
             </p>
           </div>
-          <div className="relative flex items-center justify-between gap-1 border-t-2 border-dashed border-[#1A7CFF]/20 bg-[#EEF5FF] px-6 py-4 sm:w-60 sm:flex-col sm:items-start sm:justify-center sm:border-l-2 sm:border-t-0 sm:py-6">
-            <span
-              className="absolute -left-3 -top-3 size-6 rounded-full bg-[#FAFAFC] ring-1 ring-zinc-200/80"
-              aria-hidden
-            />
-            <span
-              className="absolute -right-3 -top-3 size-6 rounded-full bg-[#FAFAFC] ring-1 ring-zinc-200/80 sm:-bottom-3 sm:-left-3 sm:right-auto sm:top-auto"
-              aria-hidden
-            />
-            <span className="text-[12.5px] font-semibold text-[#126FE3]">이직 축하금</span>
-            <span className="bg-gradient-to-r from-[#1A7CFF] to-[#6B5CFF] bg-clip-text text-[30px] font-extrabold tracking-tight text-transparent tabular-nums">
-              {manWon(PARTNER_SIGN_ON_BONUS_MAN_WON)}
-            </span>
-          </div>
-        </div>
-      </section>
+          <PartnerLandingVerifySteps />
+        </SectionBand>
 
-      <section className="flex w-full flex-col gap-8">
-        <div className="flex flex-col gap-2">
-          <SectionHeading title="추천 이후도 한눈에" />
-          <p className="text-center text-[14px] text-zinc-500 sm:text-[15px]">
-            스타팅 검토부터 면접, 입사, 정산까지 단계별로 한눈에 보여요.
-          </p>
-        </div>
-        <PartnerLandingMatchingPreview />
-      </section>
-
-      <section className="flex w-full flex-col gap-8">
-        <div className="flex flex-col gap-2">
-          <SectionHeading title="내가 할 일은 이게 전부예요" />
-          <p className="text-center text-[14px] text-zinc-500 sm:text-[15px]">
-            가이드를 보고 맞는 후보자에게 링크만 보내면 끝이에요.
-          </p>
-        </div>
-        <PartnerLandingSendGuide />
-
-        <div className="-mt-2 grid items-center gap-5 rounded-[1.5rem] bg-white p-5 ring-1 ring-zinc-200/80 md:-mt-1 lg:grid-cols-[1fr_1.15fr] lg:gap-10">
-          <div className="flex flex-col gap-1.5">
-            <h3 className="text-[17px] font-bold tracking-tight text-zinc-900">계좌번호 입력</h3>
-            <p className="text-[13.5px] leading-relaxed text-zinc-500">
-              내가 추천한 후보자가 입사 후 3개월이 지나면 스타팅에서 계좌입력 요청을 드려요. 이때 계좌번호를
-              입력하면 끝나요.
+        <SectionBand tone="tint">
+          <div className="flex flex-col gap-2">
+            <SectionHeading eyebrow="소싱 가이드" title="인증 파트너만 받는 정보" />
+            <p className="text-center text-[14px] text-zinc-500 sm:text-[15px]">
+              기업 인재상부터 탈락 사유까지, 적합한 후보자만 추천할 수 있도록 정리해 드려요.
             </p>
           </div>
-          <div className="rounded-2xl bg-zinc-50 p-4 sm:p-6">
-            <PartnerLandingNotificationSequence notifications={WAITING_NOTIFICATIONS} />
+          <PartnerLandingTierCompare />
+        </SectionBand>
+
+        <SectionBand tone="white">
+          <SectionHeading eyebrow="진행 과정" title="추천만 하면, 이후는 스타팅 헤드헌터가 관리해요" />
+          <CycleTimelineDesktop />
+          <CycleTimelineMobile />
+        </SectionBand>
+
+        <SectionBand tone="tint">
+          <div className="flex flex-col gap-2">
+            <SectionHeading
+              eyebrow="수수료 정산"
+              title={
+                <>
+                  내가 한 일은 추천 한 번,{" "}
+                  <span className="whitespace-nowrap bg-gradient-to-r from-[#1A7CFF] to-[#6B5CFF] bg-clip-text text-transparent">
+                    수수료는 확실하게
+                  </span>
+                </>
+              }
+            />
+            <p className="text-center text-[14px] text-zinc-500 sm:text-[15px]">
+              연봉이 높은 공고일수록 정산 수수료도 커져요. 최소 {manWon(PARTNER_STANDARD_FEE_MAN_WON)}부터 시작해요.
+            </p>
           </div>
-        </div>
-      </section>
 
-      <section className="flex w-full flex-col gap-6">
-        <h2 className="text-center text-[24px] font-extrabold tracking-[-0.02em] text-zinc-900 sm:text-[30px]">
-          자주 묻는 질문
-        </h2>
-        <div className="flex flex-col gap-3">
-          {FAQ.map((item) => (
-            <details
-              key={item.question}
-              className="group rounded-2xl bg-white px-5 ring-1 ring-zinc-200/80 [&_summary::-webkit-details-marker]:hidden"
-            >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-semibold text-zinc-900">
-                <span className="flex min-w-0 items-center gap-2.5">
-                  <AiIcon size={16} className="shrink-0" />
-                  {item.question}
-                </span>
-                <ChevronDown
-                  className="size-5 shrink-0 text-zinc-400 transition-transform group-open:rotate-180"
-                  aria-hidden
-                />
-              </summary>
-              <p className="pb-5 text-[14px] leading-relaxed text-zinc-600">{item.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+          <PartnerLandingPostingPreview />
 
-      <section className="relative w-full overflow-hidden rounded-[2rem] bg-zinc-900 px-6 py-14 text-center sm:py-16">
-        <div className="pointer-events-none absolute left-1/2 top-0 size-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1A7CFF]/40 blur-3xl" />
-        <div className="relative flex flex-col items-center gap-4">
-          <h2 className="text-[24px] font-extrabold tracking-[-0.02em] text-white sm:text-[32px]">
-            정리된 가이드로, 추천에만 집중하세요
-          </h2>
-          <p className="text-[14px] text-zinc-400 sm:text-[15px]">검증된 공고와 연봉 정보를 인증 파트너로 받아보세요.</p>
-          <PartnerLandingCta variant="inverse" className="mt-3" />
-        </div>
-      </section>
+          <div className="flex flex-col overflow-hidden rounded-[1.5rem] bg-white ring-1 ring-zinc-200/80 sm:flex-row sm:items-stretch">
+            <div className="flex flex-1 flex-col justify-center p-6">
+              <p className="text-[16px] font-bold tracking-tight text-zinc-900">후보자도 이직 축하금을 챙겨가요</p>
+              <p className="mt-1 text-[13px] leading-relaxed text-zinc-500">
+                수수료와 별개로 스타팅이 입사한 후보자에게 지급해요. 제안이 훨씬 쉬워져요.
+              </p>
+            </div>
+            <div className="relative flex items-center justify-center border-t-2 border-dashed border-[#1A7CFF]/25 bg-gradient-to-br from-[#DCEAFF] to-[#E6E1FF] px-6 py-4 sm:w-60 sm:border-l-2 sm:border-t-0 sm:py-6">
+              <span
+                className="absolute -left-3 -top-3 size-6 rounded-full bg-[#F2F5FA] ring-1 ring-zinc-200/80"
+                aria-hidden
+              />
+              <span
+                className="absolute -right-3 -top-3 size-6 rounded-full bg-[#F2F5FA] ring-1 ring-zinc-200/80 sm:-bottom-3 sm:-left-3 sm:right-auto sm:top-auto"
+                aria-hidden
+              />
+              <span className="bg-gradient-to-r from-[#1A7CFF] to-[#6B5CFF] bg-clip-text text-[30px] font-extrabold tracking-tight text-transparent tabular-nums">
+                {manWon(PARTNER_SIGN_ON_BONUS_MAN_WON)}
+              </span>
+            </div>
+          </div>
+        </SectionBand>
+
+        <SectionBand tone="white">
+          <div className="flex flex-col gap-2">
+            <SectionHeading eyebrow="매칭 현황" title="추천 이후도 한눈에" />
+            <p className="text-center text-[14px] text-zinc-500 sm:text-[15px]">
+              스타팅 검토부터 면접, 입사, 정산까지 단계별로 한눈에 보여요.
+            </p>
+          </div>
+          <PartnerLandingMatchingPreview />
+        </SectionBand>
+
+        <SectionBand tone="tint">
+          <div className="flex flex-col gap-2">
+            <SectionHeading eyebrow="추천 방법" title="내가 할 일은 이게 전부예요" />
+            <p className="text-center text-[14px] text-zinc-500 sm:text-[15px]">
+              가이드를 보고 맞는 후보자에게 링크만 보내면 끝이에요.
+            </p>
+          </div>
+          <PartnerLandingSendGuide />
+
+          <div className="-mt-2 grid items-center gap-5 rounded-[1.5rem] bg-white p-5 ring-1 ring-zinc-200/80 md:-mt-1 lg:grid-cols-[1fr_1.15fr] lg:gap-10">
+            <div className="flex flex-col gap-1.5">
+              <h3 className="text-[17px] font-bold tracking-tight text-zinc-900">계좌번호 입력</h3>
+              <p className="text-[13.5px] leading-relaxed text-zinc-500">
+                내가 추천한 후보자가 입사 후 3개월이 지나면 스타팅에서 계좌입력 요청을 드려요. 이때 계좌번호를
+                입력하면 끝나요.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-zinc-50 p-4 sm:p-6">
+              <PartnerLandingNotificationSequence notifications={WAITING_NOTIFICATIONS} />
+            </div>
+          </div>
+        </SectionBand>
+
+        <SectionBand tone="white">
+          <SectionHeading eyebrow="FAQ" title="자주 묻는 질문" />
+          <div className="flex flex-col gap-3">
+            {FAQ.map((item) => (
+              <details
+                key={item.question}
+                className="group rounded-2xl bg-white px-5 ring-1 ring-zinc-200/80 [&_summary::-webkit-details-marker]:hidden"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-semibold text-zinc-900">
+                  <span className="flex min-w-0 items-center gap-2.5">
+                    <AiIcon size={16} className="shrink-0" />
+                    {item.question}
+                  </span>
+                  <ChevronDown
+                    className="size-5 shrink-0 text-zinc-400 transition-transform group-open:rotate-180"
+                    aria-hidden
+                  />
+                </summary>
+                <p className="pb-5 text-[14px] leading-relaxed text-zinc-600">{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </SectionBand>
+
+        <section className="relative isolate w-full py-20 text-center sm:py-24">
+          <div
+            className="pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2 overflow-hidden bg-zinc-900"
+            aria-hidden
+          >
+            <div className="absolute left-1/2 top-0 size-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1A7CFF]/40 blur-3xl" />
+          </div>
+          <div className="relative flex flex-col items-center gap-4">
+            <h2 className="text-[24px] font-extrabold tracking-[-0.02em] text-white sm:text-[32px]">
+              정리된 가이드로, 추천에만 집중하세요
+            </h2>
+            <p className="text-[14px] text-zinc-400 sm:text-[15px]">검증된 공고와 연봉 정보를 인증 파트너로 받아보세요.</p>
+            <PartnerLandingCta variant="inverse" className="mt-3" />
+          </div>
+        </section>
+      </div>
     </div>
   )
 }
