@@ -110,7 +110,7 @@ export function PartnerLandingTierCompare() {
         <GeneralCard />
         <VerifiedCard />
       </div>
-      <p className="flex items-start gap-2 rounded-xl bg-zinc-100/80 px-4 py-3 text-[13px] leading-relaxed text-zinc-600">
+      <p className="flex items-start gap-2 rounded-xl bg-white px-4 py-3 text-[13px] ring-1 ring-[#1A7CFF]/15 leading-relaxed text-zinc-600">
         <Info className="mt-[3px] size-3.5 shrink-0 text-[#1A7CFF]" strokeWidth={2.25} aria-hidden />
         <span>
           기업의 내부 채용 정보가 담겨 있어,{" "}

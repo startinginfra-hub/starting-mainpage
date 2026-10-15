@@ -8,6 +8,7 @@ import { ChannelTalkBoot } from "@/app/components/app-shell/channel-talk-boot"
 import { SiteFooter } from "@/app/components/site-footer/site-footer"
 import { jdlistContentFrameClassName } from "@/app/jdlist/components/jdlist-content-frame"
 import { JdListHeader } from "@/app/jdlist/components/jdlist-header"
+import { isPartnerPathname } from "@/lib/intro/intro-tokens"
 import { cn } from "@/lib/utils"
 
 type AppShellProps = {
@@ -24,10 +25,6 @@ function isCompanyPath(pathname: string): boolean {
 
 function isAlliancePath(pathname: string): boolean {
   return pathname === "/alliance" || pathname.startsWith("/alliance/")
-}
-
-function isPartnerPath(pathname: string): boolean {
-  return pathname === "/partner" || pathname.startsWith("/partner/")
 }
 
 function isFramedPath(pathname: string): boolean {
@@ -121,7 +118,7 @@ export function AppShell({ children }: AppShellProps) {
           )}
           {!company ? (
             <SiteFooter
-              variant={alliance ? "alliance" : isPartnerPath(pathname) ? "partner" : "default"}
+              variant={alliance ? "alliance" : isPartnerPathname(pathname) ? "partner" : "default"}
               className={cn(
                 framed && "mt-10 md:mt-12",
                 isKosmeLandingPath(pathname) && kosmeStickyBarOffsetClassName,

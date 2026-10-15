@@ -18,7 +18,7 @@ const PREVIEW_POSTINGS: PreviewPosting[] = [
   {
     companyName: "메디브릿지",
     title: "CFO (재무 총괄)",
-    meta: ["경력 15년+", "연봉 1억 2,000만~1억 8,000만원", "서울 강남구"],
+    meta: ["경력 15년+", "서울 강남구"],
     isStartingAlliance: true,
     salaryMinManWon: 12000,
     salaryMaxManWon: 18000,
@@ -26,7 +26,7 @@ const PREVIEW_POSTINGS: PreviewPosting[] = [
   {
     companyName: "딥스케일",
     title: "AI 엔지니어링 리드",
-    meta: ["경력 10년+", "연봉 1억~1억 5,000만원", "서울 강남구"],
+    meta: ["경력 10년+", "서울 강남구"],
     isStartingAlliance: true,
     salaryMinManWon: 10000,
     salaryMaxManWon: 15000,
@@ -34,7 +34,7 @@ const PREVIEW_POSTINGS: PreviewPosting[] = [
   {
     companyName: "그린모빌리티",
     title: "B2B 영업 총괄",
-    meta: ["경력 10년+", "연봉 8,000만~1억원", "경기 성남시"],
+    meta: ["경력 10년+", "경기 성남시"],
     isStartingAlliance: true,
     salaryMinManWon: 8000,
     salaryMaxManWon: 10000,
@@ -42,7 +42,7 @@ const PREVIEW_POSTINGS: PreviewPosting[] = [
   {
     companyName: "모아커머스",
     title: "백엔드 개발자",
-    meta: ["경력 5년+", "연봉 6,000~8,000만원", "서울 성동구"],
+    meta: ["경력 5년+", "서울 성동구"],
     isStartingAlliance: true,
     salaryMinManWon: 6000,
     salaryMaxManWon: 8000,
@@ -50,7 +50,7 @@ const PREVIEW_POSTINGS: PreviewPosting[] = [
   {
     companyName: "핀플로우",
     title: "프로덕트 디자이너",
-    meta: ["경력 3년+", "연봉 4,000~6,000만원", "서울 강남구"],
+    meta: ["경력 3년+", "서울 강남구"],
     isStartingAlliance: true,
     salaryMinManWon: 4000,
     salaryMaxManWon: 6000,
@@ -58,17 +58,12 @@ const PREVIEW_POSTINGS: PreviewPosting[] = [
   {
     companyName: "스테이로그",
     title: "고객경험(CX) 매니저",
-    meta: ["경력 1년+", "서울 중구"],
-    isStartingAlliance: false,
-    salaryMinManWon: null,
-    salaryMaxManWon: null,
+    meta: ["경력 3년+", "서울 중구"],
+    isStartingAlliance: true,
+    salaryMinManWon: 4000,
+    salaryMaxManWon: 5000,
   },
 ]
-
-/** 모바일에서는 상위 카드와 마지막(최소 금액) 카드만 보여 "최소 50만원부터" 제목과 맞춘다 */
-function hiddenOnMobile(index: number) {
-  return index >= MOBILE_VISIBLE_COUNT - 1 && index < PREVIEW_POSTINGS.length - 1
-}
 
 function PreviewCard({ posting, className }: { posting: PreviewPosting; className?: string }) {
   const feeLabel = formatPartnerFeeRange(posting.salaryMinManWon, posting.salaryMaxManWon, posting.isStartingAlliance)
@@ -113,7 +108,7 @@ export function PartnerLandingPostingPreview() {
         <PreviewCard
           key={posting.companyName}
           posting={posting}
-          className={hiddenOnMobile(index) ? "max-md:hidden" : undefined}
+          className={index >= MOBILE_VISIBLE_COUNT ? "max-md:hidden" : undefined}
         />
       ))}
     </ul>

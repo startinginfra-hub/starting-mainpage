@@ -23,7 +23,6 @@ import {
 import {
   PARTNER_FEE_SHARE_RATE,
   PARTNER_SIGN_ON_BONUS_MAN_WON,
-  PARTNER_STANDARD_FEE_MAN_WON,
   PARTNER_WITHHOLDING_TAX_RATE,
   partnerFeeManWon,
 } from "@/lib/partner/partner-fee"
@@ -390,7 +389,7 @@ export function PartnerLanding() {
               }
             />
             <p className="text-center text-[14px] text-zinc-500 sm:text-[15px]">
-              연봉이 높은 공고일수록 정산 수수료도 커져요. 최소 {manWon(PARTNER_STANDARD_FEE_MAN_WON)}부터 시작해요.
+              연봉이 높은 공고일수록 정산 수수료도 커져요.
             </p>
           </div>
 

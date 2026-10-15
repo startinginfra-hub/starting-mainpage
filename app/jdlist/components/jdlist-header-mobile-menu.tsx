@@ -14,7 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
-import { APP_LOGIN_PATH, INTRO_CAREER_URL, buildAppUrl } from "@/lib/intro/intro-tokens"
+import { INTRO_CAREER_URL, getHeaderLoginUrl, isPartnerPathname } from "@/lib/intro/intro-tokens"
 import { JDLIST_HEADER_NAV, isJdListHeaderNavActive } from "./jdlist-nav"
 
 const mobileMenuTriggerBtn =
@@ -80,19 +80,21 @@ export function JdListHeaderMobileMenu() {
               className="h-11 w-full rounded-xl bg-[#1A7CFF] text-sm font-semibold text-white hover:bg-[#126FE3]"
               asChild
             >
-              <a href={buildAppUrl(APP_LOGIN_PATH, "starting")}>로그인</a>
+              <a href={getHeaderLoginUrl(pathname)}>로그인</a>
             </Button>
           </SheetClose>
-          <SheetClose asChild>
-            <Button
-              type="button"
-              variant="outline"
-              className="h-11 w-full rounded-xl border-neutral-200/75 text-sm font-semibold"
-              asChild
-            >
-              <a href={INTRO_CAREER_URL}>인재서비스</a>
-            </Button>
-          </SheetClose>
+          {isPartnerPathname(pathname) ? null : (
+            <SheetClose asChild>
+              <Button
+                type="button"
+                variant="outline"
+                className="h-11 w-full rounded-xl border-neutral-200/75 text-sm font-semibold"
+                asChild
+              >
+                <a href={INTRO_CAREER_URL}>인재서비스</a>
+              </Button>
+            </SheetClose>
+          )}
         </div>
       </SheetContent>
     </Sheet>

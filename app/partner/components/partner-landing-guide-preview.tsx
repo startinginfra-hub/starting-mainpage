@@ -3,15 +3,12 @@
 import { useEffect, useState } from "react"
 import { BadgeCheck } from "lucide-react"
 import { AiIcon } from "@/components/icons/ai-icon"
-import { formatPartnerFeeRange } from "@/lib/partner/partner-fee"
 import { cn } from "@/lib/utils"
 
 /** 소싱 가이드 항목이 하나씩 채워지는 시점(ms) */
 const STEP_AT_MS = [700, 1700, 2700]
 const LAST_STEP = STEP_AT_MS.length
 const LOOP_MS = 9000
-
-const EXAMPLE_FEE = formatPartnerFeeRange(6000, 8000, true)
 
 const SOURCING_GUIDE_ITEMS: Array<{ label: string; body: string }> = [
   { label: "기업 인재상", body: "주도적으로 문제를 정의하는 시니어" },
@@ -81,17 +78,6 @@ export function PartnerLandingGuidePreview() {
           <p className="truncate text-[15px] font-bold tracking-tight text-neutral-900">백엔드 개발자 (경력 5년+)</p>
         </div>
       </div>
-      <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-zinc-200/70 text-[11.5px]">
-        <div className="bg-white px-3 py-2">
-          <dt className="text-neutral-500">연봉</dt>
-          <dd className="mt-0.5 font-semibold text-neutral-900 tabular-nums">6,000~8,000만원</dd>
-        </div>
-        <div className="bg-white px-3 py-2">
-          <dt className="text-neutral-500">예상 수수료</dt>
-          <dd className="mt-0.5 font-semibold text-neutral-900 tabular-nums">{EXAMPLE_FEE}</dd>
-        </div>
-      </dl>
-
       <div className="relative rounded-2xl bg-white p-4 shadow-[0_18px_40px_-20px_rgba(26,124,255,0.55)] ring-2 ring-[#1A7CFF]/25">
         <div className="flex items-center justify-between gap-2">
           <p className="flex items-center gap-1.5 text-[15px] font-bold tracking-tight text-zinc-900">
