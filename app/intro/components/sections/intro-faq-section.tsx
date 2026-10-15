@@ -3,9 +3,13 @@
 import { useState } from "react"
 import { Plus } from "lucide-react"
 import { IntroSection, IntroSectionHeading } from "../intro-section"
+import {
+  MIN_CREDIT_CHARGE_CREDITS,
+  getCreditChargeDiscountPercent,
+} from "../pricing/intro-pricing-constants"
 import { cn } from "@/lib/utils"
 
-type FaqItem = (typeof FAQ_ITEMS)[number]
+type FaqItem = { question: string; answer: string }
 
 function IntroFaqItem({ item, defaultOpen = false }: { item: FaqItem; defaultOpen?: boolean }) {
   const [isOpen, setIsOpen] = useState(defaultOpen)
@@ -72,7 +76,8 @@ const FAQ_ITEMS = [
   {
     question: "크레딧은 얼마부터 충전할 수 있나요?",
     answer:
-      "크레딧은 자유롭게 충전할 수 있어요. 600 크레딧 이상 충전 시 계좌이체는 15%, 카드 결제는 11% 할인이 적용돼요.",
+      `크레딧은 자유롭게 충전할 수 있어요. ${MIN_CREDIT_CHARGE_CREDITS} 크레딧 이상 충전 시 계좌이체는 ${getCreditChargeDiscountPercent("bank")}%, 카드 결제는 ${getCreditChargeDiscountPercent("card")}% 할인이 적용돼요.`,
+    answerAfterDiscountEvent: "크레딧은 자유롭게 충전할 수 있어요.",
   },
   {
     question: "수수료는 어떻게 책정되나요?",
@@ -83,16 +88,26 @@ const FAQ_ITEMS = [
     question: "보증기간과 재추천은 어떻게 진행되나요?",
     answer: "입사일 기준 한 달 이내 자진퇴사 시 재추천을 제공해요.",
   },
-] as const
+] satisfies ReadonlyArray<FaqItem & { answerAfterDiscountEvent?: string }>
 
-export function IntroFaqSection() {
+export function IntroFaqSection({ discountEventActive }: { discountEventActive: boolean }) {
   return (
     <IntroSection id="faq">
       <IntroSectionHeading title="궁금한 점, 미리 정리해뒀어요" />
 
       <div className="mx-auto max-w-3xl space-y-3">
         {FAQ_ITEMS.map((item, index) => (
-          <IntroFaqItem key={item.question} item={item} defaultOpen={index === 0} />
+          <IntroFaqItem
+            key={item.question}
+            item={{
+              question: item.question,
+              answer:
+                (!discountEventActive && "answerAfterDiscountEvent" in item
+                  ? item.answerAfterDiscountEvent
+                  : undefined) ?? item.answer,
+            }}
+            defaultOpen={index === 0}
+          />
         ))}
       </div>
     </IntroSection>

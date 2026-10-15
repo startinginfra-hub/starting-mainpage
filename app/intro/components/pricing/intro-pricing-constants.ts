@@ -7,11 +7,19 @@ export const MIN_CREDIT_CHARGE_CREDITS = 600
 export const CREDIT_CHARGE_STEP = 300
 
 export const CREDIT_CHARGE_DISCOUNTS = {
-  card: { rate: 0.11, label: "카드결제 충전" },
-  bank: { rate: 0.15, label: "계좌이체 충전" },
+  card: { rate: 0.06, label: "카드결제 충전" },
+  bank: { rate: 0.1, label: "계좌이체 충전" },
 } as const
 
 export type CreditChargeMethod = keyof typeof CREDIT_CHARGE_DISCOUNTS
+
+/** 2026-12-01 00:00 Asia/Seoul. 이후에는 충전 할인이 없다. */
+export const CREDIT_DISCOUNT_EVENT_END_AT = new Date("2026-11-30T15:00:00.000Z")
+export const CREDIT_DISCOUNT_EVENT_END_LABEL = "11월 30일"
+
+export function isCreditDiscountEventActive(asOf: Date = new Date()): boolean {
+  return asOf.getTime() < CREDIT_DISCOUNT_EVENT_END_AT.getTime()
+}
 
 export function formatPricingManwon(amount: number): string {
   return `${amount.toLocaleString("ko-KR")}만 원`
