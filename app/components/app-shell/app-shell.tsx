@@ -26,6 +26,10 @@ function isAlliancePath(pathname: string): boolean {
   return pathname === "/alliance" || pathname.startsWith("/alliance/")
 }
 
+function isPartnerPath(pathname: string): boolean {
+  return pathname === "/partner" || pathname.startsWith("/partner/")
+}
+
 function isFramedPath(pathname: string): boolean {
   return pathname.startsWith("/jdlist") || pathname.startsWith("/project")
 }
@@ -117,7 +121,7 @@ export function AppShell({ children }: AppShellProps) {
           )}
           {!company ? (
             <SiteFooter
-              variant={alliance ? "alliance" : "default"}
+              variant={alliance ? "alliance" : isPartnerPath(pathname) ? "partner" : "default"}
               className={cn(
                 framed && "mt-10 md:mt-12",
                 isKosmeLandingPath(pathname) && kosmeStickyBarOffsetClassName,

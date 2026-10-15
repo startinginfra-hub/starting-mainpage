@@ -4,16 +4,19 @@ import { StartingWordmark } from "@/app/components/starting-wordmark"
 import { INTRO_CONTENT_MAX } from "@/lib/intro/intro-tokens"
 import { cn } from "@/lib/utils"
 
-type SiteFooterVariant = "default" | "alliance"
+type SiteFooterVariant = "default" | "alliance" | "partner"
+
+const lightTheme = {
+  root: "border-[#e3e8f1] bg-[#fbfcfe]",
+  link: "text-sm text-[#5d6a82] transition-colors hover:text-[#0b0f1c]",
+  heading: "text-[#0b0f1c]",
+  body: "text-[#5d6a82]",
+  company: "text-[#3f4a60]",
+} as const
 
 const footerTheme = {
-  default: {
-    root: "border-[#e3e8f1] bg-[#fbfcfe]",
-    link: "text-sm text-[#5d6a82] transition-colors hover:text-[#0b0f1c]",
-    heading: "text-[#0b0f1c]",
-    body: "text-[#5d6a82]",
-    company: "text-[#3f4a60]",
-  },
+  default: lightTheme,
+  partner: lightTheme,
   alliance: {
     root: "border-white/[0.08] bg-[#07090f]",
     link: "text-sm text-white/45 transition-colors hover:text-white",
@@ -50,74 +53,112 @@ type SiteFooterProps = {
   variant?: SiteFooterVariant
 }
 
-export function SiteFooter({ className, variant = "default" }: SiteFooterProps) {
+function FooterLinkGrid({ variant }: { variant: keyof typeof footerLinks }) {
   const theme = footerTheme[variant]
   const links = footerLinks[variant]
   const headingClass = cn("mb-3 text-xs font-semibold uppercase tracking-wide", theme.heading)
 
   return (
+    <div className="mb-10 grid grid-cols-2 gap-8 max-[600px]:grid-cols-1 md:grid-cols-3">
+      <div>
+        <p className={headingClass}>솔루션</p>
+        <ul className="space-y-2">
+          {links.solution.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} className={theme.link}>
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <p className={headingClass}>회사</p>
+        <ul className="space-y-2">
+          <li>
+            <Link href="/company" className={theme.link}>
+              회사 소개
+            </Link>
+          </li>
+          <li>
+            <a
+              href="https://blog.starting.kr/ko"
+              className={theme.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              블로그
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div className="col-span-2 max-[600px]:col-span-1 md:col-span-1">
+        <p className={headingClass}>지원</p>
+        <ul className="space-y-2">
+          <li>
+            <ChannelTalkInquiryLink className={theme.link}>문의하기</ChannelTalkInquiryLink>
+          </li>
+          <li>
+            <Link href={links.tos} className={theme.link}>
+              이용약관
+            </Link>
+          </li>
+          <li>
+            <Link href={links.privacy} className={theme.link}>
+              개인정보처리방침
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+function PartnerFooterLinks() {
+  const theme = footerTheme.partner
+
+  return (
+    <ul className="mb-8 flex flex-wrap items-center gap-x-2 gap-y-1">
+      <li>
+        <ChannelTalkInquiryLink className={theme.link}>문의하기</ChannelTalkInquiryLink>
+      </li>
+      <li aria-hidden className={theme.body}>
+        ·
+      </li>
+      <li>
+        <Link href="/partner/terms" className={theme.link}>
+          파트너 이용약관
+        </Link>
+      </li>
+      <li aria-hidden className={theme.body}>
+        ·
+      </li>
+      <li>
+        <Link href="/partner/privacy" className={theme.link}>
+          개인정보처리방침
+        </Link>
+      </li>
+    </ul>
+  )
+}
+
+export function SiteFooter({ className, variant = "default" }: SiteFooterProps) {
+  const theme = footerTheme[variant]
+
+  return (
     <footer className={cn("border-t py-12 md:py-16", theme.root, className)}>
       <div className={cn(INTRO_CONTENT_MAX, "mx-auto w-full px-4 md:px-8")}>
-        <div className="mb-10">
+        <div className={variant === "partner" ? "mb-6" : "mb-10"}>
           {variant === "alliance" ? (
             <StartingWordmark href="/" tone="onDark" />
+          ) : variant === "partner" ? (
+            <StartingWordmark href="/" />
           ) : (
             <StartingWordmark href="/" className="[&_img:last-child]:brightness-0" />
           )}
         </div>
 
-        <div className="mb-10 grid grid-cols-2 gap-8 max-[600px]:grid-cols-1 md:grid-cols-3">
-          <div>
-            <p className={headingClass}>솔루션</p>
-            <ul className="space-y-2">
-              {links.solution.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className={theme.link}>
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className={headingClass}>회사</p>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/company" className={theme.link}>
-                  회사 소개
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="https://blog.starting.kr/ko"
-                  className={theme.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  블로그
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="col-span-2 max-[600px]:col-span-1 md:col-span-1">
-            <p className={headingClass}>지원</p>
-            <ul className="space-y-2">
-              <li>
-                <ChannelTalkInquiryLink className={theme.link}>문의하기</ChannelTalkInquiryLink>
-              </li>
-              <li>
-                <Link href={links.tos} className={theme.link}>
-                  이용약관
-                </Link>
-              </li>
-              <li>
-                <Link href={links.privacy} className={theme.link}>
-                  개인정보처리방침
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
+        {variant === "partner" ? <PartnerFooterLinks /> : <FooterLinkGrid variant={variant} />}
 
         <div className={cn("text-xs leading-relaxed break-words", theme.body)}>
           <div className="hidden space-y-1.5 md:block">
