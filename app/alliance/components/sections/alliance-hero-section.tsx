@@ -24,7 +24,7 @@ export function AllianceHeroSection() {
           </h1>
 
           <p className="intro-hero-text-in intro-hero-text-in-delay-2 mt-6 max-w-[620px] text-base leading-relaxed text-white/60 md:text-lg">
-            연봉 4천 이상 포지션 전용. 계약 연봉의 18% 정찰제
+            연봉 4천 이상 포지션 전용. 계약 연봉의 20% 정찰제
           </p>
 
           <div className="intro-hero-cta intro-hero-text-in intro-hero-text-in-delay-3">

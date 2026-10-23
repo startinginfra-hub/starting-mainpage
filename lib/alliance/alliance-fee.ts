@@ -3,7 +3,7 @@ import { extractSalaryDigits } from "@/lib/intro/hiring-cost-calculator"
 /** 이용 자격 최소 제시 연봉(만 원) */
 export const ALLIANCE_MIN_SALARY_MANWON = 4000
 /** 연봉 구간과 관계없이 적용되는 단일 요율 */
-export const ALLIANCE_FEE_RATE = 0.18
+export const ALLIANCE_FEE_RATE = 0.2
 export const ALLIANCE_MAX_SALARY_MANWON = 100000
 export const ALLIANCE_DEFAULT_SALARY_MANWON = 4000
 

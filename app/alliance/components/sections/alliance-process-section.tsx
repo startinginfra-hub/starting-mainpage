@@ -52,7 +52,7 @@ const PROCESS_STEPS = [
     title: "입사 후 결제",
     body: (
       <>
-        입사가 확정되면 <strong className={strongCls}>계약 연봉의 18%</strong>를 결제해요.
+        입사가 확정되면 <strong className={strongCls}>계약 연봉의 20%</strong>를 결제해요.
       </>
     ),
     vis: "payment",
