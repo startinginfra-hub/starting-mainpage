@@ -11,11 +11,11 @@ import { AllianceProcessSection } from "./components/sections/alliance-process-s
 export const metadata: Metadata = {
   title: "스타팅 얼라이언스",
   description:
-    "연봉 4,000만 원 이상 핵심 포지션을 위한 정찰제 헤드헌팅. AI 정밀 필터링과 전담 헤드헌터가 검증한 인재만 추천해요.",
+    "다수의 헤드헌터가 함께 찾는 정찰제 헤드헌팅. AI 정밀 필터링과 전담 헤드헌터가 검증한 인재만 추천해요.",
   alternates: { canonical: "/alliance" },
   openGraph: {
     title: "스타팅 얼라이언스",
-    description: "연봉 4,000만 원 이상 핵심 포지션을 위한 정찰제 헤드헌팅",
+    description: "다수의 헤드헌터가 함께 찾는 정찰제 헤드헌팅",
     url: "https://starting.kr/alliance",
   },
 }

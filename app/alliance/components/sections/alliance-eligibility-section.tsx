@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Info } from "lucide-react"
 import { IntroReveal } from "@/app/intro/components/intro-reveal"
 import {
   ALLIANCE_DEFAULT_SALARY_MANWON,
@@ -14,7 +13,7 @@ import { formatManwon } from "@/lib/intro/hiring-cost-calculator"
 import { cn } from "@/lib/utils"
 import { AllianceSection, AllianceSectionHeading } from "../alliance-section"
 
-const MOBILE_SALARY_PRESETS = [4000, 6000, 8000, 10000] as const
+const MOBILE_SALARY_PRESETS = [5000, 6000, 8000, 10000] as const
 
 export function AllianceEligibilitySection() {
   const [salaryInput, setSalaryInput] = useState(
@@ -28,7 +27,7 @@ export function AllianceEligibilitySection() {
       <AllianceSectionHeading
         title={
           <>
-            연봉 <span className="alliance-text-gold">4,000만 원 이상</span> 포지션 전용
+            예상 수수료를 확인해보세요
           </>
         }
         subtitle="연봉 구간 상관없이 수수료율은 고정이에요."
@@ -37,12 +36,9 @@ export function AllianceEligibilitySection() {
       <IntroReveal yOffset="16">
         <div className="grid overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0f131c] md:grid-cols-2">
           <div className="p-5 md:p-8">
-            <div className="flex items-baseline justify-between gap-2">
-              <label htmlFor="alliance-salary" className="text-sm font-medium text-white/60">
-                채용 후보자 연봉
-              </label>
-              <span className="text-[11px] text-white/35 md:hidden">최소 4,000만 원</span>
-            </div>
+            <label htmlFor="alliance-salary" className="text-sm font-medium text-white/60">
+              채용 후보자 연봉
+            </label>
             <div className="mt-2 flex items-baseline gap-2 border-b border-white/15 pb-2 focus-within:border-[#1A7CFF] md:mt-3">
               <input
                 id="alliance-salary"
@@ -55,7 +51,6 @@ export function AllianceEligibilitySection() {
               />
               <span className="shrink-0 text-base text-white/50">만 원</span>
             </div>
-            <p className="mt-3 hidden text-xs text-white/35 md:block">최소 연봉 4,000만 원</p>
             <div className="mt-3 grid grid-cols-4 gap-1.5 md:hidden">
               {MOBILE_SALARY_PRESETS.map((preset) => {
                 const active = salaryManwon === preset
@@ -101,11 +96,10 @@ export function AllianceEligibilitySection() {
             </div>
           ) : (
             <div
-              className="flex items-center gap-3 border-t border-white/[0.08] p-5 md:border-t-0 md:border-l md:p-8"
+              className="flex items-center border-t border-white/[0.08] p-5 md:border-t-0 md:border-l md:p-8"
               aria-live="polite"
             >
-              <Info className="size-5 shrink-0 text-white/40" strokeWidth={2} aria-hidden />
-              <p className="text-sm leading-relaxed text-white/60">연봉 4,000만 원 이상 포지션만 신청할 수 있어요.</p>
+              <p className="text-sm leading-relaxed text-white/60">연봉을 입력하면 예상 수수료가 나와요.</p>
             </div>
           )}
         </div>

@@ -28,9 +28,9 @@ const PROCESS_STEPS = [
     title: "포지션 신청",
     body: (
       <>
-        <strong className={strongCls}>연봉 4,000만 원 이상</strong> 포지션만 신청할 수 있어요.
+        채용공고 URL만 넣으면 포지션 정보가 <strong className={strongCls}>자동으로 채워져요</strong>.
         <br />
-        채용공고를 불러오면 입력이 자동으로 완료되고, AI 스크리닝과 전담 헤드헌터가 함께 검토해요.
+        AI 스크리닝과 전담 헤드헌터가 함께 검토해요.
       </>
     ),
     vis: "apply",

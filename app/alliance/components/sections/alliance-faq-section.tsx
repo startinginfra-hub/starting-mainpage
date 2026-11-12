@@ -9,7 +9,7 @@ import { AllianceSection, AllianceSectionHeading } from "../alliance-section"
 const FAQ_ITEMS = [
   {
     question: "어떤 포지션을 신청할 수 있나요?",
-    answer: "매칭 신청 시 제시 연봉이 4,000만 원 이상인 포지션만 신청할 수 있어요.",
+    answer: "채용공고 URL을 넣으면 포지션 정보가 자동으로 채워져요. 분야별 헤드헌터가 함께 후보를 찾아요.",
   },
   {
     question: "수수료는 어떻게 책정되나요?",

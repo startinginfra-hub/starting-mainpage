@@ -1,18 +1,16 @@
 import { extractSalaryDigits } from "@/lib/intro/hiring-cost-calculator"
 
-/** 이용 자격 최소 제시 연봉(만 원) */
-export const ALLIANCE_MIN_SALARY_MANWON = 4000
 /** 연봉 구간과 관계없이 적용되는 단일 요율 */
 export const ALLIANCE_FEE_RATE = 0.2
 export const ALLIANCE_MAX_SALARY_MANWON = 100000
-export const ALLIANCE_DEFAULT_SALARY_MANWON = 4000
+export const ALLIANCE_DEFAULT_SALARY_MANWON = 5000
 
 export type AllianceFeeResult =
   | { eligible: false; salaryManwon: number }
   | { eligible: true; salaryManwon: number; rate: number; feeManwon: number }
 
 export function calculateAllianceFee(salaryManwon: number): AllianceFeeResult {
-  if (!Number.isFinite(salaryManwon) || salaryManwon < ALLIANCE_MIN_SALARY_MANWON) {
+  if (!Number.isFinite(salaryManwon) || salaryManwon <= 0) {
     return { eligible: false, salaryManwon }
   }
   return {

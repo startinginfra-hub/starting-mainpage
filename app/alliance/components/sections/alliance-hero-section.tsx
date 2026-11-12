@@ -19,12 +19,12 @@ export function AllianceHeroSection() {
             <span className="alliance-text-gold">스타팅 얼라이언스</span>
           </span>
           <h1 className="alliance-hero-headline intro-hero-text-in intro-hero-text-in-delay-1">
-            리드급 채용에 특화된
+            한 명이 아니라
             <span className="alliance-text-gold block">다수의 헤드헌터가 함께 찾습니다</span>
           </h1>
 
           <p className="intro-hero-text-in intro-hero-text-in-delay-2 mt-6 max-w-[620px] text-base leading-relaxed text-white/60 md:text-lg">
-            연봉 4천 이상 포지션 전용. 계약 연봉의 20% 정찰제
+            계약 연봉의 20% 정찰제
           </p>
 
           <div className="intro-hero-cta intro-hero-text-in intro-hero-text-in-delay-3">

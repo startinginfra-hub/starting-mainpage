@@ -168,7 +168,7 @@ export function PersonaApplyScreen({ onNext }: PersonaScreenProps) {
           style={delay(TIMELINE.tier)}
         >
           <CheckCircle2 className="size-3.5 shrink-0 text-[#b8934f]" strokeWidth={2.25} aria-hidden />
-          얼라이언스 이용 가능 · 연봉 4,000만 원 이상 · 수수료 {PERSONA_POSITION.rateLabel}
+          얼라이언스 이용 가능 · 수수료 {PERSONA_POSITION.rateLabel}
         </div>
 
         <FilledList
