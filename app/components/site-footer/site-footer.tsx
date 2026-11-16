@@ -150,7 +150,7 @@ export function SiteFooter({ className, variant = "default" }: SiteFooterProps) 
       <div className={cn(INTRO_CONTENT_MAX, "mx-auto w-full px-4 md:px-8")}>
         <div className={variant === "partner" ? "mb-6" : "mb-10"}>
           {variant === "alliance" ? (
-            <StartingWordmark href="/" tone="onDark" />
+            <StartingWordmark href="/alliance" tone="onDark" scrollMainToTop />
           ) : variant === "partner" ? (
             <StartingWordmark href="/" />
           ) : (

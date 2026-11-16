@@ -15,6 +15,15 @@ type StartingWordmarkProps = {
   tone?: "default" | "onDark"
   /** 클라이언트 라우팅 대신 문서 전체를 새로 불러옵니다. */
   reloadDocument?: boolean
+  /** 클릭 시 `main[data-app-main]`을 최상단으로 스크롤합니다. */
+  scrollMainToTop?: boolean
+}
+
+function scrollAppMainToTop() {
+  const main = document.querySelector("main[data-app-main]")
+  if (main instanceof HTMLElement) {
+    main.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+  }
 }
 
 export function StartingWordmark({
@@ -24,6 +33,7 @@ export function StartingWordmark({
   variant = "wordmark",
   tone = "default",
   reloadDocument = false,
+  scrollMainToTop = false,
 }: StartingWordmarkProps) {
   const interactiveClassName = [
     "group rounded-md outline-none",
@@ -37,6 +47,11 @@ export function StartingWordmark({
     href == null && onClick != null && ["cursor-pointer", ...interactiveClassName],
     className,
   )
+
+  const handleClick = () => {
+    if (scrollMainToTop) scrollAppMainToTop()
+    onClick?.()
+  }
 
   const content = (
     <>
@@ -61,9 +76,9 @@ export function StartingWordmark({
   )
 
   if (href == null) {
-    if (onClick) {
+    if (onClick || scrollMainToTop) {
       return (
-        <button type="button" onClick={onClick} className={classNames} aria-label="페이지 최상단으로">
+        <button type="button" onClick={handleClick} className={classNames} aria-label="페이지 최상단으로">
           {content}
         </button>
       )
@@ -74,14 +89,14 @@ export function StartingWordmark({
 
   if (reloadDocument) {
     return (
-      <a href={href} className={classNames}>
+      <a href={href} className={classNames} onClick={handleClick}>
         {content}
       </a>
     )
   }
 
   return (
-    <Link href={href} className={classNames}>
+    <Link href={href} className={classNames} onClick={handleClick}>
       {content}
     </Link>
   )
