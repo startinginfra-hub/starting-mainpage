@@ -4,6 +4,7 @@ import { PrivacyPolicyStartingVersions } from "@/app/components/legal/privacy-po
 export const metadata: Metadata = {
   title: "개인정보처리방침",
   description: "스타팅파트너스 주식회사 개인정보처리방침",
+  alternates: { canonical: "/privacy" },
 }
 
 export default function PrivacyPolicyPage() {

@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { PartnerPrivacyContent } from "@/app/components/legal/partner-privacy-content"
 import { PartnerLegalPage } from "@/app/partner/components/partner-legal-page"
+import { JsonLdScript } from "@/app/components/seo/json-ld"
+import { buildBreadcrumbJsonLd } from "@/lib/seo/json-ld"
 
 export const metadata: Metadata = {
   title: "개인정보처리방침 · 스타팅 파트너",
@@ -10,8 +12,17 @@ export const metadata: Metadata = {
 
 export default function PartnerPrivacyPage() {
   return (
-    <PartnerLegalPage title="스타팅 커리어 개인정보처리방침">
-      <PartnerPrivacyContent />
-    </PartnerLegalPage>
+    <>
+      <JsonLdScript
+        data={buildBreadcrumbJsonLd([
+          { name: "스타팅", path: "/" },
+          { name: "스타팅 파트너", path: "/partner" },
+          { name: "개인정보처리방침", path: "/partner/privacy" },
+        ])}
+      />
+      <PartnerLegalPage title="스타팅 커리어 개인정보처리방침">
+        <PartnerPrivacyContent />
+      </PartnerLegalPage>
+    </>
   )
 }

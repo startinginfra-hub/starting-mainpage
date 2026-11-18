@@ -11,6 +11,7 @@ import { CompanyPartnersSection } from "./components/sections/company-partners-s
 export const metadata: Metadata = {
   title: "스타팅파트너스",
   description: COMPANY_META_DESCRIPTION,
+  alternates: { canonical: "/company" },
 }
 
 export default function CompanyPage() {

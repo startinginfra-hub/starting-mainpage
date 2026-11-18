@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
+import { JsonLdScript } from "@/app/components/seo/json-ld"
 import { COMPANY_META_DESCRIPTION } from "@/lib/company/company-content"
+import { buildBreadcrumbJsonLd } from "@/lib/seo/json-ld"
 import { CompanyHrBenefitsSection } from "../components/sections/company-hr-benefits-section"
 import { CompanyHrCultureSection } from "../components/sections/company-hr-culture-section"
 import { CompanyHrHeroSection } from "../components/sections/company-hr-hero-section"
@@ -8,15 +10,25 @@ import { CompanyHrOfficeSection } from "../components/sections/company-hr-office
 export const metadata: Metadata = {
   title: "HR - 스타팅파트너스",
   description: COMPANY_META_DESCRIPTION,
+  alternates: { canonical: "/company/hr" },
 }
 
 export default function CompanyHrPage() {
   return (
-    <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-20 px-5 py-16 md:gap-40 md:px-8 md:py-40">
-      <CompanyHrHeroSection />
-      <CompanyHrCultureSection />
-      <CompanyHrOfficeSection />
-      <CompanyHrBenefitsSection />
-    </div>
+    <>
+      <JsonLdScript
+        data={buildBreadcrumbJsonLd([
+          { name: "스타팅", path: "/" },
+          { name: "회사소개", path: "/company" },
+          { name: "HR 문화", path: "/company/hr" },
+        ])}
+      />
+      <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-20 px-5 py-16 md:gap-40 md:px-8 md:py-40">
+        <CompanyHrHeroSection />
+        <CompanyHrCultureSection />
+        <CompanyHrOfficeSection />
+        <CompanyHrBenefitsSection />
+      </div>
+    </>
   )
 }

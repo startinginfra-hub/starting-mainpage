@@ -4,6 +4,7 @@ import { TermsOfServiceContent } from "@/app/components/legal/terms-of-service-c
 export const metadata: Metadata = {
   title: "이용약관",
   description: "스타팅파트너스 주식회사 서비스 이용약관",
+  alternates: { canonical: "/tos" },
 }
 
 export default function TermsOfServicePage() {

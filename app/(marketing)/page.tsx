@@ -1,6 +1,8 @@
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
+import { JsonLdScript } from "@/app/components/seo/json-ld"
 import { SectionSkeleton } from "@/app/components/section-skeleton"
+import { buildOrganizationJsonLd } from "@/lib/seo/json-ld"
 import { IntroActivePostingsSection } from "@/app/intro/components/sections/intro-active-postings-section"
 import { IntroCapabilitiesSection } from "@/app/intro/components/sections/intro-capabilities-section"
 import { IntroCompareSection } from "@/app/intro/components/sections/intro-compare-section"
@@ -66,6 +68,9 @@ export default function HomePage() {
 
   return (
     <div className="max-w-full overflow-x-clip">
+      {/* Metadata API는 trailing slash를 제거하므로 홈 canonical은 직접 삽입 */}
+      <link rel="canonical" href="https://starting.kr/" />
+      <JsonLdScript data={buildOrganizationJsonLd()} />
       <div className="intro-hero-stack relative overflow-x-clip bg-[#fbfcfe]">
         <div className="intro-hero-grid pointer-events-none absolute inset-0" aria-hidden />
         <div className="intro-hero-glow pointer-events-none absolute" aria-hidden />
